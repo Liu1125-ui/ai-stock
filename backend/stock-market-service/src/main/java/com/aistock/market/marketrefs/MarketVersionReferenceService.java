@@ -1,0 +1,7 @@
+package com.aistock.market.marketrefs;
+import com.aistock.common.marketrefs.*;import com.aistock.common.marketrefs.MarketReferenceRecords.*;import java.time.*;import java.util.*;import org.springframework.stereotype.Service;
+@Service public class MarketVersionReferenceService {
+ private final MarketVersionReferenceRepository repository;private final MarketVersionReferenceClient client;private final Clock clock;
+ public MarketVersionReferenceService(MarketVersionReferenceRepository repository,MarketVersionReferenceClient client,Clock clock){this.repository=repository;this.client=client;this.clock=clock;}
+ public Report inspect(String stock,String version){MarketReferenceInput.requireStock(stock);MarketReferenceInput.requireVersion(version);var start=clock.instant();var meta=repository.meta(stock,version,start);var owners=new ArrayList<OwnerResult>();for(String owner:List.of("prediction","scheduler","notification")){try{owners.add(MarketReferenceInput.validateOwner(client.read(owner,version),owner,version));}catch(RuntimeException e){owners.add(new OwnerResult(owner,version,clock.instant(),"UNKNOWN","REFERENCE_RESPONSE_INVALID",List.of()));}}boolean complete=owners.stream().allMatch(o->"COMPLETE".equals(o.state()));return MarketReferenceInput.validateReport(new Report(stock,version,meta.provider(),meta.priceBasis(),meta.versionState(),meta.currentHead(),start,clock.instant(),complete?"COMPLETE":"PARTIAL",owners),stock,version);}
+}

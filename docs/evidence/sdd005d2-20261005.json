@@ -1,0 +1,87 @@
+{
+  "checkedAt": "2026-10-05T16:01:18.737979+08:00",
+  "checks": [
+    {
+      "port": 18083,
+      "health": "UP"
+    },
+    {
+      "port": 18083,
+      "forgedIdentityStatus": 401
+    },
+    {
+      "port": 18083,
+      "anonymousDetailStatus": 401
+    },
+    {
+      "port": 18080,
+      "health": "UP"
+    },
+    {
+      "port": 18080,
+      "forgedIdentityStatus": 401
+    },
+    {
+      "port": 18080,
+      "anonymousDetailStatus": 401
+    },
+    {
+      "frontendAnonymousHistoryStatus": 401
+    },
+    {
+      "predictionPageShellStatus": 200,
+      "renderedLoginUIVerified": false
+    },
+    {
+      "historyPageShellStatus": 200
+    },
+    {
+      "gatewayInternalStatus": 404
+    },
+    {
+      "untrustedOriginStatus": 403
+    },
+    {
+      "modelId": "55f8adad-2064-4cc8-b794-ec47f720e648",
+      "publicationStatus": 409
+    },
+    {
+      "modelId": "d31533cf-9d80-420d-8203-170bd11417a5",
+      "publicationStatus": 409
+    },
+    {
+      "modelId": "9129d34b-c467-495b-b404-69cf3b860e68",
+      "publicationStatus": 409
+    }
+  ],
+  "realPublishedSuccessVerified": false,
+  "browserAutomationError": "kernel assets path not found",
+  "backendTests": 193,
+  "frontendTests": 32,
+  "algorithmChanged": false,
+  "backendTestScope": "full suite 191 then prediction/gateway full rerun with 2 added cases; aggregate 193",
+  "algorithmTestScope": "unchanged; preceding D1 59, not rerun in D2",
+  "productionDatabase": {
+    "migrationVersion": 3,
+    "pendingModels": 3,
+    "predictionRecords": 0
+  },
+  "positiveEvidence": "isolated MySQL and local HTTP fixture only",
+  "frontendBuild": "strict typecheck and production build passed",
+  "gitRemoteConfigured": false,
+  "codeProvenance": "Codex; no verified CodeArts diff",
+  "finalReview": {
+    "critical": 0,
+    "important": 2,
+    "minor": 0,
+    "fixed": [
+      "authentication generation guards old retry",
+      "clear previous result on new submission"
+    ],
+    "regressionsRedFailed": 3,
+    "regressionsGreenFullPassed": 32
+  },
+  "postFixDeploymentVerifiedAt": "2026-10-05T16:12:01.064385+08:00",
+  "liveFrontendBundleMatchesBuild": true,
+  "authenticatedUIVerified": false
+}

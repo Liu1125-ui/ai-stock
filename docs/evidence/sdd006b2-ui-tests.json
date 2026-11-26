@@ -1,0 +1,35 @@
+{
+  "scope": "SDD006B2 Task6 message center, rule history, unread navigation and recent home summary",
+  "implementationTool": "Codex",
+  "testCommand": "npm --prefix frontend test -- --reporter=json --outputFile=../runtime/sdd006b2-ui-vitest.json",
+  "tests": 102,
+  "passed": 102,
+  "failed": 0,
+  "pending": 0,
+  "testFiles": 27,
+  "report": "runtime/sdd006b2-ui-vitest.json",
+  "buildCommand": "npm --prefix frontend run build",
+  "buildResult": "PASS (vue-tsc --noEmit + vite build)",
+  "buildLog": "runtime/sdd006b2-ui-build-final.log",
+  "warning": "Existing main/market-analysis bundles exceed Vite500kB advisory; build succeeds. Bundle optimization tracked separately.",
+  "redEvidence": [
+    "runtime/sdd006b2-ui-red.log",
+    "runtime/sdd006b2-ui-history-red.log"
+  ],
+  "checks": [
+    "filter/page/read/batch limit",
+    "failed operations retain rows and selection",
+    "late filter response ignored",
+    "identity switch clears unread and ignores old responses",
+    "empty history does not claim never matched",
+    "rule availability independent from email availability",
+    "homepage bounded size3 existing API",
+    "messages401 signals session expiry"
+  ],
+  "uiGuidance": "Vue skill search attempted twice with no verified database match. Fallback: existing project tokens, layouts and general accessibility guidance; no new design system.",
+  "deployed": false,
+  "browserVisualVerification": "Pending Task7 deployment; no claim of live browser check",
+  "externalApiCalls": 0,
+  "maasCalls": 0,
+  "mailSent": 0
+}

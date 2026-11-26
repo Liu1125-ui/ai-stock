@@ -1,0 +1,138 @@
+{
+  "checkedAt": "2026-10-03T11:23:58.5724525+08:00",
+  "stage": "SDD-005A forecast input only",
+  "records": [
+    {
+      "instrumentId": "SH600030",
+      "rawVersionId": "35dbd0a1-8746-474e-9f7b-845f3c0cc29b",
+      "inputVersionId": "6f58ff7a-5fce-41b7-a870-65f4d2b6e507",
+      "rawContentHash": "c0ae23216341b6e026352f7b3731ae91266065c4f40ea5abe71d8d43217a302b",
+      "inputHash": "7815c6a23351371d96afbcc27c60db3cc316c075654601a059642342589a9cff",
+      "calendarHash": "d7e34909db394640da61dd60e0819372d0efccdaf2f6a6fadbcb5f555785dfe2",
+      "definition": "baostock-backward-close-over-raw-v1",
+      "provider": "baostock",
+      "originDate": "2026-09-30",
+      "rows": 60,
+      "targetDates": [
+        "2026-10-08",
+        "2026-10-09",
+        "2026-10-12",
+        "2026-10-13",
+        "2026-10-14"
+      ],
+      "freshness": "FRESH"
+    },
+    {
+      "instrumentId": "SH600276",
+      "rawVersionId": "18972be0-a940-49e1-9d37-3b44d98a3643",
+      "inputVersionId": "2559db33-790b-4e55-99ba-3fac33f18609",
+      "rawContentHash": "46f011971f04fce08f37e771c08761e92c68268276f38161b0530b5df772b27b",
+      "inputHash": "6217cf80d7cfe8a4191184adc2bbc8ad4f4e895be1e4815c805ff202295c0ff2",
+      "calendarHash": "d7e34909db394640da61dd60e0819372d0efccdaf2f6a6fadbcb5f555785dfe2",
+      "definition": "baostock-backward-close-over-raw-v1",
+      "provider": "baostock",
+      "originDate": "2026-09-30",
+      "rows": 60,
+      "targetDates": [
+        "2026-10-08",
+        "2026-10-09",
+        "2026-10-12",
+        "2026-10-13",
+        "2026-10-14"
+      ],
+      "freshness": "FRESH"
+    },
+    {
+      "instrumentId": "SZ000002",
+      "rawVersionId": "1ef6cd72-8527-4a8d-88f1-b62155a9641c",
+      "inputVersionId": "631a59a0-c9dd-44e3-ae29-a2d8e22930b7",
+      "rawContentHash": "fcb35f76cd63a3ae435ef836845c57e0df546f8f378c0857fb8f237ec4677cec",
+      "inputHash": "9001d7cc5f3123fa54f84ae9e38b3d84eed879af513d504069bc9f9c4cf59fb8",
+      "calendarHash": "d7e34909db394640da61dd60e0819372d0efccdaf2f6a6fadbcb5f555785dfe2",
+      "definition": "baostock-backward-close-over-raw-v1",
+      "provider": "baostock",
+      "originDate": "2026-09-30",
+      "rows": 60,
+      "targetDates": [
+        "2026-10-08",
+        "2026-10-09",
+        "2026-10-12",
+        "2026-10-13",
+        "2026-10-14"
+      ],
+      "freshness": "FRESH"
+    }
+  ],
+  "replayVerified": true,
+  "rawHeadsUnchanged": true,
+  "rawRevision": 2,
+  "rawRowsPerInstrument": 424,
+  "internalAuthentication": [
+    {
+      "status": 401,
+      "path": "/internal/v1/market/forecast-raw-window?instrumentId=SH600030"
+    },
+    {
+      "status": 401,
+      "path": "/internal/v1/market/forecast-window?instrumentId=SH600030"
+    }
+  ],
+  "formalInference": {
+    "detail": "PUBLISHED_MODEL_NOT_CONFIGURED",
+    "status": 503
+  },
+  "limits": [
+    "Single successful source probe does not guarantee continuous external availability",
+    "No future price accuracy claim",
+    "Source factor point-in-time corporate-action semantics not fully audited"
+  ],
+  "reviewChecks": [
+    {
+      "path": "/internal/v1/market/forecast-raw-window;x",
+      "status": 401,
+      "method": "GET"
+    },
+    {
+      "path": "/internal/v1/market/forecast-window;x",
+      "status": 401,
+      "method": "GET"
+    },
+    {
+      "path": "/internal/v1/market/forecast-inputs;x",
+      "status": 401,
+      "method": "POST"
+    },
+    {
+      "path": "/internal/v1/market;v/forecast-raw-window;x",
+      "status": 401,
+      "method": "GET"
+    },
+    {
+      "path": "/internal/v1/market;v/forecast-window;x",
+      "status": 401,
+      "method": "GET"
+    },
+    {
+      "path": "/internal/v1/market;v/forecast-inputs;x",
+      "status": 401,
+      "method": "POST"
+    },
+    {
+      "path": "/internal/v1/market/forecast-inputs;x",
+      "status": 413,
+      "method": "POST authenticated oversized"
+    },
+    {
+      "input": "1E+100000000",
+      "status": 422,
+      "code": "FORECAST_INPUT_INVALID"
+    },
+    {
+      "input": "1E-100000000",
+      "status": 422,
+      "code": "FORECAST_INPUT_INVALID"
+    }
+  ],
+  "backendTests": 157,
+  "pythonTests": 26
+}

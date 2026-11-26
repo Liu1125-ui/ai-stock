@@ -1,0 +1,11 @@
+# 候选模型推理：artifacts校验固定制品与安全strict重载，contracts校验固定窗口及六列转换，engine执行候选五点与十进制换算。模型发布权在MS-03；本模块不是用户预测任务。
+
+http.py先认证与限1MiB，再在线程池占单槽45秒子进程；worker.py安全封装错误和五点结果。健康的CONFIGURED仅说明已配置候选根目录，不代表模型已发布或所有候选可用；/infer仍拒绝未发布。
+
+inspect内部接口：只接受artifactId/manifestHash，沿用认证、1MiB与单槽工作子进程，安全strict重载返回元数据供MS-03登记/发布复核；不修改manifest或权重，不代表发布或生成预测。
+
+SDD-005D1：publication.py经固定业务地址读取MS-03已发布descriptor及MS-02固定输入；拒绝重定向、64KiB以上响应及STALE/UNKNOWN。正式infer只接受modelId/artifactId/manifestHash/instrumentId/inputVersionId，不接受调用方价格或发布声明。原engine和制品不改，worker核对checkpointHash并返回formalInference/modelId/publicationRevision；共享有界槽及45秒进程期限，业务服务失效时不产生假曲线。
+
+正式预测另核对固定快照的RAW版本/内容哈希与MS-02当前forecast-raw-window一致，避免同交易日修订旧快照仍显示FRESH。历史候选验收不作当前头限制。读取后发生更新不替换已固定版本，下一调用重新校验。
+
+Task4C：market_use.py仅校验正式推理的五项业务凭据。路由先认证、按原五字段校验正文，再从单值HTTP头构建私有_marketUse传入子进程，调用方不能在正文注入该字段。publication.fetch_window将同一身份转发给两个市场读取，固定已绑定RAW；模型发布查询不附带市场凭据。MARKET_VERSION_USE_REQUIRED默认false，开启后正式推理缺失凭据在启动worker前拒绝；离线inspect/validate保持原边界，不冒充正式预测。

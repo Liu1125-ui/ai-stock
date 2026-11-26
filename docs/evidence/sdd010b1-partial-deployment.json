@@ -1,0 +1,59 @@
+{
+  "deployedAt": "2026-10-25T13:50:53.5866430+08:00",
+  "reviewMinorDeferred": "internal context error response no-store consistency",
+  "anonymousAdminHttp": 401,
+  "manualMaasCalls": 0,
+  "databaseDataSha256": "e95e517b3cc4f875cc368ffc3e82bcb739895cf1b83d47e5f837d18501a6b7e4",
+  "health": [
+    {
+      "status": "UP",
+      "port": 18080
+    },
+    {
+      "status": "UP",
+      "port": 18081
+    },
+    {
+      "status": "UP",
+      "port": 18082
+    },
+    {
+      "status": "UP",
+      "port": 18083
+    },
+    {
+      "status": "UP",
+      "port": 18084
+    },
+    {
+      "status": "UP",
+      "port": 18085
+    },
+    {
+      "status": "UP",
+      "port": 18090
+    }
+  ],
+  "manualMails": 0,
+  "databaseDataUnchanged": true,
+  "rawWindowHashesUnchanged": true,
+  "manualSupplierCalls": 0,
+  "futurePublicWriteOptionsHttp": 404,
+  "onlyMarketContainerRecreated": true,
+  "schemaVersion": "13",
+  "frontendHttp": 200,
+  "publicInternalHttp": 404,
+  "backupDirectory": "E:\\aiStock\\项目代码\\stock-system\\runtime\\sdd010b1\\backup-20261025-134142",
+  "sourceCommit": "db04f5d0858cdc75311986fd8b54e42b8dca2ae9",
+  "marketJarSha256": "698bbe7b2d8f85d4fbeca9086c983f8788ab5ecf65b2741b2faf86cceb89c6f6",
+  "internalChecks": {
+    "unauthenticated": 401,
+    "missingStock": 404,
+    "badQuery": 400,
+    "errorNoStoreMinorDeferred": true
+  },
+  "marketHealthyInstances": 1,
+  "task3to7Implemented": false,
+  "marketImage": "sha256:87ee18cc306e937edf244ebeadaa554145bf9d0fcfe5f300397ac9699e0e2207",
+  "reviewImportantFixed": true
+}

@@ -1,0 +1,94 @@
+{
+  "checkedAt": "2026-10-09T23:04:09.8660594+08:00",
+  "scope": "SDD005E3",
+  "backend": {
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "log": "runtime/e3-final-backend.log",
+    "tests": 328
+  },
+  "frontend": {
+    "build": "passed",
+    "failed": 0,
+    "nginxTest": "passed",
+    "tests": 78
+  },
+  "deployment": {
+    "anonymousQuestionStatus": 401,
+    "nginxConfig": "passed",
+    "flywayV7": true,
+    "originalHashesUnchanged": true,
+    "questionOperationCount": 0,
+    "answerCount": 0,
+    "servicesUp": [
+      18080,
+      18081,
+      18082,
+      18083,
+      18084,
+      18085
+    ]
+  },
+  "review": {
+    "importantFixed": 2,
+    "rounds": 1,
+    "critical": 0,
+    "important": 2
+  },
+  "realMaasCalls": 0,
+  "realAcceptance": "passed: one actual v2 saved-answer case; read-only refresh and reload",
+  "browser": "passed: login, historical E2b read, suggested input, read-only refresh, zero operation/answer, screenshot ready",
+  "commits": [
+    "35bc427",
+    "3f13265",
+    "6d38bd1",
+    "7abf219",
+    "c6e2f84"
+  ],
+  "followUp": {
+    "checkedAt": "2026-10-09T23:25:56.3655398+08:00",
+    "userTriggeredV1": {
+      "state": "FAILED",
+      "durationMs": 8250,
+      "rule": "UNSAFE_LITERAL",
+      "operationId": "8f3520e0-d795-463d-89b8-03f472e05e45",
+      "errorCode": "AI_OUTPUT_INVALID",
+      "exactToken": "not retained"
+    },
+    "v2": {
+      "failed": 0,
+      "answerCount": 0,
+      "agentAdditionalCalls": 0,
+      "deployed": true,
+      "originalHashesUnchanged": true,
+      "artifactMatches": true,
+      "operationCount": 1,
+      "allSixUp": true,
+      "relatedTests": 128,
+      "realAcceptance": "awaiting additional permission",
+      "promptVersion": "grounded-stock-question-v2"
+    }
+  },
+  "actualAcceptance": {
+    "promptVersion": "grounded-stock-question-v2",
+    "usedExistingSuccessfulAnswer": true,
+    "answers": 1,
+    "originalHashesUnchanged": true,
+    "answerId": "40bd4e99-6b31-49d1-945d-9a0dc098c251",
+    "paragraphsSqlHash": "8dcf138dc4929b6b583a3f3eb6ee552a51c12b355d6246e167e4097c14b05cf3",
+    "contextSqlHash": "80e66dba4b3aac061586731125ff20e9f2812fe3f77f6de3b8b6881aa7836533",
+    "operationsAfter": 2,
+    "refreshPassed": true,
+    "agentCallsThisTurn": 0,
+    "operationId": "3088b7a0-6833-41de-88ad-0e61fdda666b",
+    "operationsBefore": 2,
+    "status": "ANSWERED",
+    "paragraphs": 3,
+    "durationMs": 25166,
+    "topic": "PREDICTION",
+    "reloadPassed": true,
+    "state": "SUCCEEDED",
+    "sourceCopyMatches": true
+  }
+}

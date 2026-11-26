@@ -1,0 +1,47 @@
+{
+  "scope": "SDD006B2 Task3 independent jobs and recovery",
+  "command": "scripts/check-auth-task1.ps1 (clean verify -Pauth-integration,cli-build)",
+  "log": "runtime/sdd006b2-jobs-full.log",
+  "result": "BUILD SUCCESS",
+  "totals": {
+    "tests": 439,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "newSuites": [
+    {
+      "suite": "com.aistock.scheduler.alert.AlertJobMysqlTest",
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "suite": "com.aistock.scheduler.alert.AlertJobWorkerTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "suite": "com.aistock.scheduler.alert.AlertTaskClientTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "suite": "com.aistock.scheduler.task.TaskWorkerTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "deployment": false,
+  "automaticScanEnabled": false,
+  "externalMarketCalls": false,
+  "maasCalls": 0,
+  "emailsSent": 0
+}

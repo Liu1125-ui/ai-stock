@@ -1,0 +1,60 @@
+{
+  "sourceCommit": "4e938a1767106324dd753b2a44832bf870a0252e",
+  "files": {
+    "model.py": {
+      "source": "models/Transformer.py",
+      "sourceSha256": "8325b0fd814888c8001992eeea43aca2ec998ffede1dd88fa18c9a8924fcbf8c",
+      "classes": [
+        "Model"
+      ],
+      "extractedSha256": "affd763a67b04490e809168256d2aa2650b9c095a39e45e294da37aa960376c9",
+      "changes": "Only retained listed original class bodies and adjusted imports; unused classes omitted."
+    },
+    "embedding.py": {
+      "source": "layers/Embed.py",
+      "sourceSha256": "0a29593e3796b5a3798bd3d37c1150fc2256c559abdee36e83eecd1a05787247",
+      "classes": [
+        "PositionalEmbedding",
+        "TokenEmbedding",
+        "FixedEmbedding",
+        "TemporalEmbedding",
+        "TimeFeatureEmbedding",
+        "DataEmbedding"
+      ],
+      "extractedSha256": "98159bf919321867fb577758f804f14e69891d23480ff1473352ce740d6cbe52",
+      "changes": "Only retained listed original class bodies and adjusted imports; unused classes omitted."
+    },
+    "encoder_decoder.py": {
+      "source": "layers/Transformer_EncDec.py",
+      "sourceSha256": "031b26a6ed774442bfb4cf316d4a605f7642cd652a4c2b82f5e3d1fcdc47b098",
+      "classes": [
+        "ConvLayer",
+        "EncoderLayer",
+        "Encoder",
+        "DecoderLayer",
+        "Decoder"
+      ],
+      "extractedSha256": "2aecdfc4f40ed7b3b03af88830dd064819e3ca024168fde256bbc7d4f4420154",
+      "changes": "Only retained listed original class bodies and adjusted imports; unused classes omitted."
+    },
+    "attention.py": {
+      "source": "layers/SelfAttention_Family.py",
+      "sourceSha256": "0fea961b640b1a7db471df2e389abfb843ce8e5767aca5af141ee22dd43be66f",
+      "classes": [
+        "FullAttention",
+        "AttentionLayer"
+      ],
+      "extractedSha256": "a558415020a8b53b8f960d6560420c20a0c7c37a8f1ddd92c105d2ba3f765d4d",
+      "changes": "Only retained listed original class bodies and adjusted imports; unused classes omitted."
+    },
+    "masking.py": {
+      "source": "utils/masking.py",
+      "sourceSha256": "c22de70ad076f4eeecc857aba984741da05da54375333399ff2742b041544986",
+      "classes": [
+        "TriangularCausalMask"
+      ],
+      "extractedSha256": "d65b8caa094554b0b7881a1eb7f079f4c35e1900d67224d547d73009000ffae5",
+      "changes": "Only retained listed original class bodies and adjusted imports; unused classes omitted."
+    }
+  }
+}

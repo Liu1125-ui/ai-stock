@@ -1,0 +1,6 @@
+package com.aistock.prediction.verification;
+import com.aistock.common.ApiExceptionHandler;import com.aistock.prediction.security.*;import com.fasterxml.jackson.databind.ObjectMapper;import org.junit.jupiter.api.Test;import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import static org.mockito.Mockito.*;import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+class DueHttpTest {
+ @Test void serviceIdentityPrecedesInvalidDateParsing()throws Exception{var repo=mock(VerificationDueRepository.class);var mapper=new ObjectMapper().findAndRegisterModules();var mvc=MockMvcBuilders.standaloneSetup(new VerificationDueController(repo)).setControllerAdvice(new ApiExceptionHandler()).addFilters(new ModelRequestFilter("private",new SecurityErrorWriter(mapper))).build();mvc.perform(get("/internal/v1/prediction-verifications/due?dueThrough=bad")).andExpect(status().isUnauthorized());mvc.perform(get("/internal/v1/prediction-verifications/due?dueThrough=bad").header("X-Service-Token","private")).andExpect(status().isBadRequest());mvc.perform(get("/internal/v1/prediction-verifications/affected?dueThrough=bad&instrumentId=bad")).andExpect(status().isUnauthorized());verifyNoInteractions(repo);}
+}

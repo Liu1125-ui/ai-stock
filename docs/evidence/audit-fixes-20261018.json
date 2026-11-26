@@ -1,0 +1,139 @@
+{
+  "date": "2026-10-18",
+  "baseCommit": "c597cca",
+  "findings": [
+    "AUDIT-01",
+    "AUDIT-02"
+  ],
+  "status": "DEPLOYED_AUTOMATED_AND_ADMIN_NAVIGATION_CHECKS_PASSED",
+  "watchlistRed": {
+    "tests": 8,
+    "failed": 6,
+    "passed": 2
+  },
+  "targetedFrontend": {
+    "tests": 12,
+    "passed": true
+  },
+  "frontend": {
+    "tests": 155,
+    "buildPassed": true,
+    "chunkWarningRetained": true
+  },
+  "algorithm": {
+    "tests": 94,
+    "warnings": 1,
+    "realExternalCalls": false
+  },
+  "backendWorkflowConsumer": {
+    "configuration": "actual workflow job env, database SQL, backend command",
+    "database": "isolated MySQL 8.0.46 localhost13316",
+    "result": "passed",
+    "remoteCI": false,
+    "attempts": [
+      "original workflow missing prediction env reproduced",
+      "first full run concurrent claim test assumption failed",
+      "local fixture recreation omitted MYSQL_DATABASE; corrected",
+      "final empty-fixture full rerun passed"
+    ],
+    "counts": {
+      "tests": 669,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "codeReview": {
+    "status": "passed",
+    "independent": true,
+    "critical": 0,
+    "important": 0,
+    "minor": 0,
+    "realDestinationNoAutoPostTestAdded": true,
+    "concurrentClaimInvariantReviewed": true
+  },
+  "newSourceCalls": 0,
+  "maasCalls": 0,
+  "mailSent": 0,
+  "runtimeDeployed": true,
+  "holdingsImplemented": false,
+  "mybatisPlusIntegrated": false,
+  "concurrentClaimTest": {
+    "repetitions": 10,
+    "productRepositoryChanged": false,
+    "singleSequentialFollowupSameNow": true
+  },
+  "authenticatedBrowserAcceptance": {
+    "status": "passed",
+    "role": "ADMIN",
+    "instrumentId": "SH600030",
+    "paths": [
+      "home watchlist card -> prediction form",
+      "watchlist page card -> prediction form"
+    ],
+    "publishedArtifact": "transformer-s3-2023-seed43-9a96167ecb00234d",
+    "predictionSubmitClicked": false,
+    "ordinaryUserBrowserRecheck": false
+  },
+  "commits": {
+    "frontend": "e26c9f5",
+    "ci": "98d4aef",
+    "concurrencyTest": "85f1ef1"
+  },
+  "deploymentHealth": [
+    {
+      "port": 18080,
+      "status": 200,
+      "body": "{\"status\":\"UP\"}"
+    },
+    {
+      "port": 18081,
+      "status": 200,
+      "body": "{\"status\":\"UP\"}"
+    },
+    {
+      "port": 18082,
+      "status": 200,
+      "body": "{\"status\":\"UP\"}"
+    },
+    {
+      "port": 18083,
+      "status": 200,
+      "body": "{\"status\":\"UP\"}"
+    },
+    {
+      "port": 18084,
+      "status": 200,
+      "body": "{\"status\":\"UP\"}"
+    },
+    {
+      "port": 18085,
+      "status": 200,
+      "body": "{\"status\":\"UP\"}"
+    },
+    {
+      "port": 18090,
+      "status": 200,
+      "body": "{\"status\":\"UP\",\"inference\":\"PUBLICATION_CHECK_REQUIRED\",\"candidateValidation\":\"CONFIGURED\"}"
+    },
+    {
+      "frontend": 200,
+      "mainAsset": [
+        "/assets/index-X7DSvQ1Y.js"
+      ]
+    }
+  ],
+  "deployedAssets": [
+    {
+      "asset": "WatchlistCards-bs4NYDkq.js",
+      "sha256": "6bcdc3345b92275976660f8cd385155203995747391fc37961921cadcfcd0e22",
+      "matchesBuild": true
+    },
+    {
+      "asset": "PredictionPage-FAUcaHAE.js",
+      "sha256": "65ea9ecc1444d5985d132df550e14ef869e079ea6b41b6d67eabfb9ba25632fe",
+      "matchesBuild": true
+    }
+  ],
+  "testFixtureRemoved": true
+}

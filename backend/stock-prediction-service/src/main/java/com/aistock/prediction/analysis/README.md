@@ -1,0 +1,14 @@
+# 单股AI行情分析
+作用：解释指定股票与固定RAW行情版本的技术指标，分析记录仅属本人。
+实现方法：内部证据接口 → 确定性事实 → 引用模板校验 → MaaS → 持久化记录。MS02统一计算指标；不跨库取数、不让大模型重算价格。
+证据取数5秒完整截止、512KiB上限；指标不足不补零，RAW及陈旧限制显式引用。当前E2a不包含开放问答和持仓分析。
+
+AnalysisRepository保存本人固定快照与尝试；AnalysisService先回放旧操作再取新证据；AnalysisController拒绝未知字段并从会话取身份。V6新增结果/尝试表，MaaS共享槽位于maas目录。
+
+AnalysisPredictionSource：本服务数据库按本人和股票筛选候选，校验五点并固定当前验证；AnalysisPredictionFacts：复用既有解释事实，PRED_命名隔离历史与预测，保存各自版本并计算缓存hash。不触发训练、预测或验证任务。
+
+E2b：可选predictionId；旧五字段与null保持旧请求hash。新引用用独立提示与完整预测/验证context。原操作回放先于依赖读取，回执携带原预测ID；候选路径GET /api/v1/stock-analyses/prediction-options仅本人同股成功未隐藏记录。
+
+SDD010B3 Task4A：AnalysisService先begin提交操作身份，再读取预测引用与行情；没有上下文时contextReady=false、contextHash=null，仍保留原预测选择供刷新恢复。bindFacts只绑定一次核验快照，先查已有context缓存，再申请共享付费槽。准备及模型网络调用均无数据库事务。执行代次首版固定1，同一operation不重启；错误代次拒绝、终态条件更新并递增fencingRevision，超时后不能补写结果。claim/旧complete重载仅保留本地仓储兼容，真实服务使用显式代次。市场使用bundle登记、终态证明和Java/Python头转发仍是后续Task4内容；本片不能启用市场门禁。
+
+SDD010B3 Task4B：主配置将AnalysisService连接到MarketUseOwnerService；独立analysis-enabled开关默认false。开启时，在begin后、证据读取前持久登记原使用请求并核对市场协议和实际门禁，使用同一固定RAW。BoundedAnalysisHttp只向行情服务携带五项身份头。模型和结果处理后先提交本地终态，finally再通知市场核对；回执丢失不重新登记或重算。历史成功请求仍先重放。预测/验证/Python接入未完成，仍不得开启全局门禁。

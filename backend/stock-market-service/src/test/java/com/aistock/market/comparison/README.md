@@ -1,0 +1,6 @@
+作用：股票对比历史证据单元和隔离数据库测试。实现方法：固定时钟与手工数据验证缺失、版本、日期、哈希、认证，不用fixture证明真实行情效果。
+ComparisonUpdate系列验证20点截止、停牌、历史不足、独立日历、固定RAW读取、CURRENT窗口投影及内部鉴权/参数。Samples日期为合成测试边界，不表示真实交易所日历；mysql标记仅使用13316隔离库。
+
+ComparisonRefresh测试实际锁等待跨租约和最终UPDATE失败回滚；ComparisonCollectorHttpTest只访问本地HttpServer，验证严格JSON、身份、正文期限和2MiB上限，不代表真实数据源验收。
+
+ComparisonLocalUseMysqlTest验证先准入、DRAINING在途完成、明确拒绝无读取、真实物理过期/回拨隔离、原编号恢复及锁等待；HTTP补查只有该内部认证生产入口转换准入职责。

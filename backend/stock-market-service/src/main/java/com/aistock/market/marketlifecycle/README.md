@@ -1,0 +1,19 @@
+# 行情生命周期事务基础
+
+作用：原子登记不可变RAW使用集合、记录停用/恢复动作及安全完成等待。实现方法：内部身份锁→bundle→按序行情头/版本/生命周期锁，READ_COMMITTED短事务，同库外键和完整集合校验。Task2事务基础之上已接入Task3A内部认证协议Controller，协议与核对任务默认关闭，尚未部署；Task3B已接入证据/发布门禁，生产启用仍待全部owner及上线检查。releaseVerified仅接受后续固定owner客户端已核实的终态证明，不能向浏览器暴露任意释放能力。
+
+新写仓储使用READ_COMMITTED，拒绝静默加入隔离级别不一致的外层事务。commandsReady仅允许本地缓存/配置判断，不得在持锁期间发起远程探测。binding是只读恢复元数据，不能直接当作证据读取的原子授权；后续取证据接口必须在短事务内核验完整使用身份。Use.lifecycleRevision表示查询时许可修订，并非不可变的数据版本或单独授权令牌。
+
+Task3A：MarketUseAccessFilter先认证后有界读取；MarketUseProtocol严格解析；MarketUseController只接受登记/查询/核对请求；ProofClient从固定owner地址查询终态，限64KiB/4秒且不重定向；Reconciler每批最多50个bundle，未知/损坏条目先更新检查时间后保留并轮转。登记requestId回执与canonical selector同库保存，回执不是原子取证据授权。当前构建强制enforcement=true会拒绝启动，不能将协议已接通当作全链路保护已上线。
+
+Task3B：MarketEvidenceFilter在候选服务认证之后读取五个X-Market-Use-*头，建立请求内固定Grant；withActiveUse在每段本地SQL前重新锁定guard/bundle/RAW/许可并验证ACTIVE和原选择。MarketEvidenceGate.local仅包本地读写，外部collector不持事务；线程scope在finally清理，不向异步线程隐式传播。pinned按股票定位唯一RAW，comparison另外核对选定evidenceId，估值核对完整股票集合。
+
+证据门禁开关MARKET_VERSION_EVIDENCE_GATES_ENABLED默认false；旧owner仍未转发头，不得提前启用。已有原ACTIVE可在DRAINING完成，RELEASED每次local拒绝；原HTTP回执/选择元数据及历史快照查看不作为新计算准入。SOURCE采集前checkpoint保留权限错误码，发布再核验一次。完整系统启用和管理员操作仍未开放。
+
+Task4B能力接口新增evidenceGatesEnabled，报告真实配置值；protocolEnabled不能代替证据门禁已开启。enforcement仍OFF、全局consumerIntegration仍PENDING、管理员actions仍false；只接入分析owner不改变全局就绪结论。
+
+Task5D2 MarketComparisonUseOwner以原比较operation/generation=1持久原RAW/登记编号；先准入后窗口/采集。原号恢复不重新登记，proof锁实际操作后物理超时；本地可信仓储终态直接用于整组release。默认false，启用需protocol+evidence gates。
+
+Task5D3新增市场预警派生owner及proof目的ALERT_EVIDENCE_PUBLISH；其余入口仍待审计，能力仍PARTIAL。只有本地开关及协议/证据门禁同时启用时，prepare POST准入转到真实服务。
+
+Task6A市场直连只读接口：`GET /api/v1/admin/market-data/{instrumentId}/versions/{versionId}/lifecycle` 返回许可状态、修订号、排空周期、在途数和是否当前头；`GET .../lifecycle/history` 按同一版本读取操作历史，接受可选 cursor 和 1–20 条 limit。只允许管理员会话，拒绝请求体和多值/未知参数，所有结果不缓存。此阶段 actionsReady 固定为 false，网关代理、页面和写入口随后实现。

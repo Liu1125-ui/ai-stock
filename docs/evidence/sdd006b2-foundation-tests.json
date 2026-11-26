@@ -1,0 +1,56 @@
+{
+  "scope": "B2 tasks1-2 only, not deployed; tasks3-7 pending",
+  "backendReports": {
+    "stock-common": {
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "stock-gateway": {
+      "tests": 23,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "stock-market-service": {
+      "tests": 116,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "stock-notification-service": {
+      "tests": 51,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "stock-prediction-service": {
+      "tests": 126,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "stock-scheduler-service": {
+      "tests": 37,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "stock-user-service": {
+      "tests": 61,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "total": 416,
+  "fullLog": "runtime/sdd006b2-evaluation-full.log",
+  "externalEffects": {
+    "maasCalls": 0,
+    "emailsSent": 0,
+    "productionMigrationApplied": false,
+    "automaticScanningEnabled": false
+  },
+  "review": "author self-check; final independent review pending task7"
+}

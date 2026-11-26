@@ -1,0 +1,154 @@
+{
+  "date": "2026-10-17",
+  "reviewedCommit": "69347edda1715ac64039884d9152ac4acb236820",
+  "scope": "read-only requirements/code/evidence audit; documentation changes only",
+  "report": "E:\\aiStock\\项目代码\\stock-system\\docs\\project-completion-audit-20261017.md",
+  "sourceFiles": [
+    {
+      "path": "E:\\aiStock\\任务书\\20230202951_刘太荃_任务书.docx",
+      "sha256": "413ea772c1920d514fa091d07b6eb2126db582b897c02386d693dd02dcda2ad8"
+    },
+    {
+      "path": "E:\\aiStock\\需求与设计\\股票分析系统_需求分析说明书_V1.2.md",
+      "sha256": "47530162be89d10b3b8b6c5aa7e707ec38b6b7b6e107feceebc5f52f5a449cd6"
+    },
+    {
+      "path": "E:\\aiStock\\项目代码\\stock-system\\frontend\\src\\router\\index.ts",
+      "sha256": "e9a549833b29f04703b0a89944ee1bb7cc42df8fca527e3c039f8cb9fd89ee44"
+    },
+    {
+      "path": "E:\\aiStock\\项目代码\\stock-system\\frontend\\src\\components\\market\\WatchlistCards.vue",
+      "sha256": "d857549692e78832f3d1c0a4716d447f0dcd792570bc2bdad060c4d0ec33fdf6"
+    },
+    {
+      "path": "E:\\aiStock\\项目代码\\stock-system\\.github\\workflows\\user-business-ci.yml",
+      "sha256": "ea2aea71c4b7e86386f43ffe22cc22e056dcef273d316e97b00997bfc5c8ec6e"
+    },
+    {
+      "path": "E:\\aiStock\\项目代码\\stock-system\\backend\\stock-prediction-service\\src\\test\\java\\com\\aistock\\prediction\\modelcatalog\\ModelDatabaseFixture.java",
+      "sha256": "65110358d99a18fbe44483b7c94f4ddbd3010a478fe281b557d97e3e7f00e958"
+    },
+    {
+      "path": "E:\\aiStock\\项目代码\\stock-system\\backend\\stock-prediction-service\\src\\main\\java\\com\\aistock\\prediction\\forecast\\ForecastService.java",
+      "sha256": "25d4c131adeadaa570c8fdc600e46d86c70b742b821c1b7d1e57df4bd990756a"
+    }
+  ],
+  "businesses": [
+    {
+      "id": "FR-01",
+      "status": "partial"
+    },
+    {
+      "id": "FR-02",
+      "status": "partial"
+    },
+    {
+      "id": "FR-03",
+      "status": "core_acceptance_evidenced"
+    },
+    {
+      "id": "FR-04",
+      "status": "not_implemented_in_formal_system"
+    },
+    {
+      "id": "FR-05",
+      "status": "partial"
+    },
+    {
+      "id": "FR-06",
+      "status": "partial"
+    },
+    {
+      "id": "FR-07",
+      "status": "partial"
+    },
+    {
+      "id": "FR-08",
+      "status": "not_implemented_in_formal_system"
+    },
+    {
+      "id": "FR-09",
+      "status": "partial"
+    },
+    {
+      "id": "FR-10",
+      "status": "core_acceptance_evidenced"
+    },
+    {
+      "id": "FR-11",
+      "status": "partial"
+    },
+    {
+      "id": "FR-12",
+      "status": "partial"
+    },
+    {
+      "id": "FR-13",
+      "status": "partial"
+    }
+  ],
+  "counts": {
+    "core_acceptance_evidenced": 2,
+    "partial": 9,
+    "not_implemented_in_formal_system": 2
+  },
+  "runtime": {
+    "javaServicesUp": 6,
+    "algorithmUp": true,
+    "modelStates": {
+      "PUBLISHED": 1,
+      "PENDING": 2
+    },
+    "modelHorizons": [
+      5
+    ],
+    "successfulPredictions": 1,
+    "comparisons": 2,
+    "comparisonAiResults": 1,
+    "questionAnswers": 1,
+    "verification": {
+      "state": "COMPLETE",
+      "dueThrough": "2026-10-16",
+      "dueCount": 5,
+      "verifiedCount": 5,
+      "missingCount": 0
+    },
+    "alertRules": 1,
+    "alertTriggers": 0,
+    "inboxMessages": 0,
+    "alertMailRows": 0,
+    "alertMailWorkerEnabled": false
+  },
+  "newExternalCalls": {
+    "sourceAcceptance": 0,
+    "maas": 0,
+    "mail": 0
+  },
+  "fullTestsRerun": false,
+  "existingTestEvidence": {
+    "date": "2026-10-16",
+    "backend": 660,
+    "frontend": 148,
+    "comparisonPython": 18
+  },
+  "findings": [
+    {
+      "id": "AUDIT-01",
+      "kind": "confirmed_code_gap",
+      "summary": "Watchlist prediction button is hardcoded disabled with obsolete title",
+      "file": "frontend/src/components/market/WatchlistCards.vue"
+    },
+    {
+      "id": "AUDIT-02",
+      "kind": "confirmed_configuration_gap_not_executed_remotely",
+      "summary": "CI lacks prediction test database creation and PREDICTION_TEST_DB_URL/PASSWORD",
+      "file": ".github/workflows/user-business-ci.yml"
+    }
+  ],
+  "sourceDocumentRead": {
+    "markitdownInstalled": false,
+    "fallback": "bundled python-docx; source unchanged"
+  },
+  "researchInterpretation": "existing retrospective experiments are not formal system experiment business or independent future blind evaluation",
+  "referencesReverifiedOnline": false
+}

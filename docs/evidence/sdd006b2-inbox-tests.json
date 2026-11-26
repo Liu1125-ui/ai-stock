@@ -1,0 +1,78 @@
+{
+  "scope": "SDD006B2 Task5 owner-scoped inbox/history APIs and gateway",
+  "implementationTool": "Codex",
+  "command": "scripts/check-auth-task1.ps1 (clean verify -Pauth-integration,cli-build)",
+  "result": "BUILD SUCCESS",
+  "log": "runtime/sdd006b2-inbox-full.log",
+  "totals": {
+    "tests": 481,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "newAndChangedSuites": [
+    {
+      "suite": "com.aistock.gateway.NotificationProxyTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "suite": "com.aistock.notification.alert.AlertRuleMysqlTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "suite": "com.aistock.notification.alert.NotificationResponseLimitTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "suite": "com.aistock.notification.alert.NotificationSecurityTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "suite": "com.aistock.notification.inbox.InboxMysqlTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "suite": "com.aistock.notification.inbox.InboxSecurityTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "redEvidence": [
+    "runtime/sdd006b2-inbox-red.log",
+    "runtime/sdd006b2-inbox-security-red.log",
+    "runtime/sdd006b2-inbox-security.log",
+    "runtime/sdd006b2-inbox-availability-red.log"
+  ],
+  "composeConfig": {
+    "valid": true,
+    "ALERT_EVALUATION_ENABLED": false,
+    "ALERT_PLAN_ENABLED": false,
+    "ALERT_WORKER_ENABLED": false
+  },
+  "isolation": "New DB tests only stock_notification_test on localhost13316; account/client fixtures mocked; no business DB changes",
+  "deployed": false,
+  "externalApiCalls": 0,
+  "mailSent": 0,
+  "finalIndependentReview": "Pending Task7",
+  "remaining": [
+    "Task6 messages UI",
+    "Task7 final review, deployment and end-to-end verification"
+  ]
+}

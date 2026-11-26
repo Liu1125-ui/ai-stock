@@ -1,0 +1,9 @@
+package com.aistock.scheduler.task;
+import com.fasterxml.jackson.databind.*;import java.time.*;
+public final class HttpRevisionClient implements RevisionClient {
+ private final String market,prediction;private final PredictionTaskHttp http;
+ public HttpRevisionClient(String market,String prediction,String token,ObjectMapper mapper){this.market=market;this.prediction=prediction;http=new PredictionTaskHttp(token,mapper);}
+ public Event next(long after){if(after<0)throw HttpPredictionTaskClient.invalid();var n=data(http.call(market,"/internal/v1/market/revision-events?after="+after+"&limit=1",null,Duration.ofSeconds(10)));var items=n.path("items");if(!items.isArray()||items.size()>1)throw HttpPredictionTaskClient.invalid();if(items.isEmpty())return null;var e=items.get(0);var id=e.path("eventId");String stock=e.path("instrumentId").asText(),raw=e.path("rawVersionId").asText();if(!id.isIntegralNumber()||!id.canConvertToLong()||id.longValue()<=after||!stock.matches("(SH|SZ)[0-9]{6}")||!HttpPredictionTaskClient.uuid(raw))throw HttpPredictionTaskClient.invalid();return new Event(id.longValue(),stock,raw);}
+ public PredictionTaskClient.Page affected(String stock,LocalDate cutoff,String after){if(stock==null||!stock.matches("(SH|SZ)[0-9]{6}")||cutoff==null||after!=null&&!HttpPredictionTaskClient.uuid(after))throw HttpPredictionTaskClient.invalid();var n=data(http.call(prediction,"/internal/v1/prediction-verifications/affected?instrumentId="+stock+"&dueThrough="+cutoff+"&limit=50"+(after==null?"":"&after="+after),null,Duration.ofSeconds(10)));var page=HttpPredictionTaskClient.parsePage(n,cutoff,after);if(page.items().stream().anyMatch(i->!stock.equals(i.instrumentId())))throw HttpPredictionTaskClient.invalid();return page;}
+ private JsonNode data(JsonNode n){if(!"OK".equals(n.path("code").asText())||!n.path("data").isObject())throw HttpPredictionTaskClient.invalid();return n.path("data");}
+}

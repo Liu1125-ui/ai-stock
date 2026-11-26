@@ -1,0 +1,10 @@
+package com.aistock.prediction.explanation;
+import com.aistock.common.*;import com.aistock.prediction.modelcatalog.ModelRecords.Actor;import com.fasterxml.jackson.databind.ObjectMapper;import jakarta.servlet.http.HttpServletRequest;import java.util.UUID;import org.springframework.security.core.Authentication;import org.springframework.http.HttpStatus;import org.springframework.web.bind.annotation.*;
+@RestController public class ExplanationController {
+ private final ExplanationService service;private final ObjectMapper mapper;
+ public ExplanationController(ExplanationService service,ObjectMapper mapper){this.service=service;this.mapper=mapper;}
+ @GetMapping("/api/v1/predictions/{id}/explanation")public ApiResponse<?> get(Authentication auth,@PathVariable UUID id,HttpServletRequest request){return ApiResponse.success(service.get(user(auth),id),TraceIds.normalize(request.getHeader("X-Trace-Id")));}
+ @PostMapping("/api/v1/predictions/{id}/explanation")public ApiResponse<?> generate(Authentication auth,@PathVariable UUID id,HttpServletRequest request){var user=user(auth);UUID operation;try{var bytes=request.getInputStream().readNBytes(513);if(bytes.length>512)throw invalid();var body=mapper.readTree(bytes);if(body==null||!body.isObject()||body.size()!=1||!body.path("operationId").isTextual())throw invalid();var text=body.path("operationId").asText();if(!text.matches("[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"))throw invalid();operation=UUID.fromString(text);}catch(java.io.IOException|IllegalArgumentException e){throw invalid();}return ApiResponse.success(service.generate(user,id,operation),TraceIds.normalize(request.getHeader("X-Trace-Id")));}
+ private UUID user(Authentication auth){if(auth==null||!auth.isAuthenticated()||!(auth.getPrincipal() instanceof Actor actor))throw new BusinessException("AUTH_REQUIRED","请先登录",HttpStatus.UNAUTHORIZED);return actor.userId();}
+ private BusinessException invalid(){return new BusinessException("AI_REQUEST_INVALID","解释请求格式不正确",HttpStatus.BAD_REQUEST);}
+}

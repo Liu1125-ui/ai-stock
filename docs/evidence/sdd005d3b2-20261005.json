@@ -1,0 +1,147 @@
+{
+  "date": "2026-10-05",
+  "stage": "SDD005D3B2",
+  "codeCommit": "af2635d",
+  "scope": "普通每日到期扫描、持久类型任务与回执恢复；修订触发D3B3待做",
+  "backend": {
+    "command": "scripts/check-auth-task1.ps1 clean verify",
+    "totals": {
+      "tests": 263,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "modules": {
+      "stock-common": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "stock-gateway": {
+        "tests": 18,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "stock-market-service": {
+        "tests": 73,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "stock-notification-service": {
+        "tests": 10,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "stock-prediction-service": {
+        "tests": 76,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "stock-scheduler-service": {
+        "tests": 27,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "stock-user-service": {
+        "tests": 57,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    "log": "runtime/sdd005d3b2-final-full.log"
+  },
+  "frontend": {
+    "tests": 40,
+    "typecheckAndBuild": "passed",
+    "testLog": "runtime/sdd005d3b2-front.log",
+    "buildLog": "runtime/sdd005d3b2-front-build.log"
+  },
+  "review": {
+    "count": 1,
+    "critical": 0,
+    "important": 1,
+    "minor": 0,
+    "fix": "Repository final移除，隔离真实Spring上下文RED到GREEN，完整回归通过"
+  },
+  "runtime": {
+    "predictionId": "19ddcb7c-3fba-4df3-ba4f-f8eebfeb3f14",
+    "health": {
+      "prediction": "UP",
+      "scheduler": "UP"
+    },
+    "schedulerMigration": "3\t1",
+    "dueAuth": 401,
+    "taskAuth": 401,
+    "internalGateway": 404,
+    "realDuePage": {
+      "cutoffDate": "2026-10-05",
+      "items": [],
+      "nextCursor": null
+    },
+    "createReplaySameTask": true,
+    "actualTask": {
+      "attempts": [
+        {
+          "attempt_id": "c221c84b-83ac-4800-af10-6643553e965a",
+          "ordinal": 1,
+          "state": "SKIPPED",
+          "started_at": "2026-10-05T13:43:49.442",
+          "lease_until": "2026-10-05T13:45:49.442",
+          "finished_at": "2026-10-05T13:43:49.516",
+          "version_id": null,
+          "error_code": null
+        }
+      ],
+      "task": {
+        "taskId": "a937cf2b-eec5-4ec6-a09d-9e10b6f48e53",
+        "instrumentId": "SH600030",
+        "targetDate": "2026-10-05",
+        "state": "SKIPPED",
+        "attemptCount": 1,
+        "currentAttempt": null,
+        "leaseUntil": null,
+        "versionId": null,
+        "errorCode": null,
+        "nextAt": "2026-10-05T13:43:48.699Z",
+        "createdAt": "2026-10-05T13:43:48.699Z",
+        "updatedAt": "2026-10-05T13:43:49.516Z",
+        "taskType": "PREDICTION_VERIFY",
+        "predictionId": "19ddcb7c-3fba-4df3-ba4f-f8eebfeb3f14",
+        "ruleVersion": "origin-share-close-v1"
+      }
+    },
+    "actualReceipt": {
+      "operationId": "c221c84b-83ac-4800-af10-6643553e965a",
+      "state": "SKIPPED_NOT_DUE",
+      "versionId": null,
+      "errorCode": null
+    },
+    "persistedScan": "2026-10-05\tNULL\t2",
+    "PREDICTION_VERIFY_PLAN_ENABLED": true,
+    "MARKET_WORKER_ENABLED": true,
+    "snapshotModelsLegacyTasksUnchanged": true,
+    "currentUserVerificationVersions": 0,
+    "frontendEntryBuildMatches": true,
+    "verificationResourceBuildMatches": true
+  },
+  "restart": {
+    "sameTask": true,
+    "sameOneAttempt": true,
+    "sameReceipt": true,
+    "scanRevisionBefore": 1,
+    "scanRevisionAfter": 2
+  },
+  "limits": [
+    "真实目标日10月8日起，当前验证样本0，不声明实际预测准确率",
+    "RAW事件与同RAW因子修订重核仍属D3B3",
+    "浏览器内核不可用，未观察实际图形或登录会话页面",
+    "无remote，无push；CodeArts来源未核实"
+  ]
+}

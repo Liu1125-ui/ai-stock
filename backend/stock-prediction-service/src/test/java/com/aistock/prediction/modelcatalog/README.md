@@ -1,0 +1,15 @@
+# 模型登记与发布测试
+
+作用：验证不可变候选、真实MySQL事务/CAS/重放，以及管理员权限和依赖故障边界。方法：只允许stock_prediction_test临时数据库，清理限于该库；合成fixture仅用于行为测试，不作预测准确率证据。
+
+AlgorithmArtifactInspectorTest通过本机临时HttpServer发送响应头后停顿，验证整个响应截止与128KiB限额；只用合成协议数据，不读取研究权重或访问业务库。
+
+预测回归：ForecastMysqlTest验证同用户并发重放/冲突/到期旧写/隐藏及错误股票拒绝；ForecastHttpTest使用隔离测试会话，验证Origin/CSRF和ADMIN也不得访问他人普通历史；ForecastDependencyTest本机HTTP fixture验证缺输入自动准备、重定向/超大体拒绝。全部fixture只用于工程协议，不是预测效果证据。
+
+SDD010B3 Task4A：AnalysisAdmissionMysqlTest用真实SQL与并发屏障验证取证据前已提交、重复请求只读取一次、失败持久重放、代次/终态/到期保护及共享AI槽保全；没有外部模型调用。AnalysisAdmissionMigrationMysqlTest仅在强校验的随机stock_prediction_v12_临时schema迁移V11→V12，逐字段比较已完成操作和结果，finally仅删除自己创建的schema，不清理原业务库。
+
+SDD010B3 Task4B：AnalysisMarketUseMysqlTest验证本地提交→登记→证据→结果提交→通知，实际终态证明、未知登记原编号恢复、确认丢失、默认关闭无活动、每批25条轮转与25损坏记录不阻塞后续。全部远端依赖为mock，不调用真实模型。恢复错误保留pending，不自动POST新登记。
+
+Task4C：ForecastMarketUseMysqlTest验证真实五点结构、绑定先于准备、错RAW禁止推理、许可拒绝零源/模型调用、到期先形成不可逆失败、错代次拒写及未知POST原编号恢复。ForecastDependencyTest的缺输入链路逐请求检查同一FORECAST头，覆盖采集/发布/重读。
+
+ComparisonUseMysqlTest覆盖proof/重领两种顺序、两连接屏障并发、时钟回拨后的旧写拒绝、成功结果与九字段证明、原证据读取、拒绝后无读取、错manifest不保存，以及未知POST重启按原编号恢复。原ComparisonMysqlTest重领/分页/幂等继续回归。

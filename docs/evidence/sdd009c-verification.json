@@ -1,0 +1,365 @@
+{
+  "status": "DEPLOYED_ACCEPTED",
+  "feature": "SDD-009C",
+  "reviewBase": "2edd562",
+  "featureHead": "e6f0aff",
+  "reviewFixes": [
+    "6449855",
+    "e0a983a"
+  ],
+  "backend": {
+    "command": "mvn -B -Pauth-integration,cli-build clean verify",
+    "finishedAt": "2026-10-22T16:02:05+08:00",
+    "total": 982,
+    "modules": {
+      "stock-common": {
+        "tests": 13,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "stock-gateway": {
+        "tests": 69,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "stock-market-service": {
+        "tests": 193,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "stock-notification-service": {
+        "tests": 109,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "stock-prediction-service": {
+        "tests": 250,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "stock-scheduler-service": {
+        "tests": 249,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "stock-user-service": {
+        "tests": 99,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    "isolatedDb": "label-checked tmpfs, localhost13316, five_test_schemas"
+  },
+  "frontend": {
+    "testFiles": 61,
+    "tests": 277,
+    "typeCheck": "PASS",
+    "build": "PASS",
+    "existingLargeChunkWarning": true
+  },
+  "review": {
+    "singleReviewer": "statistics_final_review",
+    "quotaInterruptedThenResumedSameReview": true,
+    "critical": 0,
+    "importantFixed": 2,
+    "findings": [
+      "Malformed identity credentialVersion JSON conversion; four JSON-to-authorization RED/GREEN regressions, explicit integer0 remains valid",
+      "Daily outcome visibility regraded Important; RED/GREEN interface test and exact text series"
+    ],
+    "secondReview": false,
+    "newDeferredMinors": []
+  },
+  "backup": {
+    "directory": "runtime\\sdd009c\\backup-20261022-134106",
+    "databases": {
+      "stock_user": {
+        "version": "3",
+        "file": "runtime\\sdd009c\\backup-20261022-134106\\stock_user.sql",
+        "bytes": 28993,
+        "sha256": "cabe24b690a2c10332691a35cfd47b93f04df12fe98f4cf4c2bd1bfb0ea20933"
+      },
+      "stock_market": {
+        "version": "13",
+        "file": "runtime\\sdd009c\\backup-20261022-134106\\stock_market.sql",
+        "bytes": 5139564,
+        "sha256": "46a139c2469341e1fbfb5a8b100385ad5c3750b832997516e98c5d05a257c16c"
+      },
+      "stock_prediction": {
+        "version": "11",
+        "file": "runtime\\sdd009c\\backup-20261022-134106\\stock_prediction.sql",
+        "bytes": 546198,
+        "sha256": "baa7d434f174ea42f8f80330a5f19fc00372296082ba879c5ad8b1f3d7c911f4"
+      },
+      "stock_scheduler": {
+        "version": "9",
+        "file": "runtime\\sdd009c\\backup-20261022-134106\\stock_scheduler.sql",
+        "bytes": 77384,
+        "sha256": "02c15b57f3a5874794cca0261637a2317f0d7083efdbf073a1aa5b66acf73fe4"
+      }
+    },
+    "imageArchive": {
+      "file": "runtime\\sdd009c\\backup-20261022-134106\\old-images.tar",
+      "bytes": 377744896,
+      "sha256": "8255f45a4e5fbe93cb8a627fdc902ccf0cfe7a12cc93593f59553bd5ffc3dc97"
+    },
+    "oldImageIds": {
+      "stock-user-service": "sha256:7e8eaaa5a4985bdae2144396d912a56b55c0239acd719320ae13602956ef94db",
+      "stock-market-service": "sha256:0fc6a515e6db0bdf9e2b2e5fb7a9bb2682f6af5928159f377268ecf15ebffe65",
+      "stock-prediction-service": "sha256:3f7cef94aa0dc3e5f6e7b2921d70b8c6520adb69b0ed87da4f27bd3546487cf4",
+      "stock-scheduler-service": "sha256:de14cc6ef1bf6b90bae26d8a2ce15479d1ef54bddc0818c700eadcd5cc36fc1d",
+      "stock-gateway": "sha256:c6f36eb66ebfce441b7e88b9d1558166777ae8f477f58f6655a4b9633d3f2193",
+      "frontend": "sha256:20a922d6e9afc023a828958fe7f98eef76de38a28574add88dc01238efdf0653"
+    }
+  },
+  "deployment": {
+    "checkedAt": "2026-10-22T16:05:26.101885+08:00",
+    "health": {
+      "gateway": true,
+      "user": true,
+      "market": true,
+      "prediction": true,
+      "scheduler": true,
+      "notification": true,
+      "algorithm": true
+    },
+    "nacosSingleHealthy": {
+      "user": 1,
+      "market": 1,
+      "prediction": 1,
+      "scheduler": 1,
+      "notification": 1
+    },
+    "anonymous": [
+      {
+        "section": "users",
+        "port": 18081,
+        "status": 401,
+        "noStore": true
+      },
+      {
+        "section": "predictions",
+        "port": 18083,
+        "status": 401,
+        "noStore": true
+      },
+      {
+        "section": "tasks",
+        "port": 18084,
+        "status": 401,
+        "noStore": true
+      },
+      {
+        "section": "market",
+        "port": 18082,
+        "status": 401,
+        "noStore": true
+      },
+      {
+        "section": "users",
+        "port": 18080,
+        "status": 401,
+        "noStore": true
+      },
+      {
+        "section": "predictions",
+        "port": 18080,
+        "status": 401,
+        "noStore": true
+      },
+      {
+        "section": "tasks",
+        "port": 18080,
+        "status": 401,
+        "noStore": true
+      },
+      {
+        "section": "market",
+        "port": 18080,
+        "status": 401,
+        "noStore": true
+      },
+      {
+        "section": "http",
+        "port": 18080,
+        "status": 401,
+        "noStore": true
+      }
+    ],
+    "frontendAssets": [
+      {
+        "file": "/assets/index-A83_AGNZ.js",
+        "sha256": "536a41355b07d5e999d414678f21cdd348828f4df532da75a5f7fd0cf24ceb26"
+      },
+      {
+        "file": "/assets/index-BXWKcCiI.css",
+        "sha256": "24274daf56cedbb0a99a8b87c0bfbf0ee0cbf72dab801089b144e42b3dda1bb0"
+      },
+      {
+        "file": "/assets/StatisticsPage-D-5VKhkI.js",
+        "sha256": "104e03c7684ef4fe1450b47f60dcc07aab2b52263348b12e797a940fd9281a49"
+      }
+    ],
+    "schemaVersionsUnchanged": {
+      "user": "3",
+      "market": "13",
+      "prediction": "11",
+      "scheduler": "9"
+    },
+    "envUnchanged": true,
+    "adminTaskActionsEnabled": false,
+    "rollbackRehearsed": false,
+    "authenticatedBrowserAcceptance": "ADMIN_PASS"
+  },
+  "acceptance": {
+    "productionAnonymous401NoStore": "PASS_9_ROUTES",
+    "productionOrdinaryRole403": {
+      "result": "PASS_USER_REPORTED",
+      "gateway": "http://127.0.0.1:15173/api/v1/admin/statistics/http",
+      "directUserService": "http://127.0.0.1:18081/api/v1/admin/statistics/users",
+      "userReply": "两处均拒绝访问",
+      "scope": "Two representative production routes; other route-specific403 behavior covered by isolated automated tests, not claimed manually retested"
+    },
+    "adminBrowser": "PASS; legitimate user-entered admin login, no cookie extraction",
+    "independentRawColumnRecomputation": "PASS; browser KPIs match Python recomputation in each owning DB",
+    "readOnlyRefreshBusinessRows": "PASS; forecast/task/attempt/version/head/user rows unchanged",
+    "narrowScreenKeyboard": "PASS; 390px/1280px, table horizontal scroll, Tab/ShiftTab/Enter/ArrowRight",
+    "dateDraftDoesNotQuery": "PASS; editing/restoring dates retains applied window and query timestamps",
+    "scope": "SDD009C only; FR13 remains partial and existing pending items retained"
+  },
+  "limitations": [
+    "Date-range leading indexes/capacity verification before expansion",
+    "Current process HTTP only, restart resets; not DAU/P95/cloud bill",
+    "SDD009B real cancel pending natural eligible task",
+    "FR13 remains partial",
+    "Full image rollback not rehearsed",
+    "Real CodeArts usage evidence remains pending"
+  ],
+  "independentBeforeLogin": {
+    "queriedAt": "2026-10-22T16:07:37.460781+08:00",
+    "window": {
+      "from": "2026-10-16",
+      "to": "2026-10-22"
+    },
+    "method": "Selected raw columns within each owning database; Python date/counter/join calculation; no aggregate SQL reused",
+    "users": {
+      "totalUsers": 2,
+      "states": {
+        "ENABLED": 2
+      },
+      "roles": {
+        "ADMIN": 1,
+        "USER": 1
+      },
+      "registrations": 0,
+      "registrationDaily": {
+        "2026-10-16": 0,
+        "2026-10-17": 0,
+        "2026-10-18": 0,
+        "2026-10-19": 0,
+        "2026-10-20": 0,
+        "2026-10-21": 0,
+        "2026-10-22": 0
+      },
+      "successfulLogins": 5,
+      "distinctLoginUsers": 1,
+      "loginDaily": {
+        "2026-10-16": 1,
+        "2026-10-17": 0,
+        "2026-10-18": 1,
+        "2026-10-19": 1,
+        "2026-10-20": 1,
+        "2026-10-21": 1,
+        "2026-10-22": 0
+      }
+    },
+    "tasks": {
+      "taskTotal": 29,
+      "states": {
+        "FAILED": 3,
+        "SUCCEEDED": 26
+      },
+      "types": {
+        "COMPARISON_UPDATE": 9,
+        "MARKET_REFRESH": 15,
+        "PREDICTION_VERIFY": 5
+      },
+      "taskDaily": {
+        "2026-10-16": 8,
+        "2026-10-17": 4,
+        "2026-10-18": 0,
+        "2026-10-19": 7,
+        "2026-10-20": 7,
+        "2026-10-21": 3,
+        "2026-10-22": 0
+      },
+      "attemptTotal": 47,
+      "attemptStates": {
+        "FAILED": 20,
+        "SUCCEEDED": 27
+      },
+      "attemptDuration": {
+        "sampleCount": 47,
+        "excludedInvalidCount": 0,
+        "meanMs": "13299.000"
+      },
+      "unfinishedAttempts": 0,
+      "firstQueueWait": {
+        "sampleCount": 29,
+        "excludedInvalidCount": 0,
+        "meanMs": "12753.414"
+      }
+    },
+    "businessRowCounts": {
+      "users": 2,
+      "forecasts": 1,
+      "tasks": 80,
+      "attempts": 126,
+      "marketVersions": 45,
+      "heads": 3
+    },
+    "predictions": {
+      "acceptedRequests": 0
+    },
+    "market": {
+      "instrumentCount": 3,
+      "availableHeads": 3
+    }
+  },
+  "browserProof": {
+    "before": "2026-10-22T16:29:14.991624+08:00",
+    "after": "2026-10-22T16:32:20.652447+08:00",
+    "window": {
+      "from": "2026-10-16",
+      "to": "2026-10-22"
+    },
+    "browserKpisMatchIndependentRecalculation": true,
+    "businessRowsUnchanged": {
+      "users": 2,
+      "forecasts": 1,
+      "tasks": 80,
+      "attempts": 126,
+      "marketVersions": 45,
+      "heads": 3
+    },
+    "normalLoginCount": 6,
+    "attemptMeanMs": "13299.000",
+    "firstQueueMeanMs": "12753.414",
+    "marketCoverageMatched": true,
+    "readBatches": 2,
+    "maasCalls": 0,
+    "manualSupplierCalls": 0,
+    "mails": 0
+  },
+  "screenshots": [
+    "C:/Users/刘太荃/.codex/visualizations/2026/09/15/01a0a3b5-3b19-7d70-8e97-67127675e352/sdd009c-wide.jpg",
+    "C:/Users/刘太荃/.codex/visualizations/2026/09/15/01a0a3b5-3b19-7d70-8e97-67127675e352/sdd009c-narrow.jpg",
+    "C:/Users/刘太荃/.codex/visualizations/2026/09/15/01a0a3b5-3b19-7d70-8e97-67127675e352/sdd009c-narrow-table.jpg"
+  ]
+}

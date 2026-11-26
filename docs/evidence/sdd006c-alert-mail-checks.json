@@ -1,0 +1,119 @@
+{
+  "date": "2026-10-12",
+  "slice": "SDD006C",
+  "backend": {
+    "tests": 536,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "frontend": {
+    "files": 28,
+    "tests": 107,
+    "typecheck": true,
+    "build": true
+  },
+  "algorithm": {
+    "tests": 76,
+    "warnings": 1
+  },
+  "health": [
+    {
+      "service": "user",
+      "status": "UP"
+    },
+    {
+      "service": "market",
+      "status": "UP"
+    },
+    {
+      "service": "prediction",
+      "status": "UP"
+    },
+    {
+      "service": "scheduler",
+      "status": "UP"
+    },
+    {
+      "service": "notification",
+      "status": "UP"
+    },
+    {
+      "service": "gateway",
+      "status": "UP"
+    }
+  ],
+  "algorithmHealth": "UP",
+  "migration": {
+    "notificationVersion": 4,
+    "success": true
+  },
+  "workerEnabled": false,
+  "alertMailRows": 0,
+  "businessStateMatchesBeforeDeployment": true,
+  "frontendIndexMatchesBuild": true,
+  "security": [
+    {
+      "name": "internal-context-anonymous",
+      "expected": 401,
+      "actual": 401,
+      "pass": true
+    },
+    {
+      "name": "internal-target-anonymous",
+      "expected": 401,
+      "actual": 401,
+      "pass": true
+    },
+    {
+      "name": "internal-target-not-gateway-route",
+      "expected": 404,
+      "actual": 404,
+      "pass": true
+    },
+    {
+      "name": "public-status-anonymous",
+      "expected": 401,
+      "actual": 401,
+      "pass": true
+    }
+  ],
+  "externalMailSentByThisVerification": 0,
+  "maasCallsByThisVerification": 0,
+  "realAlertMailAcceptanceVerified": false,
+  "browserVisualAcceptanceVerified": false,
+  "browserBlock": "CUA and Node REPL: failed to write kernel assets; os error 3",
+  "gitRemoteConfigured": false,
+  "originalSavedImageIdsResolvable": false,
+  "rebuiltRollbackImages": [
+    {
+      "service": "stock-user-service",
+      "tag": "aistock/stock-user-service:rollback-14063e6",
+      "image": "sha256:63155c27a24ef3174d4d0289176ebf0fb1a55dd727f9ee4d1610367a4e7e64a5",
+      "source": "14063e6",
+      "rebuilt": true
+    },
+    {
+      "service": "stock-notification-service",
+      "tag": "aistock/stock-notification-service:rollback-14063e6",
+      "image": "sha256:54075cd672b316b511ea961809712e3cb90a7a5ff38c954d4972cf03849124c5",
+      "source": "14063e6",
+      "rebuilt": true
+    },
+    {
+      "service": "stock-gateway",
+      "tag": "aistock/stock-gateway:rollback-14063e6",
+      "image": "sha256:cfdc8bddb265e8d0812aac96233107a2497b412b954a6e41716d4f3fbc719851",
+      "source": "14063e6",
+      "rebuilt": true
+    },
+    {
+      "service": "frontend",
+      "tag": "aistock/frontend:rollback-14063e6",
+      "image": "sha256:5f764ecfe7c82c5b4a1eafe4e3d4d7ea736acb4b21311634a21c1cb3dcfffef1",
+      "source": "14063e6",
+      "rebuilt": true
+    }
+  ],
+  "rollbackExecuted": false
+}

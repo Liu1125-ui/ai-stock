@@ -1,0 +1,11 @@
+import type {MarketSummary,HttpSummary} from '../../../api/adminStatistics'
+export {auth,deferred} from '../tasks/taskFixtures'
+export const window={from:'2026-10-16',to:'2026-10-22'}
+export const meta={window:{...window,timeZone:'Asia/Shanghai'},queriedAt:'2026-10-22T04:00:00Z',definitionVersion:'admin-statistics-v1'}
+export const dates=Array.from({length:7},(_,i)=>'2026-10-'+String(16+i))
+export function users(){return {meta,totalUsers:'2',enabledUsers:'2',disabledUsers:'0',roleCounts:[{key:'USER',count:'1'},{key:'ADMIN',count:'1'}],registrations:'1',registrationDaily:dates.map((date,i)=>({date,count:i===0?'1':'0'})),successfulLogins:'2',distinctLoginUsers:'1',loginDaily:dates.map((date,i)=>({date,successfulLogins:i===0?'2':'0',distinctUsers:i===0?'1':'0'}))}}
+export function predictions(){return {meta,acceptedRequests:'1',stateCounts:[{key:'RUNNING',count:'0'},{key:'SUCCEEDED',count:'1'},{key:'FAILED',count:'0'}],requestDaily:dates.map((date,i)=>({date,accepted:i===0?'1':'0',succeeded:i===0?'1':'0',failed:'0',running:'0'})),modelUsage:[{modelId:'00000000-0000-0000-0000-000000000001',artifactId:'transformer-seed42',label:'Transformer版本 · transformer-seed42',acceptedRequests:'1',successfulRequests:'1',usagePercent:'100.00'}]}}
+export function tasks(){return {meta,taskTotal:'0',taskStateCounts:[],taskTypeCounts:[],taskDaily:dates.map(date=>({date,count:'0'})),attemptTotal:'0',attemptStateCounts:[],attemptDuration:{sampleCount:'0',excludedInvalidCount:'0',meanMs:null},unfinishedAttempts:'0',firstQueueWait:{sampleCount:'0',excludedInvalidCount:'0',meanMs:null}}}
+export function market():MarketSummary{return {meta,scope:'CURRENT_HEADS',instrumentCount:'1',availableHeads:'1',items:[{instrumentId:'SH600030',provider:'BAOSTOCK',priceBasis:'RAW',versionId:'v-test',status:'AVAILABLE',quality:'VERIFIED',checkedAt:meta.queriedAt,fetchedAt:meta.queriedAt,publishedAt:meta.queriedAt,coverageEnd:'2026-10-21',lastErrorCode:null}],hasMore:true}}
+export function http():HttpSummary{return {processStartedAt:'2026-10-22T02:00:00Z',observedSince:'2026-10-22T02:00:01Z',queriedAt:meta.queriedAt,scope:'CURRENT_GATEWAY_PROCESS',definitionVersion:'admin-statistics-v1',groups:[{group:'USER',completedRequests:'0',http4xx:'0',http5xx:'0',totalDurationMs:'0.000',meanDurationMs:null,errorPercent:null}],droppedSamples:'0'}}
+

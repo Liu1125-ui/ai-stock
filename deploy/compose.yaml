@@ -1,0 +1,258 @@
+name: aistock-sdd001
+services:
+  mysql:
+    image: mysql:8.0@sha256:7dcddc01f13bab2f15cde676d44d01f61fc9f99fe7785e86196dfc07d358ae2b
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Generate .env first}
+      USER_DB_PASSWORD: ${USER_DB_PASSWORD:?Generate .env first}
+      MARKET_DB_PASSWORD: ${MARKET_DB_PASSWORD:?Generate .env first}
+      PREDICTION_DB_PASSWORD: ${PREDICTION_DB_PASSWORD:?Generate .env first}
+      SCHEDULER_DB_PASSWORD: ${SCHEDULER_DB_PASSWORD:?Generate .env first}
+      NOTIFICATION_DB_PASSWORD: ${NOTIFICATION_DB_PASSWORD:?Generate .env first}
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./mysql/01-databases.sh:/docker-entrypoint-initdb.d/01-databases.sh:ro
+    healthcheck:
+      test: ["CMD-SHELL", "MYSQL_PWD=$$MYSQL_ROOT_PASSWORD mysqladmin ping -h 127.0.0.1 -u root --silent"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+  nacos:
+    image: nacos/nacos-server:v2.3.2@sha256:d70b20546fe59aeb86add0754db1dbc3a3067363e18599329c5163d0d8cd9cd8
+    environment:
+      MODE: standalone
+      NACOS_AUTH_ENABLE: "false"
+      JVM_XMS: 256m
+      JVM_XMX: 512m
+      JVM_XMN: 128m
+    ports:
+      - "127.0.0.1:${NACOS_HOST_PORT:-18488}:8848"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8848/nacos/v1/console/health/readiness >/dev/null"]
+      interval: 5s
+      timeout: 3s
+      retries: 40
+  stock-user-service:
+    image: aistock/stock-user-service:sdd001
+    build:
+      context: ../backend
+      args:
+        MODULE: stock-user-service
+    environment:
+      WATCHLIST_MARKET_PREPARATION_ENABLED: ${WATCHLIST_MARKET_PREPARATION_ENABLED:-false}
+      WATCHLIST_SCHEDULER_URL: http://stock-scheduler-service:8080
+      SPRING_PROFILES_ACTIVE: compose
+      SERVER_PORT: "8080"
+      USER_DB_PASSWORD: ${USER_DB_PASSWORD}
+      AUTH_DIGEST_KEY: ${AUTH_DIGEST_KEY:?Generate keys first}
+      AUTH_PAYLOAD_KEY: ${AUTH_PAYLOAD_KEY:?Generate keys first}
+      NOTIFICATION_URL: ""
+      SERVICE_TOKEN: ${SERVICE_TOKEN:?Generate .env first}
+      MARKET_URL: ""
+    ports:
+      - "127.0.0.1:18081:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+      nacos:
+        condition: service_healthy
+  stock-market-service:
+    image: aistock/stock-market-service:sdd001
+    build:
+      context: ../backend
+      args:
+        MODULE: stock-market-service
+    environment:
+      AISTOCK_MARKET_LIVE_PILOT_TOKEN: ${AISTOCK_MARKET_LIVE_PILOT_TOKEN:-}
+      MARKET_INDEX_REFRESH_ENABLED: ${MARKET_INDEX_REFRESH_ENABLED:-true}
+      MARKET_LOCAL_ALERT_USE_ENABLED: ${MARKET_LOCAL_ALERT_USE_ENABLED:-false}
+      MARKET_LOCAL_ALERT_USE_RECOVERY_ENABLED: ${MARKET_LOCAL_ALERT_USE_RECOVERY_ENABLED:-false}
+      MARKET_LOCAL_COMPARISON_USE_ENABLED: ${MARKET_LOCAL_COMPARISON_USE_ENABLED:-false}
+      MARKET_LOCAL_COMPARISON_USE_RECOVERY_ENABLED: ${MARKET_LOCAL_COMPARISON_USE_RECOVERY_ENABLED:-false}
+      MARKET_VERSION_EVIDENCE_GATES_ENABLED: ${MARKET_VERSION_EVIDENCE_GATES_ENABLED:-false}
+      MARKET_VERSION_USE_PROTOCOL_ENABLED: ${MARKET_VERSION_USE_PROTOCOL_ENABLED:-false}
+      MARKET_VERSION_USE_RECONCILE_ENABLED: ${MARKET_VERSION_USE_RECONCILE_ENABLED:-false}
+      MARKET_VERSION_USE_ENFORCED: ${MARKET_VERSION_USE_ENFORCED:-false}
+      SPRING_PROFILES_ACTIVE: compose
+      SERVER_PORT: "8080"
+      MARKET_DB_PASSWORD: ${MARKET_DB_PASSWORD}
+      CALENDAR_TTL_DAYS: ${CALENDAR_TTL_DAYS:-7}
+      SERVICE_TOKEN: ${SERVICE_TOKEN:?Generate .env first}
+      REFERENCE_PREDICTION_URL: http://stock-prediction-service:8080
+      REFERENCE_SCHEDULER_URL: http://stock-scheduler-service:8080
+      REFERENCE_NOTIFICATION_URL: http://stock-notification-service:8080
+      ALGORITHM_URL: http://algorithm:8090
+    ports:
+      - "127.0.0.1:18082:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+      nacos:
+        condition: service_healthy
+  stock-prediction-service:
+    image: aistock/stock-prediction-service:sdd001
+    build:
+      context: ../backend
+      args:
+        MODULE: stock-prediction-service
+    environment:
+      PREDICTION_MARKET_USE_COMPARISON_ENABLED: ${PREDICTION_MARKET_USE_COMPARISON_ENABLED:-false}
+      PREDICTION_MARKET_USE_PORTFOLIO_ENABLED: ${PREDICTION_MARKET_USE_PORTFOLIO_ENABLED:-false}
+      PREDICTION_MARKET_USE_FORECAST_ENABLED: ${PREDICTION_MARKET_USE_FORECAST_ENABLED:-false}
+      PREDICTION_MARKET_USE_VERIFICATION_ENABLED: ${PREDICTION_MARKET_USE_VERIFICATION_ENABLED:-false}
+      PREDICTION_MARKET_USE_ANALYSIS_ENABLED: ${PREDICTION_MARKET_USE_ANALYSIS_ENABLED:-false}
+      PREDICTION_MARKET_USE_RECOVERY_ENABLED: ${PREDICTION_MARKET_USE_RECOVERY_ENABLED:-false}
+      COMPARISON_AI_ENABLED: ${COMPARISON_AI_ENABLED:-false}
+      PORTFOLIO_QUESTION_ENABLED: ${PORTFOLIO_QUESTION_ENABLED:-false}
+      MAAS_ENABLED: ${MAAS_ENABLED:-false}
+      MAAS_CHAT_URL: ${MAAS_CHAT_URL:-}
+      MAAS_MODEL: ${MAAS_MODEL:-}
+      MAAS_API_KEY: ${MAAS_API_KEY:-}
+      SPRING_PROFILES_ACTIVE: compose
+      SERVER_PORT: "8080"
+      PREDICTION_DB_PASSWORD: ${PREDICTION_DB_PASSWORD}
+      SERVICE_TOKEN: ${SERVICE_TOKEN:?Generate .env first}
+      MARKET_URL: ""
+      ALGORITHM_URL: http://algorithm:8090
+      FORECAST_MARKET_URL: http://stock-market-service:8080
+      PORTFOLIO_USER_URL: http://stock-user-service:8080
+      TRAINING_SCHEDULER_URL: http://stock-scheduler-service:8080
+      PORTFOLIO_MARKET_URL: http://stock-market-service:8080
+      PORTFOLIO_MAX_CONCURRENT: ${PORTFOLIO_MAX_CONCURRENT:-2}
+      PORTFOLIO_CONCENTRATION_THRESHOLD_PERCENT: ${PORTFOLIO_CONCENTRATION_THRESHOLD_PERCENT:-50}
+    ports:
+      - "127.0.0.1:18083:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+      nacos:
+        condition: service_healthy
+  stock-scheduler-service:
+    image: aistock/stock-scheduler-service:sdd001
+    build:
+      context: ../backend
+      args:
+        MODULE: stock-scheduler-service
+    environment:
+      SPRING_PROFILES_ACTIVE: compose
+      SERVER_PORT: "8080"
+      SCHEDULER_DB_PASSWORD: ${SCHEDULER_DB_PASSWORD}
+      ADMIN_MARKET_REFRESH_ACTIONS_ENABLED: ${ADMIN_MARKET_REFRESH_ACTIONS_ENABLED:-false}
+      ADMIN_MARKET_REFRESH_COOLDOWN_SECONDS: ${ADMIN_MARKET_REFRESH_COOLDOWN_SECONDS:-60}
+      ADMIN_TASK_ACTIONS_ENABLED: ${ADMIN_TASK_ACTIONS_ENABLED:-false}
+      ADMIN_TASK_RETRY_COOLDOWN_SECONDS: ${ADMIN_TASK_RETRY_COOLDOWN_SECONDS:-60}
+      SERVICE_TOKEN: ${SERVICE_TOKEN:?Generate .env first}
+      USER_SERVICE_URL: http://stock-user-service:8080
+      MARKET_URL: ""
+      PREDICTION_URL: http://stock-prediction-service:8080
+      REVISION_MARKET_URL: http://stock-market-service:8080
+      COMPARISON_UPDATE_MARKET_URL: http://stock-market-service:8080
+      COMPARISON_UPDATE_PLAN_ENABLED: ${COMPARISON_UPDATE_PLAN_ENABLED:-false}
+      COMPARISON_UPDATE_WORKER_ENABLED: ${COMPARISON_UPDATE_WORKER_ENABLED:-false}
+      COMPARISON_UPDATE_INSTRUMENTS: ${COMPARISON_UPDATE_INSTRUMENTS:-SH600030,SH600276,SZ000002}
+      COMPARISON_UPDATE_SCAN_POLL_MS: ${COMPARISON_UPDATE_SCAN_POLL_MS:-60000}
+      COMPARISON_UPDATE_MAX_ATTEMPTS: ${COMPARISON_UPDATE_MAX_ATTEMPTS:-3}
+      COMPARISON_UPDATE_RETRY_FIRST_SECONDS: ${COMPARISON_UPDATE_RETRY_FIRST_SECONDS:-900}
+      COMPARISON_UPDATE_RETRY_SECOND_SECONDS: ${COMPARISON_UPDATE_RETRY_SECOND_SECONDS:-1800}
+      PREDICTION_REVISION_PLAN_ENABLED: ${PREDICTION_REVISION_PLAN_ENABLED:-false}
+      ALERT_MARKET_URL: http://stock-market-service:8080
+      ALERT_NOTIFICATION_URL: http://stock-notification-service:8080
+      ALERT_PLAN_ENABLED: ${ALERT_PLAN_ENABLED:-false}
+      ALERT_WORKER_ENABLED: ${ALERT_WORKER_ENABLED:-false}
+      ALERT_SCAN_POLL_MS: ${ALERT_SCAN_POLL_MS:-60000}
+      ALERT_WORKER_POLL_MS: ${ALERT_WORKER_POLL_MS:-1000}
+      ALERT_RECONCILE_MINUTES: ${ALERT_RECONCILE_MINUTES:-60}
+      ALERT_PAGE_SIZE: ${ALERT_PAGE_SIZE:-50}
+      ALERT_MAX_ACTIVE_JOBS: ${ALERT_MAX_ACTIVE_JOBS:-1000}
+      ALERT_INSTRUMENTS: ${ALERT_INSTRUMENTS:-SH600030,SH600276,SZ000002}
+      PREDICTION_VERIFY_PLAN_ENABLED: ${PREDICTION_VERIFY_PLAN_ENABLED:-false}
+      MARKET_WORKER_ENABLED: ${MARKET_WORKER_ENABLED:-false}
+      MARKET_PLAN_ENABLED: ${MARKET_PLAN_ENABLED:-false}
+      MARKET_PLAN_INSTRUMENTS: ${MARKET_PLAN_INSTRUMENTS:-SH600030,SH600276,SZ000002}
+    ports:
+      - "127.0.0.1:18084:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+      nacos:
+        condition: service_healthy
+  stock-notification-service:
+    image: aistock/stock-notification-service:sdd001
+    build:
+      context: ../backend
+      args:
+        MODULE: stock-notification-service
+    environment:
+      SPRING_PROFILES_ACTIVE: compose
+      SERVER_PORT: "8080"
+      NOTIFICATION_DB_PASSWORD: ${NOTIFICATION_DB_PASSWORD}
+      MAIL_PAYLOAD_KEY: ${MAIL_PAYLOAD_KEY:?Generate keys first}
+      MAIL_DIGEST_KEY: ${MAIL_DIGEST_KEY:?Generate keys first}
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-465}
+      SMTP_USERNAME: ${SMTP_USERNAME:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      SMTP_FROM: ${SMTP_FROM:-}
+      SMTP_SSL_ENABLED: ${SMTP_SSL_ENABLED:-true}
+      SMTP_STARTTLS_REQUIRED: ${SMTP_STARTTLS_REQUIRED:-false}
+      SERVICE_TOKEN: ${SERVICE_TOKEN:?Generate .env first}
+      MARKET_URL: ""
+      MARKET_SERVICE_URL: ""
+      USER_SERVICE_URL: ""
+      NOTIFICATION_MARKET_USE_URL: http://stock-market-service:8080
+      NOTIFICATION_MARKET_USE_ALERT_ENABLED: ${NOTIFICATION_MARKET_USE_ALERT_ENABLED:-false}
+      NOTIFICATION_MARKET_USE_RECOVERY_ENABLED: ${NOTIFICATION_MARKET_USE_RECOVERY_ENABLED:-false}
+      ALERT_MAX_RULES: ${ALERT_MAX_RULES:-50}
+      ALERT_EVALUATION_ENABLED: ${ALERT_EVALUATION_ENABLED:-false}
+      ALERT_MAIL_WORKER_ENABLED: ${ALERT_MAIL_WORKER_ENABLED:-false}
+      ALERT_MAIL_TTL_SECONDS: ${ALERT_MAIL_TTL_SECONDS:-86400}
+      ALERT_MAIL_MAX_ATTEMPTS: ${ALERT_MAIL_MAX_ATTEMPTS:-3}
+      ALERT_MAIL_LEASE_SECONDS: ${ALERT_MAIL_LEASE_SECONDS:-120}
+      ALERT_MAIL_POLL_MS: ${ALERT_MAIL_POLL_MS:-2000}
+      ALERT_MAIL_RETRY_INITIAL_SECONDS: ${ALERT_MAIL_RETRY_INITIAL_SECONDS:-60}
+      ALERT_MAIL_RETRY_LATER_SECONDS: ${ALERT_MAIL_RETRY_LATER_SECONDS:-300}
+    ports:
+      - "127.0.0.1:18085:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+      nacos:
+        condition: service_healthy
+  stock-gateway:
+    image: aistock/stock-gateway:sdd001
+    build:
+      context: ../backend
+      args:
+        MODULE: stock-gateway
+    environment:
+      SERVER_PORT: "8080"
+      NACOS_ENABLED: "true"
+      NACOS_ADDR: nacos:8848
+      USER_SERVICE_URL: ""
+      SERVICE_TOKEN: ${SERVICE_TOKEN:?Generate .env first}
+    ports:
+      - "127.0.0.1:18080:8080"
+  frontend:
+    image: aistock/frontend:sdd001
+    build:
+      context: ../frontend
+    ports:
+      - "127.0.0.1:15173:80"
+    depends_on:
+      - stock-gateway
+  algorithm:
+    image: aistock/algorithm:sdd001
+    build:
+      context: ../backend/algorithm
+    environment:
+      MARKET_VERSION_USE_REQUIRED: ${ALGORITHM_MARKET_VERSION_USE_REQUIRED:-false}
+      SERVICE_TOKEN: ${SERVICE_TOKEN:?Generate .env first}
+      MODEL_ARTIFACT_ROOT: /model-artifacts
+      PREDICTION_MODEL_AUTHORITY_URL: http://stock-prediction-service:8080
+      MARKET_INPUT_AUTHORITY_URL: http://stock-market-service:8080
+    volumes:
+      - ../runtime/model-artifacts:/model-artifacts:ro
+    ports:
+      - "127.0.0.1:18090:8090"
+volumes:
+  mysql-data:

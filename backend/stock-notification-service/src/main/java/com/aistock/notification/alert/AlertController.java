@@ -1,0 +1,13 @@
+package com.aistock.notification.alert;
+import com.aistock.common.*;import com.fasterxml.jackson.databind.JsonNode;import java.util.*;import org.springframework.web.bind.annotation.*;
+@RestController @RequestMapping("/api/v1/alerts") public class AlertController {
+ private final AlertRuleService rules;public AlertController(AlertRuleService rules){this.rules=rules;}
+ @GetMapping public ApiResponse<AlertRecords.Page> list(@RequestAttribute(NotificationSecurityFilter.OWNER)UUID owner,@RequestParam(defaultValue="1")int page,@RequestParam(defaultValue="20")int size,@RequestHeader(value="X-Trace-Id",required=false)String trace){return ApiResponse.success(rules.list(owner,page,size),TraceIds.normalize(trace));}
+ @PostMapping public ApiResponse<AlertRecords.Rule> create(@RequestAttribute(NotificationSecurityFilter.OWNER)UUID owner,@RequestBody JsonNode b,@RequestHeader(value="X-Trace-Id",required=false)String trace){fields(b,Set.of("requestId","instrumentId","condition","threshold"));UUID id;try{id=UUID.fromString(text(b,"requestId"));}catch(Exception e){throw AlertRuleService.invalid();}return ApiResponse.success(rules.create(owner,new AlertRecords.Create(id,text(b,"instrumentId"),text(b,"condition"),text(b,"threshold"))),TraceIds.normalize(trace));}
+ @PatchMapping("/{id}") public ApiResponse<AlertRecords.Rule> patch(@RequestAttribute(NotificationSecurityFilter.OWNER)UUID owner,@PathVariable UUID id,@RequestBody JsonNode b,@RequestHeader(value="X-Trace-Id",required=false)String trace){fields(b,Set.of("revision","condition","threshold","enabled"));return ApiResponse.success(rules.patch(owner,id,new AlertRecords.Patch(revision(b),optionalText(b,"condition"),optionalText(b,"threshold"),bool(b,"enabled",false))),TraceIds.normalize(trace));}
+ static void fields(JsonNode b,Set<String> allowed){if(b==null||!b.isObject())throw AlertRuleService.invalid();b.fieldNames().forEachRemaining(k->{if(!allowed.contains(k))throw AlertRuleService.invalid();});}
+ static String text(JsonNode b,String k){if(!b.has(k)||!b.get(k).isTextual())throw AlertRuleService.invalid();return b.get(k).textValue();}
+ static String optionalText(JsonNode b,String k){return b.has(k)?text(b,k):null;}
+ static Long revision(JsonNode b){if(!b.has("revision")||!b.get("revision").isIntegralNumber()||!b.get("revision").canConvertToLong())throw AlertRuleService.invalid();return b.get("revision").longValue();}
+ static Boolean bool(JsonNode b,String k,boolean required){if(!b.has(k)){if(required)throw AlertRuleService.invalid();return null;}if(!b.get(k).isBoolean())throw AlertRuleService.invalid();return b.get(k).booleanValue();}
+}

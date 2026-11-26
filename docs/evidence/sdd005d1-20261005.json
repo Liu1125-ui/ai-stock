@@ -1,0 +1,82 @@
+{
+  "checkedAt": "2026-10-05T15:04:17.036171+08:00",
+  "inputVersionId": "797cfe14-fb5d-4311-ab3b-3d1308d8007d",
+  "rawVersionId": "1dd82b9f-ce8b-44e6-bfc5-9168d2d78a32",
+  "freshness": "FRESH",
+  "checks": [
+    {
+      "modelId": "55f8adad-2064-4cc8-b794-ec47f720e648",
+      "publicationStatus": 409,
+      "inferenceState": "MODEL_NOT_PUBLISHED",
+      "result": null
+    },
+    {
+      "modelId": "d31533cf-9d80-420d-8203-170bd11417a5",
+      "publicationStatus": 409,
+      "inferenceState": "MODEL_NOT_PUBLISHED",
+      "result": null
+    },
+    {
+      "modelId": "9129d34b-c467-495b-b404-69cf3b860e68",
+      "publicationStatus": 409,
+      "inferenceState": "MODEL_NOT_PUBLISHED",
+      "result": null
+    },
+    {
+      "extraWindowStatus": 422
+    },
+    {
+      "unauthenticatedMalformedStatus": 401
+    },
+    {
+      "gatewayInternalStatus": 404
+    }
+  ],
+  "realPublishedSuccessVerified": false,
+  "backendTests": {
+    "passed": 179,
+    "failed": 0,
+    "errors": 0
+  },
+  "algorithmTests": {
+    "passed": 59,
+    "failed": 0
+  },
+  "frontendChanged": false,
+  "artifacts": [
+    {
+      "artifactId": "transformer-s3-2023-seed42-c698f02e6875e762",
+      "manifestHashUnchanged": true,
+      "checkpointHashUnchanged": true,
+      "runtimeHashesUnchanged": true
+    },
+    {
+      "artifactId": "transformer-s3-2023-seed43-9a96167ecb00234d",
+      "manifestHashUnchanged": true,
+      "checkpointHashUnchanged": true,
+      "runtimeHashesUnchanged": true
+    },
+    {
+      "artifactId": "transformer-s3-2023-seed44-809fa0c150e41590",
+      "manifestHashUnchanged": true,
+      "checkpointHashUnchanged": true,
+      "runtimeHashesUnchanged": true
+    }
+  ],
+  "administrator": {
+    "role": "ADMIN",
+    "state": "ENABLED",
+    "browserLoginVerified": false
+  },
+  "codeProvenance": "Codex; no verified CodeArts diff",
+  "gitRemoteConfigured": false,
+  "finalReview": {
+    "important": 1,
+    "critical": 0,
+    "minor": 0,
+    "fixed": "same-day RAW revision mismatch",
+    "regressionRedFailed": 2,
+    "regressionGreenFullPassed": 59
+  },
+  "postFixPendingRejectVerifiedAt": "2026-10-05T15:14:45.812267+08:00"
+}

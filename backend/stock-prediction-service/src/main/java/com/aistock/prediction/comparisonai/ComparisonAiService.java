@@ -1,0 +1,12 @@
+package com.aistock.prediction.comparisonai;
+import com.aistock.prediction.comparison.ComparisonRepository;import com.aistock.prediction.explanation.MaasClient;import com.aistock.common.BusinessException;import com.fasterxml.jackson.databind.*;import java.time.*;import java.util.*;import org.springframework.http.HttpStatus;
+public final class ComparisonAiService {
+ private final ComparisonAiRepository records;private final ComparisonRepository source;private final MaasClient client;private final ObjectMapper mapper;private final Clock clock;private final boolean enabled;
+ public record Generation(JsonNode operation,boolean replayed,boolean cached) {}
+ public ComparisonAiService(ComparisonAiRepository records,ComparisonRepository source,MaasClient client,ObjectMapper mapper,Clock clock,boolean enabled){this.records=records;this.source=source;this.client=client;this.mapper=mapper;this.clock=clock;this.enabled=enabled;}
+ public Generation generate(UUID owner,ComparisonAiInput input){input.validate();var prior=records.replay(owner,input,clock.instant());if(prior!=null)return new Generation(prior,true,false);var saved=source.get(owner,input.comparisonId());if(!configured())throw new BusinessException("AI_NOT_CONFIGURED","多股AI解释暂未启用，原对比结果仍可查看",HttpStatus.SERVICE_UNAVAILABLE);var facts=ComparisonAiFacts.build(saved,client.model(),mapper);var claim=records.claim(owner,input,facts,clock.instant());if(!claim.execute())return new Generation(claim.receipt(),claim.replayed(),claim.cached());JsonNode paragraphs=null;String error=null;try{paragraphs=ComparisonAiTemplate.render(client.generateComparison(facts.values()),facts,mapper);}catch(BusinessException e){error=e.code();}catch(RuntimeException e){error="AI_UNAVAILABLE";}try{return new Generation(records.complete(owner,input.operationId(),paragraphs,error,clock.instant()),false,false);}catch(BusinessException e){throw e;}catch(RuntimeException e){throw new BusinessException("AI_RESULT_UNCONFIRMED","解释请求状态尚未确认，请查询原请求；原结果保留",HttpStatus.SERVICE_UNAVAILABLE);}}
+ public boolean configured(){return enabled&&client.enabled();}
+ public JsonNode view(UUID owner,UUID comparison){return records.view(owner,comparison,configured(),clock.instant());}
+ public JsonNode operation(UUID owner,UUID operation){return records.operation(owner,operation,clock.instant());}
+ public JsonNode get(UUID owner,UUID explanation){return records.get(owner,explanation);}
+}

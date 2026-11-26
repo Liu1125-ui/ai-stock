@@ -1,0 +1,135 @@
+{
+  "checkedAt": "2026-10-07T06:17:33.790304100Z",
+  "backend": {
+    "tests": 291,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "frontend": {
+    "tests": 46,
+    "failures": 0,
+    "build": "passed"
+  },
+  "deployment": {
+    "18083": "UP",
+    "18080": "UP",
+    "18081": "UP",
+    "18082": "UP",
+    "18084": "UP",
+    "18085": "UP",
+    "frontend": 200,
+    "anonymousExplanation": 401
+  },
+  "migration": {
+    "version": 5,
+    "success": true
+  },
+  "forecastAndModelSnapshotUnchanged": true,
+  "forecastSnapshotSha256": "c6057822b1aa2f55c8bb7b3e57f07645a29da258310527959b97009f34c882b7",
+  "realMaas": {
+    "calls": 3,
+    "validatedResponses": 2,
+    "rejectedResponses": 1,
+    "latestValidated": {
+      "checkedAt": "2026-10-07T06:17:33.790304100Z",
+      "scope": "real MaaS client and template only; not browser/session integration",
+      "contextHash": "2ea02a85d2fb1d0190d20e3cd3de834ebf14b141edf05baca7ed68adaa9585d0",
+      "context": {
+        "predictionId": "19ddcb7c-3fba-4df3-ba4f-f8eebfeb3f14",
+        "promptVersion": "grounded-prediction-v1",
+        "providerModel": "deepseek-v4-flash",
+        "originDate": "2026-09-30",
+        "inputVersionId": "797cfe14-fb5d-4311-ab3b-3d1308d8007d",
+        "rawVersionId": "1dd82b9f-ce8b-44e6-bfc5-9168d2d78a32",
+        "inputHash": "7dfd7cd277af900d39ef898f069c6f9e76478f25005ffb063fa04bdc47e5bc4e",
+        "artifactId": "transformer-s3-2023-seed43-9a96167ecb00234d",
+        "manifestHash": "6894c7d52ba9a3968ef1f85cd0923b3d249a376281f79d752a0fe460d09f97d6",
+        "checkpointHash": "7d90bc81f0e83a70c2f1195bee7ed8637d3d40e2b53415c0fef77f956a1eb112",
+        "publicationRevision": 1,
+        "verificationVersionId": null,
+        "facts": {
+          "ORIGIN_DATE": "2026-09-30",
+          "ORIGIN_CLOSE": "25.86元（原点实际收盘价）",
+          "R1": "-0.210742%（相对原点的预测变化，非实际收益）",
+          "D1": "2026-10-08",
+          "P1": "25.805502元（预测参考价格，非实际行情）",
+          "R2": "-0.186052%（相对原点的预测变化，非实际收益）",
+          "D2": "2026-10-09",
+          "P2": "25.811887元（预测参考价格，非实际行情）",
+          "R3": "-0.097989%（相对原点的预测变化，非实际收益）",
+          "D3": "2026-10-12",
+          "P3": "25.834660元（预测参考价格，非实际行情）",
+          "R4": "-0.005023%（相对原点的预测变化，非实际收益）",
+          "D4": "2026-10-13",
+          "P4": "25.858701元（预测参考价格，非实际行情）",
+          "R5": "0.057494%（相对原点的预测变化，非实际收益）",
+          "D5": "2026-10-14",
+          "P5": "25.874868元（预测参考价格，非实际行情）",
+          "TREND": "上行",
+          "RELATIVE_ORIGIN": "部分高于、部分低于或等于原点收盘价",
+          "MODEL": "transformer-s3-2023-seed43-9a96167ecb00234d",
+          "TRAINING_CUTOFF": "2023-12-31",
+          "VERIFICATION": "尚无有效实际样本，不能评价预测准确性",
+          "LIMIT": "预测和历史误差仅供辅助参考，实际表现需等待目标日行情；当前未校准误差区间"
+        }
+      },
+      "paragraphs": [
+        {
+          "kind": "overview",
+          "text": "基于transformer-s3-2023-seed43-9a96167ecb00234d模型，预测自2026-09-30起，目标日趋势为上行，各点价格相对于原点收盘价部分高于、部分低于或等于原点收盘价。",
+          "refs": [
+            "MODEL",
+            "ORIGIN_DATE",
+            "TREND",
+            "RELATIVE_ORIGIN"
+          ]
+        },
+        {
+          "kind": "readout",
+          "text": "首个目标日2026-10-08参考价25.805502元（预测参考价格，非实际行情），变化-0.210742%（相对原点的预测变化，非实际收益）；之后2026-10-09参考价25.811887元（预测参考价格，非实际行情），变化-0.186052%（相对原点的预测变化，非实际收益）；2026-10-12参考价25.834660元（预测参考价格，非实际行情），变化-0.097989%（相对原点的预测变化，非实际收益）；2026-10-13参考价25.858701元（预测参考价格，非实际行情），变化-0.005023%（相对原点的预测变化，非实际收益）；2026-10-14参考价25.874868元（预测参考价格，非实际行情），变化0.057494%（相对原点的预测变化，非实际收益）。",
+          "refs": [
+            "D1",
+            "P1",
+            "R1",
+            "D2",
+            "P2",
+            "R2",
+            "D3",
+            "P3",
+            "R3",
+            "D4",
+            "P4",
+            "R4",
+            "D5",
+            "P5",
+            "R5"
+          ]
+        },
+        {
+          "kind": "risk",
+          "text": "训练截止2023-12-31，尚无有效实际样本，不能评价预测准确性。预测和历史误差仅供辅助参考，实际表现需等待目标日行情；当前未校准误差区间。",
+          "refs": [
+            "TRAINING_CUTOFF",
+            "VERIFICATION",
+            "LIMIT"
+          ]
+        }
+      ]
+    },
+    "scope": "Actual client and template; owned endpoints validated in isolated security tests, signed-in browser display not observed"
+  },
+  "review": {
+    "critical": 0,
+    "important": 1,
+    "minor": 3,
+    "fixPasses": 1,
+    "allReportedItemsAddressed": true
+  },
+  "limitations": [
+    "No valid realized target sample yet; no accuracy conclusion",
+    "One real response rejected by consistency validation; no automatic retries",
+    "Browser session display awaits user viewing a saved successful prediction",
+    "FR09 open Q&A and calibrated uncertainty remain separate work"
+  ]
+}

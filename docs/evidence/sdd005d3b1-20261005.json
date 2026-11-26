@@ -1,0 +1,116 @@
+{
+  "date": "2026-10-05",
+  "stage": "SDD005D3B1",
+  "codeCommit": "9742949",
+  "scope": "本人验证只读API与历史详情；自动验证D3B2待接通",
+  "backend": {
+    "command": "scripts/check-auth-task1.ps1 clean verify",
+    "totals": {
+      "tests": 243,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "modules": {
+      "stock-common": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "stock-gateway": {
+        "tests": 18,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "stock-market-service": {
+        "tests": 73,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "stock-notification-service": {
+        "tests": 10,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "stock-prediction-service": {
+        "tests": 71,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "stock-scheduler-service": {
+        "tests": 12,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "stock-user-service": {
+        "tests": 57,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    "log": "runtime/sdd005d3b1-final-all.log"
+  },
+  "frontend": {
+    "tests": 40,
+    "failures": 0,
+    "files": 16,
+    "build": "vue-tsc + vite passed",
+    "log": "runtime/sdd005d3b1-review-green.log",
+    "buildLog": "runtime/sdd005d3b1-review-build.log"
+  },
+  "review": {
+    "reviewer": "verification_user_ui_review",
+    "critical": 0,
+    "important": 1,
+    "minor": 0,
+    "fixed": "刷新与历史选择两个返回顺序RED→GREEN，一次修复，无二次审查"
+  },
+  "runtimeBug": "实际网关404定位精确白名单遗漏，两项测试1RED→全部GREEN，最小GET路由修复",
+  "deployment": {
+    "health": {
+      "prediction": {
+        "http": 200,
+        "status": "UP"
+      },
+      "gateway": {
+        "http": 200,
+        "status": "UP"
+      }
+    },
+    "anonymousList": 401,
+    "anonymousDetail": 401,
+    "forgedRole": 401,
+    "internalHidden": 404,
+    "historyEntry": 200,
+    "assets": [
+      {
+        "file": "index.html",
+        "http": 200,
+        "matchesLocalBuild": true
+      },
+      {
+        "file": "assets/PredictionResult-BWh2xe3q.js",
+        "http": 200,
+        "matchesLocalBuild": true
+      }
+    ],
+    "predictionSnapshotAndModelsUnchanged": true,
+    "actualUserVerificationVersions": 0,
+    "predictionId": "19ddcb7c-3fba-4df3-ba4f-f8eebfeb3f14",
+    "browserVisualInspection": "not performed: cua kernel assets path os error 3",
+    "authenticatedUserRead": "isolated MySQL and full security filter tests; live browser positive not observed"
+  },
+  "limitations": [
+    "浏览器内核assets路径错误，未观察图形及真实会话本人正向内容",
+    "目标交易日未到，当前用户验证版本0，不声明真实预测准确率",
+    "D3B2自动验证任务及FR-06整体仍待验收",
+    "CodeArts来源未核实；无remote未push或远程CI"
+  ]
+}

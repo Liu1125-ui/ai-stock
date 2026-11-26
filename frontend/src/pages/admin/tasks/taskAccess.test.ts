@@ -1,0 +1,6 @@
+import {it,expect,vi} from 'vitest'
+import {createAdminTaskAccess} from './taskAccess'
+it('invalidates once and refreshes account permissions without automatically unlocking',async()=>{const refresh=vi.fn().mockResolvedValue(undefined),access=createAdminTaskAccess(()=> 'admin:ADMIN',refresh);expect(access.reject({status:403},'admin:ADMIN')).toBe(true);expect(access.denied.value).toBe(true);access.reject({status:403},'admin:ADMIN');await Promise.resolve();expect(refresh).toHaveBeenCalledTimes(1);expect(access.denied.value).toBe(true)})
+it('an old identity denial cannot clear a new administrator context',()=>{const access=createAdminTaskAccess(()=> 'other:ADMIN',vi.fn());expect(access.reject({status:403},'old:ADMIN')).toBe(false);expect(access.denied.value).toBe(false)})
+it('failed account refresh keeps access invalidated',async()=>{const access=createAdminTaskAccess(()=> 'admin:ADMIN',()=>Promise.reject(new Error('offline')));access.reject({status:403},'admin:ADMIN');await Promise.resolve();await Promise.resolve();expect(access.denied.value).toBe(true)})
+it('ordinary network errors do not invalidate permissions',()=>{const refresh=vi.fn(),access=createAdminTaskAccess(()=> 'admin:ADMIN',refresh);expect(access.reject({status:503},'admin:ADMIN')).toBe(false);expect(access.denied.value).toBe(false);expect(refresh).not.toHaveBeenCalled()})

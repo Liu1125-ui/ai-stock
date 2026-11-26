@@ -1,0 +1,6 @@
+# 股票对比
+MS03只通过受保护HTTP读取MS02固定证据，计算并保存本人历史。ComparisonMarketClient限制连接、响应和超时；后续计算与存储职责分开。没有供应商采集或MaaS调用。
+
+历史分页允许仅upper重读固定首页，before必须同时携upper。每股dataIssues记录请求范围内日期、价格/量字段和MISSING/SUSPENDED，历史摘要省略chart和dataIssues。
+
+Task5A保留(owner,requestId)与原fingerprint及过期重领。每轮lease_generation UUID同时是市场实际执行身份，协议generation=1；重领前同事务保存旧轮FAILED，再替换UUID。proof发现当前轮到期，先真正换掉父行UUID再记录失败，父业务仍RUNNING/expired可重领；时钟回拨也不能恢复旧写权限。complete/fail与结果及本轮终态同事务，历史曲线不改写。新比较scope使用原stock/evidenceId配对，完整RAW集合匹配后才计算。

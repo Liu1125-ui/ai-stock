@@ -1,0 +1,291 @@
+{
+  "checkedAt": "2026-10-13",
+  "stage": "SDD007C_DEPLOYED_REAL_GENERATE_SAVE_REFRESH_ACCEPTED",
+  "backendTests": {
+    "tests": 606,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "frontendTests": {
+    "files": 38,
+    "passed": 148
+  },
+  "build": "PASS_WITH_EXISTING_SIZE_WARNINGS",
+  "independentReviews": 1,
+  "acceptedP2Fixed": 2,
+  "secondIndependentReview": false,
+  "health": {
+    "gateway": {
+      "http": 200,
+      "status": "UP"
+    },
+    "user": {
+      "http": 200,
+      "status": "UP"
+    },
+    "market": {
+      "http": 200,
+      "status": "UP"
+    },
+    "prediction": {
+      "http": 200,
+      "status": "UP"
+    },
+    "scheduler": {
+      "http": 200,
+      "status": "UP"
+    },
+    "notification": {
+      "http": 200,
+      "status": "UP"
+    },
+    "algorithm": {
+      "http": 200,
+      "status": "UP"
+    }
+  },
+  "deployment": {
+    "criticalFieldsUnchanged": true,
+    "criticalChanges": [],
+    "countChanges": [
+      {
+        "database": "prediction",
+        "table": "comparison_ai_operation",
+        "before": null,
+        "after": 0
+      },
+      {
+        "database": "prediction",
+        "table": "comparison_ai_result",
+        "before": null,
+        "after": 0
+      },
+      {
+        "database": "prediction",
+        "table": "flyway_schema_history",
+        "before": 8,
+        "after": 9
+      }
+    ],
+    "checks": {
+      "anonymousView": {
+        "http": 401,
+        "expected": 401,
+        "pass": true
+      },
+      "anonymousOperation": {
+        "http": 401,
+        "expected": 401,
+        "pass": true
+      },
+      "internalBlocked": {
+        "http": 404,
+        "expected": 404,
+        "pass": true
+      },
+      "frontendPage": {
+        "http": 200,
+        "pass": true
+      },
+      "comparisonChunk": {
+        "http": 200,
+        "hasAiPanel": true,
+        "pass": true
+      }
+    },
+    "nacos": {
+      "stock-user-service": {
+        "http": 200,
+        "healthyInstances": 1
+      },
+      "stock-market-service": {
+        "http": 200,
+        "healthyInstances": 1
+      },
+      "stock-prediction-service": {
+        "http": 200,
+        "healthyInstances": 1
+      },
+      "stock-scheduler-service": {
+        "http": 200,
+        "healthyInstances": 1
+      },
+      "stock-notification-service": {
+        "http": 200,
+        "healthyInstances": 1
+      },
+      "stock-gateway": {
+        "http": 200,
+        "healthyInstances": 0,
+        "registrationExpected": false,
+        "reason": "Gateway deliberately has register-enabled:false; service health checked independently"
+      }
+    },
+    "pass": true
+  },
+  "predictionSchemaVersion": 9,
+  "comparisonId": "01a31765-75cf-4bf5-95be-df7037e57b81",
+  "featureFlag": {
+    "deployedInitially": false,
+    "enabledAfterExplicitOneCallAuthorization": true,
+    "current": true
+  },
+  "realMaas": {
+    "authorizedMaximum": 2,
+    "observedComparisonOperations": 2,
+    "status": "SECOND_CALL_SUCCEEDED_FIRST_FAILED",
+    "failedOperationId": "7e1a921f-ca12-42e3-91bf-d19322489e6e",
+    "successfulOperationId": "41593a5f-ec65-460c-b75d-956b46e66d36",
+    "explanationId": "a4b1997e-8aeb-4ac4-a74c-92b33a599144",
+    "savedResults": 1,
+    "remainingAuthorizedCalls": 0,
+    "firstExactProviderFormatViolation": "NOT_RETAINED; do not guess",
+    "vendorBilledTokens": "NOT_QUERIED"
+  },
+  "browserAutomation": "KERNEL_PATH_ERROR; authenticated page check requires user assistance",
+  "rollback": {
+    "actualLegacyGateIsolatedProbe": "PASS",
+    "transactionRolledBack": true,
+    "productionOldImageStartup": "NOT_REHEARSED",
+    "oldFlywayWithV9Startup": "NOT_REHEARSED"
+  },
+  "thisSliceProviderCalls": 0,
+  "thisSliceMaasCallsObserved": 2,
+  "thisSliceEmails": 0,
+  "mailWorker": false,
+  "wholeSystemExternalActivity": "Existing scheduled workers are outside this slice count",
+  "comparisonEvidenceAutoUpdate": "PENDING; evidence cutoff 2026-10-09",
+  "modelResearch": "UNCHANGED; no accuracy improvement claimed",
+  "codeArtsEvidence": "PENDING",
+  "myBatisPlus": "PLANNED_NOT_INTEGRATED",
+  "gitRemote": false,
+  "fixCommit": "735d5e6",
+  "testLogs": [
+    "runtime/sdd007c-backend-final.log",
+    "runtime/sdd007c-frontend-final.log",
+    "runtime/sdd007c-frontend-build.log",
+    "runtime/sdd007c-review-red.log",
+    "runtime/sdd007c-review-green.log",
+    "runtime/sdd007c-rollback-probe.log",
+    "runtime/sdd007c-livefix-backend.log",
+    "runtime/sdd007c-livefix-frontend.log",
+    "runtime/sdd007c-livefix-build.log",
+    "runtime/sdd007c-nginx-red.log",
+    "runtime/sdd007c-diagnostic-red.log",
+    "runtime/sdd007c-diagnostic-green.log"
+  ],
+  "proxyTimeoutRootCause": {
+    "beforeSeconds": 8,
+    "nginxUpstreamTimeoutObserved": true,
+    "localNineSecondProbe": {
+      "provider": "LOCAL_FAKE_ONLY",
+      "results": {
+        "comparisonAi": {
+          "http": 200,
+          "seconds": 9.004,
+          "pass": true
+        },
+        "ordinaryApiControl": {
+          "http": 503,
+          "seconds": 8.013,
+          "pass": true
+        }
+      },
+      "pass": true
+    },
+    "fixedDeployment": "PASS_NGINX_T_AND_EFFECTIVE_ROUTE"
+  },
+  "latestFixCommit": "9e6aeb1",
+  "failedOperationFactsAudit": {
+    "operationId": "7e1a921f-ca12-42e3-91bf-d19322489e6e",
+    "comparisonId": "01a31765-75cf-4bf5-95be-df7037e57b81",
+    "metricFactChecks": 8,
+    "sourceHashMatches": true,
+    "formulaMatches": true,
+    "frozenCutoffMatches": true,
+    "providerModel": "deepseek-v4-flash",
+    "pass": true,
+    "modelResult": "FAILED_AI_OUTPUT_INVALID; this only verifies submitted fixed facts"
+  },
+  "postFixDataPreservation": {
+    "criticalFieldsUnchanged": true,
+    "criticalChanges": [],
+    "countChanges": [
+      {
+        "database": "user",
+        "table": "login_session",
+        "before": 12,
+        "after": 13
+      },
+      {
+        "database": "prediction",
+        "table": "comparison_ai_operation",
+        "before": null,
+        "after": 1
+      },
+      {
+        "database": "prediction",
+        "table": "comparison_ai_result",
+        "before": null,
+        "after": 0
+      },
+      {
+        "database": "prediction",
+        "table": "flyway_schema_history",
+        "before": 8,
+        "after": 9
+      }
+    ]
+  },
+  "additionalCallAuthorization": "GRANTED_MAXIMUM_ONE_DIAGNOSTIC",
+  "realSuccessAudit": {
+    "comparisonId": "01a31765-75cf-4bf5-95be-df7037e57b81",
+    "explanationId": "a4b1997e-8aeb-4ac4-a74c-92b33a599144",
+    "paragraphs": 3,
+    "referencesChecked": 19,
+    "metricFactsChecked": 8,
+    "sourceHashMatches": true,
+    "formulaMatches": true,
+    "fixedTextAndNoUnexplainedNumbers": true,
+    "providerModel": "deepseek-v4-flash",
+    "pass": true,
+    "countsBeforeUserRefresh": {
+      "operations": 2,
+      "results": 1
+    }
+  },
+  "authenticatedPageGeneration": "USER_CONFIRMED_THREE_PARAGRAPHS",
+  "pageRefresh": "USER_CONFIRMED_PRESERVED; operations2/results1 unchanged",
+  "authenticatedBrowserAcceptance": "USER_OPERATED; automation kernel path error remains",
+  "finalDataPreservation": {
+    "criticalFieldsUnchanged": true,
+    "countChanges": [
+      {
+        "database": "user",
+        "table": "login_session",
+        "before": 12,
+        "after": 13
+      },
+      {
+        "database": "prediction",
+        "table": "comparison_ai_operation",
+        "before": null,
+        "after": 2
+      },
+      {
+        "database": "prediction",
+        "table": "comparison_ai_result",
+        "before": null,
+        "after": 1
+      },
+      {
+        "database": "prediction",
+        "table": "flyway_schema_history",
+        "before": 8,
+        "after": 9
+      }
+    ]
+  },
+  "actualPaidReplayTest": "NOT_RUN; same-key no-provider replay verified by automated tests"
+}

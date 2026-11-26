@@ -1,0 +1,13 @@
+package com.aistock.prediction.question;
+import com.aistock.common.*;import com.aistock.prediction.modelcatalog.ModelRecords.Actor;import com.fasterxml.jackson.databind.*;import com.fasterxml.jackson.core.JsonParser;import jakarta.servlet.http.HttpServletRequest;import org.springframework.security.core.Authentication;import org.springframework.http.HttpStatus;import org.springframework.web.bind.annotation.*;import java.util.*;
+@RestController public class QuestionController {
+ private final QuestionService service;private final ObjectMapper strict;
+ public QuestionController(QuestionService service,ObjectMapper m){this.service=service;strict=m.copy().enable(JsonParser.Feature.STRICT_DUPLICATE_DETECTION).enable(DeserializationFeature.FAIL_ON_TRAILING_TOKENS);}
+ @PostMapping("/api/v1/stock-questions")public ApiResponse<?> ask(Authentication auth,HttpServletRequest req){UUID u=user(auth);QuestionInput in;try{var bytes=req.getInputStream().readNBytes(2049);if(bytes.length>2048)throw new BusinessException("AI_REQUEST_TOO_LARGE","问题请求超过处理上限",HttpStatus.PAYLOAD_TOO_LARGE);var n=strict.readTree(bytes);if(n==null||!n.isObject()||n.size()!=3||!n.path("operationId").isTextual()||!n.path("analysisId").isTextual()||!n.path("question").isTextual())throw QuestionInput.invalid();in=new QuestionInput(uuid(n.path("operationId").asText()),uuid(n.path("analysisId").asText()),n.path("question").asText());}catch(java.io.IOException|IllegalArgumentException e){throw QuestionInput.invalid();}return ok(service.generate(u,in),req);}
+ @GetMapping("/api/v1/stock-questions")public ApiResponse<?> list(Authentication a,@RequestParam String analysisId,@RequestParam(defaultValue="1")int page,HttpServletRequest r){return ok(service.list(user(a),uuid(analysisId),page),r);}
+ @GetMapping("/api/v1/stock-questions/{id}")public ApiResponse<?> get(Authentication a,@PathVariable String id,HttpServletRequest r){return ok(service.get(user(a),uuid(id)),r);}
+ @GetMapping("/api/v1/stock-questions/operations/{id}")public ApiResponse<?> operation(Authentication a,@PathVariable String id,HttpServletRequest r){return ok(service.operation(user(a),uuid(id)),r);}
+ private UUID uuid(String v){if(v==null||!v.matches("[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"))throw QuestionInput.invalid();return UUID.fromString(v);}
+ private UUID user(Authentication a){if(a==null||!a.isAuthenticated()||!(a.getPrincipal() instanceof Actor actor))throw new BusinessException("AUTH_REQUIRED","请先登录",HttpStatus.UNAUTHORIZED);return actor.userId();}
+ private ApiResponse<?> ok(Object data,HttpServletRequest r){return ApiResponse.success(data,TraceIds.normalize(r.getHeader("X-Trace-Id")));}
+}

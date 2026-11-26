@@ -1,0 +1,92 @@
+{
+  "checkedAt": "2026-10-13",
+  "stage": "SDD007B_DEPLOYED_USER_ACCEPTED",
+  "backendTests": {
+    "tests": 582,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "frontendTests": {
+    "files": 36,
+    "passed": 133
+  },
+  "build": "PASS_WITH_EXISTING_SIZE_WARNINGS",
+  "realEvidence": {
+    "stocks": [
+      "SH600030",
+      "SH600276",
+      "SZ000002"
+    ],
+    "periods": [
+      "3M",
+      "6M",
+      "1Y"
+    ],
+    "cutoff": "2026-10-09",
+    "provider": "baostock",
+    "basis": "BACKWARD",
+    "metricChecks": 36,
+    "independentDecimalAudit": true,
+    "sourceHash": "1188d17394fbb970bff2e113d8832bf55407284271c798e63f147042edb70370",
+    "chartPointAudit": "PASS"
+  },
+  "independentReviews": 1,
+  "acceptedP2Fixed": 3,
+  "authenticatedBrowserAcceptance": "USER_CONFIRMED_CREATE_REFRESH_HISTORY",
+  "liveDeploymentChecks": "PASS",
+  "comparisonEvidenceAutoUpdate": "PENDING",
+  "multiStockAi": "NOT_IMPLEMENTED",
+  "mailWorker": "UNCHANGED_OFF",
+  "comparisonSliceExternalProviderCalls": 0,
+  "comparisonSliceMaasCalls": 0,
+  "comparisonSliceEmails": 0,
+  "wholeSystemExternalActivity": "Existing scheduled workers are outside this slice count",
+  "codeArtsEvidence": "PENDING",
+  "myBatisPlus": "PLANNED_NOT_INTEGRATED",
+  "gitRemote": false,
+  "userCreatedResultAudit": {
+    "comparisonId": "01a31765-75cf-4bf5-95be-df7037e57b81",
+    "origin": "Normal user login and creation; user confirmed curve/metrics/refresh/history normal",
+    "stockCount": 2,
+    "metricChecks": 8,
+    "chartPointChecks": 122,
+    "sourceHashMatches": true,
+    "predictionSchemaVersion": "8",
+    "passed": true,
+    "dbClientCharset": "utf8mb4"
+  },
+  "dataPreservation": {
+    "criticalFieldsUnchanged": true,
+    "criticalChanges": [],
+    "countChanges": [
+      {
+        "database": "user",
+        "table": "login_session",
+        "before": 11,
+        "after": 12
+      },
+      {
+        "database": "market",
+        "table": "independent_calendar_operation",
+        "before": 4,
+        "after": 5
+      },
+      {
+        "database": "market",
+        "table": "independent_calendar_version",
+        "before": 4,
+        "after": 5
+      },
+      {
+        "database": "prediction",
+        "table": "flyway_schema_history",
+        "before": 7,
+        "after": 8
+      }
+    ]
+  },
+  "predictionSchemaVersion": 8,
+  "browserAutomation": "KERNEL_PATH_ERROR; not claimed automated visual pass",
+  "narrowViewportAcceptance": "PENDING"
+}

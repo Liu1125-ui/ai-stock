@@ -1,0 +1,458 @@
+{
+  "slice": "SDD010B2A",
+  "verifiedAt": "2026-10-28T03:13:56.8080233+08:00",
+  "state": "DEPLOYED_AND_READONLY_ACCEPTED",
+  "codeHead": "5b7cce6",
+  "tests": {
+    "frontend": {
+      "typecheck": "PASS",
+      "files": 70,
+      "tests": 321,
+      "build": "PASS",
+      "warning": "Existing chunk >500kB build advisory; build succeeds"
+    },
+    "backend": {
+      "total": 1134,
+      "skipped": 0,
+      "errors": 0,
+      "failures": 0,
+      "execution": "Initial full clean verify passed common/gateway/user; test-only fixture cleanup fixed with RED/GREEN; complete affected market/prediction/scheduler/notification and common clean verify passed.",
+      "modules": {
+        "stock-scheduler-service": {
+          "failures": 0,
+          "skipped": 0,
+          "tests": 276,
+          "errors": 0
+        },
+        "stock-gateway": {
+          "failures": 0,
+          "skipped": 0,
+          "tests": 90,
+          "errors": 0
+        },
+        "stock-common": {
+          "failures": 0,
+          "skipped": 0,
+          "tests": 52,
+          "errors": 0
+        },
+        "stock-notification-service": {
+          "failures": 0,
+          "skipped": 0,
+          "tests": 113,
+          "errors": 0
+        },
+        "stock-user-service": {
+          "failures": 0,
+          "skipped": 0,
+          "tests": 99,
+          "errors": 0
+        },
+        "stock-prediction-service": {
+          "failures": 0,
+          "skipped": 0,
+          "tests": 254,
+          "errors": 0
+        },
+        "stock-market-service": {
+          "failures": 0,
+          "skipped": 0,
+          "tests": 250,
+          "errors": 0
+        }
+      }
+    }
+  },
+  "review": {
+    "freshRounds": 1,
+    "minor": 0,
+    "subsequentChange": "Test-only finally cleanup plus regression; no product code changes after review",
+    "reviewedRange": "a9ec2c3..65c917d",
+    "important": 0,
+    "critical": 0
+  },
+  "deployment": {
+    "health": {
+      "stock-notification-service": "UP",
+      "stock-market-service": "UP",
+      "stock-prediction-service": "UP",
+      "stock-gateway": "UP",
+      "stock-user-service": "UP",
+      "stock-scheduler-service": "UP",
+      "algorithm": "UP"
+    },
+    "artifacts": {
+      "stock-notification-service": {
+        "sha256": "0a979752999e0ddb94b0525db189a8b8980d4c34695c85d7c7357525fd5bfbaf",
+        "matches": true,
+        "image": "sha256:f65a761adf092c7c9034537b27b72d8d4ce59de3385821f47742df4d59c67d8d"
+      },
+      "stock-market-service": {
+        "sha256": "8cb6585bc45e87940d3e43e3752c933de7e44986a891de08a2d385ec8c443d3a",
+        "matches": true,
+        "image": "sha256:1dfbc567aef4d10418646ee07c0637f7f266771d1bd1b9738b79185c6f8c2eee"
+      },
+      "stock-prediction-service": {
+        "sha256": "bdbacbbf3b33977b899de86cc9b96036e33bf3bee8316d947c515f71a322919f",
+        "matches": true,
+        "image": "sha256:642ecd2c8e63c1bc01fcf83d841b44bde9f2d122467d567748c6e3357b9d452f"
+      },
+      "stock-gateway": {
+        "sha256": "e5cae9f881ece09f6daf7852cd9502084eade2a234a1425d47d145c0b835d70d",
+        "matches": true,
+        "image": "sha256:955579d412b4ea10fff05cc36931162a29614e5147ae6c536f8b7b2f5e8c3d9a"
+      },
+      "stock-scheduler-service": {
+        "sha256": "17dfcb5c1c965700eebae4c443ca86198c6cf0ef710cfbdeb57d53a889fbf4f5",
+        "matches": true,
+        "image": "sha256:e43c23fdb769b191ae40817caa180a818836af3a372dec3af87f9d7161eb3ffc"
+      },
+      "frontend": {
+        "matches": true,
+        "sha256": "cd79bb8c9f1b24a7d937aec0fc0e156855cc2e9dab4d5a72aa90682a2603f0a8"
+      }
+    },
+    "options": {
+      "15173": 200,
+      "18082": 200
+    },
+    "anonymous": {
+      "15173": 401,
+      "18082": 401
+    }
+  },
+  "readonlyProof": {
+    "internalAnonymous": {
+      "prediction": 401,
+      "scheduler": 401,
+      "notification": 401
+    },
+    "threeRawWindowsUnchanged": true,
+    "businessHashesAfter": {
+      "scheduler": "81652eff36e007f2732624ba3bbd59c2a702dda1604cd311dc3ba51024bc2729",
+      "market": "255fc002c50b57e3773ebf2261e53454a638a5f21f34cb6e02ace80c5d37aa20",
+      "prediction": "c3392103dc4e00e63ae187f656dcb32a663713057d65eb26abd476328e5fe68a",
+      "notification": "e723a3dfabb0fbfdbfe9509a3115ac83675ce5ecbbd26c6eb9b1dd1308983088"
+    },
+    "businessHashesBefore": {
+      "notification": "e723a3dfabb0fbfdbfe9509a3115ac83675ce5ecbbd26c6eb9b1dd1308983088",
+      "scheduler": "81652eff36e007f2732624ba3bbd59c2a702dda1604cd311dc3ba51024bc2729",
+      "market": "255fc002c50b57e3773ebf2261e53454a638a5f21f34cb6e02ace80c5d37aa20",
+      "prediction": "c3392103dc4e00e63ae187f656dcb32a663713057d65eb26abd476328e5fe68a"
+    },
+    "allFourUnchanged": true,
+    "rawWindows": {
+      "SH600030": {
+        "versionId": "711006fe-1e84-4a0a-b944-ba8a9eeb9cdc",
+        "sha256": "b123b80c955c57ed397594a36f193058353bb22da18be481a4272f9d41d16c9b"
+      },
+      "SH600276": {
+        "versionId": "331637d3-072f-4095-be4e-d8218ed6f0dc",
+        "sha256": "02bd94a0e9a968f9b99037cf62f3616965d70835d9857dd2660a070d36ddc74a"
+      },
+      "SZ000002": {
+        "versionId": "180c1d1c-1109-4e65-89f9-b07f5b06b379",
+        "sha256": "fa670c5c494c4f7869158e4c27e7a103fe1e7f017360587c2628ca82e22f58d7"
+      }
+    },
+    "ownerResults": {
+      "prediction": {
+        "58dacade-f1f4-41f4-8817-71a80381ee10": {
+          "state": "COMPLETE",
+          "queriedAt": "2026-10-27T19:09:10.759921868Z",
+          "groups": [
+            {
+              "category": "forecasts",
+              "rows": "0"
+            },
+            {
+              "category": "verifications",
+              "rows": "1"
+            },
+            {
+              "category": "explanations",
+              "rows": "0"
+            },
+            {
+              "category": "explanation_ops",
+              "rows": "0"
+            },
+            {
+              "category": "analyses",
+              "rows": "0"
+            },
+            {
+              "category": "analysis_ops",
+              "rows": "0"
+            },
+            {
+              "category": "questions",
+              "rows": "0"
+            },
+            {
+              "category": "question_ops",
+              "rows": "0"
+            },
+            {
+              "category": "comparisons",
+              "rows": "0"
+            },
+            {
+              "category": "comparison_ops",
+              "rows": "0"
+            },
+            {
+              "category": "comparison_ai",
+              "rows": "0"
+            },
+            {
+              "category": "comparison_ai_ops",
+              "rows": "0"
+            },
+            {
+              "category": "portfolio_analyses",
+              "rows": "0"
+            },
+            {
+              "category": "portfolio_questions",
+              "rows": "0"
+            },
+            {
+              "category": "portfolio_question_ops",
+              "rows": "0"
+            }
+          ]
+        },
+        "711006fe-1e84-4a0a-b944-ba8a9eeb9cdc": {
+          "state": "COMPLETE",
+          "queriedAt": "2026-10-27T19:09:10.848096064Z",
+          "groups": [
+            {
+              "category": "forecasts",
+              "rows": "0"
+            },
+            {
+              "category": "verifications",
+              "rows": "0"
+            },
+            {
+              "category": "explanations",
+              "rows": "0"
+            },
+            {
+              "category": "explanation_ops",
+              "rows": "0"
+            },
+            {
+              "category": "analyses",
+              "rows": "0"
+            },
+            {
+              "category": "analysis_ops",
+              "rows": "0"
+            },
+            {
+              "category": "questions",
+              "rows": "0"
+            },
+            {
+              "category": "question_ops",
+              "rows": "0"
+            },
+            {
+              "category": "comparisons",
+              "rows": "0"
+            },
+            {
+              "category": "comparison_ops",
+              "rows": "0"
+            },
+            {
+              "category": "comparison_ai",
+              "rows": "0"
+            },
+            {
+              "category": "comparison_ai_ops",
+              "rows": "0"
+            },
+            {
+              "category": "portfolio_analyses",
+              "rows": "0"
+            },
+            {
+              "category": "portfolio_questions",
+              "rows": "0"
+            },
+            {
+              "category": "portfolio_question_ops",
+              "rows": "0"
+            }
+          ]
+        }
+      },
+      "scheduler": {
+        "58dacade-f1f4-41f4-8817-71a80381ee10": {
+          "state": "COMPLETE",
+          "queriedAt": "2026-10-27T19:09:10.889681863Z",
+          "groups": [
+            {
+              "category": "tasks",
+              "rows": "1"
+            },
+            {
+              "category": "attempts",
+              "rows": "1"
+            },
+            {
+              "category": "verification_scan",
+              "rows": "0"
+            },
+            {
+              "category": "alert_evidence_work",
+              "rows": "0"
+            },
+            {
+              "category": "alert_jobs",
+              "rows": "0"
+            },
+            {
+              "category": "alert_scan",
+              "rows": "0"
+            },
+            {
+              "category": "comparison_context",
+              "rows": "1"
+            },
+            {
+              "category": "refresh_context",
+              "rows": "1"
+            },
+            {
+              "category": "refresh_operations",
+              "rows": "1"
+            }
+          ]
+        },
+        "711006fe-1e84-4a0a-b944-ba8a9eeb9cdc": {
+          "state": "COMPLETE",
+          "queriedAt": "2026-10-27T19:09:10.926945917Z",
+          "groups": [
+            {
+              "category": "tasks",
+              "rows": "1"
+            },
+            {
+              "category": "attempts",
+              "rows": "1"
+            },
+            {
+              "category": "verification_scan",
+              "rows": "0"
+            },
+            {
+              "category": "alert_evidence_work",
+              "rows": "0"
+            },
+            {
+              "category": "alert_jobs",
+              "rows": "0"
+            },
+            {
+              "category": "alert_scan",
+              "rows": "0"
+            },
+            {
+              "category": "comparison_context",
+              "rows": "0"
+            },
+            {
+              "category": "refresh_context",
+              "rows": "0"
+            },
+            {
+              "category": "refresh_operations",
+              "rows": "0"
+            }
+          ]
+        }
+      },
+      "notification": {
+        "58dacade-f1f4-41f4-8817-71a80381ee10": {
+          "state": "COMPLETE",
+          "queriedAt": "2026-10-27T19:09:10.951903085Z",
+          "groups": [
+            {
+              "category": "alert_rules",
+              "rows": "0"
+            },
+            {
+              "category": "alert_rule_operations",
+              "rows": "0"
+            },
+            {
+              "category": "alert_triggers",
+              "rows": "0"
+            }
+          ]
+        },
+        "711006fe-1e84-4a0a-b944-ba8a9eeb9cdc": {
+          "state": "COMPLETE",
+          "queriedAt": "2026-10-27T19:09:10.984176703Z",
+          "groups": [
+            {
+              "category": "alert_rules",
+              "rows": "0"
+            },
+            {
+              "category": "alert_rule_operations",
+              "rows": "0"
+            },
+            {
+              "category": "alert_triggers",
+              "rows": "0"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "ui": {
+    "historicalCurrentHead": false,
+    "viewport": 390,
+    "tableScrollWidth": 520,
+    "tableRegionWidth": 283,
+    "liveUserRelogin": "NOT_REPEATED",
+    "versionSwitchClearsPrevious": true,
+    "admin": "PASS",
+    "roleEvidence": "Isolated HTTP USER denial tests plus matching deployed artifacts; live ADMIN and anonymous checks",
+    "keyboardEnterAndTab": "PASS",
+    "bothVersionsMatchOwnerCounts": true,
+    "latestCurrentHead": true,
+    "pageWidth": 375
+  },
+  "safeguards": {
+    "existingAuthorizedTrial": "SUCCEEDED, one task/one attempt preserved",
+    "supplierCalls": 0,
+    "naturalBackgroundActivity": "Existing switches restored after paused snapshot window; not counted as manual slice calls",
+    "originalEightSchedulerFlagsRestored": true,
+    "emailSends": 0,
+    "newRefreshTasks": 0,
+    "maasCalls": 0,
+    "manualRefreshGate": false
+  },
+  "backup": {
+    "restoreDrill": "NOT_PERFORMED",
+    "imageArchiveBytes": 372775936,
+    "schemaMigration": "NONE",
+    "path": "runtime/sdd010b2a/backup-20261028",
+    "businessDatabases": 5,
+    "oldImages": 6
+  },
+  "limitations": [
+    "Candidate record rows, not unique business/user counts or a summed business total",
+    "Queries are per-service observations, not a distributed atomic snapshot",
+    "Zero references is not permission to disable or delete; in-flight reference interlock and actual version disable remain future work",
+    "FR-11 remains partially complete"
+  ],
+  "screenshot": "docs/evidence/sdd010b2a-market-version-references-accepted.png"
+}

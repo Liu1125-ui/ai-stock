@@ -1,0 +1,61 @@
+{
+  "scope": "SDD006B2 Task4 calendar refresh, revision event scan and latest-day reconciliation",
+  "implementationTool": "Codex",
+  "command": "scripts/check-auth-task1.ps1 (clean verify -Pauth-integration,cli-build)",
+  "result": "BUILD SUCCESS",
+  "log": "runtime/sdd006b2-scan-full.log",
+  "totals": {
+    "tests": 464,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "newSuites": [
+    {
+      "suite": "com.aistock.scheduler.alert.AlertCalendarPlanTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "suite": "com.aistock.scheduler.alert.AlertMarketClientTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "suite": "com.aistock.scheduler.alert.AlertScanMysqlTest",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "suite": "com.aistock.scheduler.alert.AlertScanPlanMysqlTest",
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "redEvidence": [
+    "runtime/sdd006b2-scan-red.log",
+    "runtime/sdd006b2-scan-client-red.log",
+    "runtime/sdd006b2-scan-pause-red.log"
+  ],
+  "composeConfig": {
+    "valid": true,
+    "ALERT_PLAN_ENABLED": false,
+    "ALERT_WORKER_ENABLED": false,
+    "marketUrl": "http://stock-market-service:8080",
+    "notificationUrl": "http://stock-notification-service:8080"
+  },
+  "isolation": "Only stock_scheduler_test on localhost13316 for new DB tests; HTTP dependencies local fixtures",
+  "productionDeployment": false,
+  "externalMarketCalls": 0,
+  "maasCalls": 0,
+  "realEmailsSent": 0,
+  "independentReview": "Reserved for whole-plan Task7"
+}

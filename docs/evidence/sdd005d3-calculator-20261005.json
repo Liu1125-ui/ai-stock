@@ -1,0 +1,27 @@
+{
+  "checkedAt": "2026-10-05T17:31:13.324832+08:00",
+  "scope": "Pure deterministic verification calculator, not real ex-post market evaluation",
+  "calculatorTests": 12,
+  "predictionServiceRegression": {
+    "tests": 51,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "build": "PASSED",
+  "review": {
+    "critical": 0,
+    "important": 3,
+    "importantFixedWithRedGreen": 3,
+    "minorDeferred": 1
+  },
+  "pending": [
+    "realization source/version publication",
+    "append-only verification persistence",
+    "MS04 scheduling",
+    "user verification UI",
+    "signed daily error output"
+  ],
+  "productionDataChanged": false,
+  "deployed": false
+}

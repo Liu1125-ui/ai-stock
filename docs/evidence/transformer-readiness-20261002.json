@@ -1,0 +1,590 @@
+{
+  "checkedAt": "2026-10-02T23:20:18.452743+08:00",
+  "scope": "模型接入前核验，不是正式模型发布或新的准确率证明",
+  "checkpointAudit": {
+    "checkpoints_loaded": 3,
+    "stocks": 3,
+    "historical_windows": 45,
+    "historical_points": 225,
+    "latest_archived_runs": 9,
+    "max_csv_difference": 5.960464477539063E-08,
+    "production_ready": false,
+    "reason": "RAW bars lack adjustment ratio; future calendar/version and model release contract not wired"
+  },
+  "models": [
+    {
+      "filename": "S3_one_year_42_rmse6p2.pt",
+      "sha256": "280b0e5f7b809d86857ec97ed651e9dba82951d7a383540b8ee73651929963ef",
+      "keys": [
+        "state_dict",
+        "config",
+        "mean",
+        "std",
+        "mode",
+        "cutoff",
+        "epoch"
+      ],
+      "config": {
+        "task_name": "long_term_forecast",
+        "seq_len": 60,
+        "label_len": 30,
+        "pred_len": 5,
+        "enc_in": 6,
+        "dec_in": 6,
+        "c_out": 1,
+        "d_model": 32,
+        "n_heads": 4,
+        "e_layers": 1,
+        "d_layers": 1,
+        "d_ff": 64,
+        "dropout": 0.1,
+        "factor": 3,
+        "embed": "timeF",
+        "freq": "d",
+        "activation": "gelu"
+      },
+      "mode": "absolute",
+      "training_cutoff": "2023-12-31",
+      "selected_epoch": 3,
+      "parameters": 22881,
+      "safe_load": true,
+      "strict_state_dict": true
+    },
+    {
+      "filename": "S3_one_year_43_rmse6p2.pt",
+      "sha256": "7d90bc81f0e83a70c2f1195bee7ed8637d3d40e2b53415c0fef77f956a1eb112",
+      "keys": [
+        "state_dict",
+        "config",
+        "mean",
+        "std",
+        "mode",
+        "cutoff",
+        "epoch"
+      ],
+      "config": {
+        "task_name": "long_term_forecast",
+        "seq_len": 60,
+        "label_len": 30,
+        "pred_len": 5,
+        "enc_in": 6,
+        "dec_in": 6,
+        "c_out": 1,
+        "d_model": 32,
+        "n_heads": 4,
+        "e_layers": 1,
+        "d_layers": 1,
+        "d_ff": 64,
+        "dropout": 0.1,
+        "factor": 3,
+        "embed": "timeF",
+        "freq": "d",
+        "activation": "gelu"
+      },
+      "mode": "absolute",
+      "training_cutoff": "2023-12-31",
+      "selected_epoch": 4,
+      "parameters": 22881,
+      "safe_load": true,
+      "strict_state_dict": true
+    },
+    {
+      "filename": "S3_one_year_44_rmse6p2.pt",
+      "sha256": "7ec2e5dd681f2365bd2ab578e1ae9b039dafdb996408384eeb27ca1001c42118",
+      "keys": [
+        "state_dict",
+        "config",
+        "mean",
+        "std",
+        "mode",
+        "cutoff",
+        "epoch"
+      ],
+      "config": {
+        "task_name": "long_term_forecast",
+        "seq_len": 60,
+        "label_len": 30,
+        "pred_len": 5,
+        "enc_in": 6,
+        "dec_in": 6,
+        "c_out": 1,
+        "d_model": 32,
+        "n_heads": 4,
+        "e_layers": 1,
+        "d_layers": 1,
+        "d_ff": 64,
+        "dropout": 0.1,
+        "factor": 3,
+        "embed": "timeF",
+        "freq": "d",
+        "activation": "gelu"
+      },
+      "mode": "absolute",
+      "training_cutoff": "2023-12-31",
+      "selected_epoch": 5,
+      "parameters": 22881,
+      "safe_load": true,
+      "strict_state_dict": true
+    }
+  ],
+  "researchSourceHashes": {
+    "实验与测试\\联合研究\\research_features.py": "838f27a3d18529f8a23be220150a8ad2e27c8a9ef60cc6c2f0e858c6f5d45b90",
+    "实验与测试\\联合研究\\fetch_supplement.py": "751b80f2431e74b482ddcc9318864daa3501a64951cd4d34eaba6c17e122ba74",
+    "实验与测试\\联合研究\\build_feature_artifacts.py": "3d1e43df3631576b0ddc6106d1fe7f815f5548d7032389cee52bebfb62560332",
+    "实验与测试\\联合研究\\顺序改进验证\\run_validation.py": "b8b75691f358d643dfb70a265b681085ccb12b72199440ef9b093003301ecf61",
+    "项目代码\\Time-Series-Library\\models\\Transformer.py": "8325b0fd814888c8001992eeea43aca2ec998ffede1dd88fa18c9a8924fcbf8c",
+    "项目代码\\Time-Series-Library\\layers\\Embed.py": "0a29593e3796b5a3798bd3d37c1150fc2256c559abdee36e83eecd1a05787247",
+    "项目代码\\Time-Series-Library\\layers\\Transformer_EncDec.py": "031b26a6ed774442bfb4cf316d4a605f7642cd652a4c2b82f5e3d1fcdc47b098",
+    "项目代码\\Time-Series-Library\\layers\\SelfAttention_Family.py": "0fea961b640b1a7db471df2e389abfb843ce8e5767aca5af141ee22dd43be66f"
+  },
+  "sourceAudit": {
+    "state": "SUCCESS",
+    "checkedAt": "2026-10-02T23:18:24.846881+08:00",
+    "calendar": {
+      "coverage": [
+        "2026-09-30",
+        "2026-11-11"
+      ],
+      "rows": 43,
+      "origin": "2026-09-30",
+      "five_target_trading_days": [
+        "2026-10-08",
+        "2026-10-09",
+        "2026-10-12",
+        "2026-10-13",
+        "2026-10-14"
+      ]
+    },
+    "stocks": [
+      {
+        "stock": "SH600030",
+        "raw_rows": 86,
+        "adjusted_rows": 86,
+        "last": "2026-09-30",
+        "last_ratio": 4.993781,
+        "matching_dates": true,
+        "ratio_definition": "backward adjusted close divided by raw close; precision and point-in-time definition still require release validation"
+      },
+      {
+        "stock": "SH600276",
+        "raw_rows": 86,
+        "adjusted_rows": 86,
+        "last": "2026-09-30",
+        "last_ratio": 52.381197,
+        "matching_dates": true,
+        "ratio_definition": "backward adjusted close divided by raw close; precision and point-in-time definition still require release validation"
+      },
+      {
+        "stock": "SZ000002",
+        "raw_rows": 86,
+        "adjusted_rows": 86,
+        "last": "2026-09-30",
+        "last_ratio": 134.284605,
+        "matching_dates": true,
+        "ratio_definition": "backward adjusted close divided by raw close; precision and point-in-time definition still require release validation"
+      }
+    ]
+  },
+  "liveInferenceAudit": {
+    "stocks": 3,
+    "runs": 9,
+    "points": 45,
+    "all_five_finite_positive": true,
+    "max_clipped_fraction": 0.0,
+    "future_outcome_accuracy_not_evaluated": true,
+    "published_to_system": false
+  },
+  "inputs": [
+    {
+      "stock": "SH600030",
+      "lookback": 60,
+      "first_input_date": "2026-07-08",
+      "last_input_date": "2026-09-30",
+      "raw_close_at_origin": "25.86",
+      "factor_overlap_rows": 83,
+      "factor_overlap_max_abs_difference": 0.0
+    },
+    {
+      "stock": "SH600276",
+      "lookback": 60,
+      "first_input_date": "2026-07-08",
+      "last_input_date": "2026-09-30",
+      "raw_close_at_origin": "47.2",
+      "factor_overlap_rows": 83,
+      "factor_overlap_max_abs_difference": 0.0
+    },
+    {
+      "stock": "SZ000002",
+      "lookback": 60,
+      "first_input_date": "2026-07-08",
+      "last_input_date": "2026-09-30",
+      "raw_close_at_origin": "4.26",
+      "factor_overlap_rows": 83,
+      "factor_overlap_max_abs_difference": 0.0
+    }
+  ],
+  "archivedParityCases": [
+    {
+      "seed": 42,
+      "stock": "SH600030",
+      "origin": "2026-01-08",
+      "five_points": true,
+      "max_abs_difference": 1.1102230246251565E-16,
+      "clipped_fraction": 0.0
+    },
+    {
+      "seed": 42,
+      "stock": "SH600030",
+      "origin": "2026-03-13",
+      "five_points": true,
+      "max_abs_difference": 0.0,
+      "clipped_fraction": 0.0
+    },
+    {
+      "seed": 42,
+      "stock": "SH600030",
+      "origin": "2026-05-14",
+      "five_points": true,
+      "max_abs_difference": 1.1102230246251565E-16,
+      "clipped_fraction": 0.0
+    },
+    {
+      "seed": 42,
+      "stock": "SH600030",
+      "origin": "2026-07-10",
+      "five_points": true,
+      "max_abs_difference": 2.220446049250313E-16,
+      "clipped_fraction": 0.0
+    },
+    {
+      "seed": 42,
+      "stock": "SH600030",
+      "origin": "2026-09-11",
+      "five_points": true,
+      "max_abs_difference": 2.220446049250313E-16,
+      "clipped_fraction": 0.0
+    },
+    {
+      "seed": 42,
+      "stock": "SH600276",
+      "origin": "2026-01-08",
+      "five_points": true,
+      "max_abs_difference": 1.1102230246251565E-16,
+      "clipped_fraction": 0.0
+    },
+    {
+      "seed": 42,
+      "stock": "SH600276",
+      "origin": "2026-03-13",
+      "five_points": true,
+      "max_abs_difference": 1.1102230246251565E-16,
+      "clipped_fraction": 0.0
+    },
+    {
+      "seed": 42,
+      "stock": "SH600276",
+      "origin": "2026-05-14",
+      "five_points": true,
+      "max_abs_difference": 1.1102230246251565E-16,
+      "clipped_fraction": 0.0
+    },
+    {
+      "seed": 42,
+      "stock": "SH600276",
+      "origin": "2026-07-10",
+      "five_points": true,
+      "max_abs_difference": 1.1102230246251565E-16,
+      "clipped_fraction": 0.0
+    },
+    {
+      "seed": 42,
+      "stock": "SH600276",
+      "origin": "2026-09-11",
+      "five_points": true,
+      "max_abs_difference": 1.1102230246251565E-16,
+      "clipped_fraction": 0.0
+    },
+    {
+      "seed": 42,
+      "stock": "SZ000002",
+      "origin": "2026-01-08",
+      "five_points": true,
+      "max_abs_difference": 1.1102230246251565E-16,
+      "clipped_fraction": 0.0
+    },
+    {
+      "seed": 42,
+      "stock": "SZ000002",
+      "origin": "2026-03-13",
+      "five_points": true,
+      "max_abs_difference": 1.1102230246251565E-16,
+      "clipped_fraction": 0.0
+    },
+    {
+      "seed": 42,
+      "stock": "SZ000002",
+      "origin": "2026-05-14",
+      "five_points": true,
+      "max_abs_difference": 1.1102230246251565E-16,
+      "clipped_fraction": 0.0
+    },
+    {
+      "seed": 42,
+      "stock": "SZ000002",
+      "origin": "2026-07-10",
+      "five_points": true,
+      "max_abs_difference": 1.1102230246251565E-16,
+      "clipped_fraction": 0.0
+    },
+    {
+      "seed": 42,
+      "stock": "SZ000002",
+      "origin": "2026-09-11",
+      "five_points": true,
+      "max_abs_difference": 1.1102230246251565E-16,
+      "clipped_fraction": 0.0
+    },
+    {
+      "seed": 43,
+      "stock": "SH600030",
+      "origin": "2026-01-08",
+      "five_points": true,
+      "max_abs_difference": 2.220446049250313E-16,
+      "clipped_fraction": 0.0
+    },
+    {
+      "seed": 43,
+      "stock": "SH600030",
+      "origin": "2026-03-13",
+      "five_points": true,
+      "max_abs_difference": 1.1102230246251565E-16,
+      "clipped_fraction": 0.0
+    },
+    {
+      "seed": 43,
+      "stock": "SH600030",
+      "origin": "2026-05-14",
+      "five_points": true,
+      "max_abs_difference": 2.220446049250313E-16,
+      "clipped_fraction": 0.0
+    },
+    {
+      "seed": 43,
+      "stock": "SH600030",
+      "origin": "2026-07-10",
+      "five_points": true,
+      "max_abs_difference": 1.1102230246251565E-16,
+      "clipped_fraction": 0.0
+    },
+    {
+      "seed": 43,
+      "stock": "SH600030",
+      "origin": "2026-09-11",
+      "five_points": true,
+      "max_abs_difference": 1.1102230246251565E-16,
+      "clipped_fraction": 0.0
+    },
+    {
+      "seed": 43,
+      "stock": "SH600276",
+      "origin": "2026-01-08",
+      "five_points": true,
+      "max_abs_difference": 1.1102230246251565E-16,
+      "clipped_fraction": 0.0
+    },
+    {
+      "seed": 43,
+      "stock": "SH600276",
+      "origin": "2026-03-13",
+      "five_points": true,
+      "max_abs_difference": 1.1102230246251565E-16,
+      "clipped_fraction": 0.0
+    },
+    {
+      "seed": 43,
+      "stock": "SH600276",
+      "origin": "2026-05-14",
+      "five_points": true,
+      "max_abs_difference": 1.1102230246251565E-16,
+      "clipped_fraction": 0.0
+    },
+    {
+      "seed": 43,
+      "stock": "SH600276",
+      "origin": "2026-07-10",
+      "five_points": true,
+      "max_abs_difference": 1.1102230246251565E-16,
+      "clipped_fraction": 0.0
+    },
+    {
+      "seed": 43,
+      "stock": "SH600276",
+      "origin": "2026-09-11",
+      "five_points": true,
+      "max_abs_difference": 1.1102230246251565E-16,
+      "clipped_fraction": 0.0
+    },
+    {
+      "seed": 43,
+      "stock": "SZ000002",
+      "origin": "2026-01-08",
+      "five_points": true,
+      "max_abs_difference": 1.1102230246251565E-16,
+      "clipped_fraction": 0.0
+    },
+    {
+      "seed": 43,
+      "stock": "SZ000002",
+      "origin": "2026-03-13",
+      "five_points": true,
+      "max_abs_difference": 1.1102230246251565E-16,
+      "clipped_fraction": 0.0
+    },
+    {
+      "seed": 43,
+      "stock": "SZ000002",
+      "origin": "2026-05-14",
+      "five_points": true,
+      "max_abs_difference": 1.1102230246251565E-16,
+      "clipped_fraction": 0.0
+    },
+    {
+      "seed": 43,
+      "stock": "SZ000002",
+      "origin": "2026-07-10",
+      "five_points": true,
+      "max_abs_difference": 1.1102230246251565E-16,
+      "clipped_fraction": 0.0
+    },
+    {
+      "seed": 43,
+      "stock": "SZ000002",
+      "origin": "2026-09-11",
+      "five_points": true,
+      "max_abs_difference": 1.1102230246251565E-16,
+      "clipped_fraction": 0.0
+    },
+    {
+      "seed": 44,
+      "stock": "SH600030",
+      "origin": "2026-01-08",
+      "five_points": true,
+      "max_abs_difference": 1.1102230246251565E-16,
+      "clipped_fraction": 0.0
+    },
+    {
+      "seed": 44,
+      "stock": "SH600030",
+      "origin": "2026-03-13",
+      "five_points": true,
+      "max_abs_difference": 2.220446049250313E-16,
+      "clipped_fraction": 0.0
+    },
+    {
+      "seed": 44,
+      "stock": "SH600030",
+      "origin": "2026-05-14",
+      "five_points": true,
+      "max_abs_difference": 2.220446049250313E-16,
+      "clipped_fraction": 0.0
+    },
+    {
+      "seed": 44,
+      "stock": "SH600030",
+      "origin": "2026-07-10",
+      "five_points": true,
+      "max_abs_difference": 2.220446049250313E-16,
+      "clipped_fraction": 0.0
+    },
+    {
+      "seed": 44,
+      "stock": "SH600030",
+      "origin": "2026-09-11",
+      "five_points": true,
+      "max_abs_difference": 1.1102230246251565E-16,
+      "clipped_fraction": 0.0
+    },
+    {
+      "seed": 44,
+      "stock": "SH600276",
+      "origin": "2026-01-08",
+      "five_points": true,
+      "max_abs_difference": 1.1102230246251565E-16,
+      "clipped_fraction": 0.0
+    },
+    {
+      "seed": 44,
+      "stock": "SH600276",
+      "origin": "2026-03-13",
+      "five_points": true,
+      "max_abs_difference": 1.1102230246251565E-16,
+      "clipped_fraction": 0.0
+    },
+    {
+      "seed": 44,
+      "stock": "SH600276",
+      "origin": "2026-05-14",
+      "five_points": true,
+      "max_abs_difference": 2.220446049250313E-16,
+      "clipped_fraction": 0.0
+    },
+    {
+      "seed": 44,
+      "stock": "SH600276",
+      "origin": "2026-07-10",
+      "five_points": true,
+      "max_abs_difference": 1.1102230246251565E-16,
+      "clipped_fraction": 0.0
+    },
+    {
+      "seed": 44,
+      "stock": "SH600276",
+      "origin": "2026-09-11",
+      "five_points": true,
+      "max_abs_difference": 1.1102230246251565E-16,
+      "clipped_fraction": 0.0
+    },
+    {
+      "seed": 44,
+      "stock": "SZ000002",
+      "origin": "2026-01-08",
+      "five_points": true,
+      "max_abs_difference": 5.960464477539063E-08,
+      "clipped_fraction": 0.0
+    },
+    {
+      "seed": 44,
+      "stock": "SZ000002",
+      "origin": "2026-03-13",
+      "five_points": true,
+      "max_abs_difference": 1.1102230246251565E-16,
+      "clipped_fraction": 0.0
+    },
+    {
+      "seed": 44,
+      "stock": "SZ000002",
+      "origin": "2026-05-14",
+      "five_points": true,
+      "max_abs_difference": 1.1102230246251565E-16,
+      "clipped_fraction": 0.0
+    },
+    {
+      "seed": 44,
+      "stock": "SZ000002",
+      "origin": "2026-07-10",
+      "five_points": true,
+      "max_abs_difference": 1.1102230246251565E-16,
+      "clipped_fraction": 0.0
+    },
+    {
+      "seed": 44,
+      "stock": "SZ000002",
+      "origin": "2026-09-11",
+      "five_points": true,
+      "max_abs_difference": 0.0,
+      "clipped_fraction": 0.0
+    }
+  ],
+  "productionChanged": false,
+  "productionModelPublished": false
+}

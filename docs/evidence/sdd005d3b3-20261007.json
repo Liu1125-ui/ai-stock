@@ -1,0 +1,181 @@
+{
+  "date": "2026-10-07",
+  "stage": "SDD005D3B3",
+  "codeCommit": "02a078b",
+  "backend": {
+    "testedAt": "2026-10-05",
+    "command": "scripts/check-auth-task1.ps1 clean verify",
+    "counts": {
+      "tests": 279,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "modules": {
+      "stock-common": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "stock-gateway": {
+        "tests": 18,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "stock-market-service": {
+        "tests": 76,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "stock-notification-service": {
+        "tests": 10,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "stock-prediction-service": {
+        "tests": 79,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "stock-scheduler-service": {
+        "tests": 37,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "stock-user-service": {
+        "tests": 57,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    "log": "runtime/d3b3-final-full.log"
+  },
+  "frontend": {
+    "changed": false,
+    "previousD3B2Tests": 40,
+    "previousD3B2Build": "passed",
+    "currentPredictionsEntryHTTP": 200,
+    "visualObserved": false
+  },
+  "review": {
+    "count": 1,
+    "critical": 0,
+    "important": 1,
+    "minor": 0,
+    "fix": "跨日/20点截止前进重置页；HTTP后重读clock；有界任务hash包含due，RED到GREEN"
+  },
+  "runtime": {
+    "predictionId": "19ddcb7c-3fba-4df3-ba4f-f8eebfeb3f14",
+    "cutoffDate": "2026-10-06",
+    "health": {
+      "market": "UP",
+      "prediction": "UP",
+      "scheduler": "UP"
+    },
+    "marketMigration": 8,
+    "schedulerMigration": 4,
+    "eventAuth": 401,
+    "affectedAuth": 401,
+    "recheckAuth": 401,
+    "gatewayEvent": 404,
+    "gatewayRecheck": 404,
+    "actualHeadEvents": [
+      {
+        "eventId": 1,
+        "instrumentId": "SH600030",
+        "rawVersionId": "cd3e203d-06d2-4e15-9fcd-6a296f498622"
+      },
+      {
+        "eventId": 2,
+        "instrumentId": "SH600276",
+        "rawVersionId": "dc4e532c-09a2-425f-95c7-a9e1b155c57d"
+      },
+      {
+        "eventId": 3,
+        "instrumentId": "SZ000002",
+        "rawVersionId": "9c27f90d-d829-4ce4-b04b-a04dc529351d"
+      },
+      {
+        "eventId": 4,
+        "instrumentId": "SH600276",
+        "rawVersionId": "2f5e5f9b-92b0-4dd9-987a-9175c1d57d1b"
+      },
+      {
+        "eventId": 5,
+        "instrumentId": "SZ000002",
+        "rawVersionId": "56f0146d-0db9-4284-95ea-c89a1ca34ca7"
+      },
+      {
+        "eventId": 6,
+        "instrumentId": "SH600030",
+        "rawVersionId": "545baa86-871c-4174-bc01-483e38eddbb9"
+      }
+    ],
+    "allAffectedEmpty": true,
+    "persistedEventCursor": "6\tNULL\t12",
+    "recheckReplaySameTask": true,
+    "actualRecheck": {
+      "attempts": [
+        {
+          "attempt_id": "c941ac97-1e8f-498c-ad2a-175cbd2b3739",
+          "ordinal": 1,
+          "state": "SKIPPED",
+          "started_at": "2026-10-07T05:31:53.068",
+          "lease_until": "2026-10-07T05:33:53.068",
+          "finished_at": "2026-10-07T05:31:53.14",
+          "version_id": null,
+          "error_code": null
+        }
+      ],
+      "task": {
+        "taskId": "a8dfa15e-fe18-49b5-8ff0-547cf14c5f29",
+        "instrumentId": "SH600030",
+        "targetDate": "2026-10-06",
+        "state": "SKIPPED",
+        "attemptCount": 1,
+        "currentAttempt": null,
+        "leaseUntil": null,
+        "versionId": null,
+        "errorCode": null,
+        "nextAt": "2026-10-07T05:31:52.303Z",
+        "createdAt": "2026-10-07T05:31:52.303Z",
+        "updatedAt": "2026-10-07T05:31:53.140Z",
+        "taskType": "PREDICTION_VERIFY",
+        "predictionId": "19ddcb7c-3fba-4df3-ba4f-f8eebfeb3f14",
+        "ruleVersion": "origin-share-close-v1"
+      }
+    },
+    "actualReceipt": {
+      "operationId": "c941ac97-1e8f-498c-ad2a-175cbd2b3739",
+      "state": "SKIPPED_NOT_DUE",
+      "versionId": null,
+      "errorCode": null
+    },
+    "PREDICTION_REVISION_PLAN_ENABLED": true,
+    "MARKET_WORKER_ENABLED": true,
+    "forecastModelsExistingLegacyPayloadUnchanged": true,
+    "marketHeadsUnchangedSinceOct5": false,
+    "currentUserVerificationVersions": 0
+  },
+  "restart": {
+    "sameTask": true,
+    "sameOneAttempt": true,
+    "sameReceipt": true,
+    "partialScanCompletedBeforeRestart": 4,
+    "scanCompletedAfterRestart": 6
+  },
+  "baseline": "2026-10-05 readonly baseline；10月7日恢复时依赖容器停止，部署前采样未完成且未覆盖旧baseline；原预测/model及原行情任务payload逐条一致，允许正常新增行情任务与head变化",
+  "limits": [
+    "实际目标首日10月8日，当前验证版本0，无实际准确率结论",
+    "RAW变更由持久事件触发；同RAW因子变化仅服务身份受控重核，未自动发现全部变化",
+    "没有新增管理员重核按钮",
+    "无remote未push，CodeArts来源未核实"
+  ]
+}

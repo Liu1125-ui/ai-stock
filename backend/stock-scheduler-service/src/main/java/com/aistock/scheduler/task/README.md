@@ -1,0 +1,24 @@
+# 持久任务
+
+作用：统一保存日线更新计划、任务和尝试，派发给行情服务，保留失败及重试记录。
+
+实现方法：独立库短事务、行锁领取、唯一任务键、尝试令牌和 90 秒租约；最多三次自动尝试，退避 60/120 秒；手动重试保留既有尝试。HTTP 在事务外，数据产物仅保存版本引用。RUNNING 结果不确定时进入 RECONCILING 并查询 MS-02 回执，不盲目重新派发；旧令牌不能覆盖新尝试。每日计划计算北京时间最新到期日，重启和重复触发不重复建任务。
+
+状态：QUEUED、RUNNING、RECONCILING、RETRY_WAIT、SUCCEEDED、EMPTY、FAILED、CANCELLED。当前已有历史的完整刷新空返回属于失败，不作为 EMPTY 成功展示。只有 FAILED 可手动重试，只有 QUEUED / RETRY_WAIT 可取消。所有内部接口先校验服务身份。
+
+D3B2新增PREDICTION_VERIFY与120秒租约，原MARKET_REFRESH保持90秒；同预测/截止/规则自动键幂等，尝试回执核对后再重试。SKIPPED_NOT_DUE转SKIPPED无版本，不算验证成功。内部POST /internal/v1/tasks/verifications允许受控创建；普通用户不能直接访问。PredictionTaskClient固定内部地址及SERVICE_TOKEN，正文128KiB、完整截止100/10秒、禁重定向，错operation/版本拒绝。
+
+DailyVerificationPlan每60秒读取最多50条已到期预测，VerificationScanRepository持久游标与创建任务同短事务，revision CAS防并发跳页；网络失败不推进，扫描完成再循环捕获新记录。配置PREDICTION_VERIFY_PLAN_ENABLED启用计划，MARKET_WORKER_ENABLED沿用旧名作为共享任务worker开关；两者应同时启用。新的任务网络均在事务外，runOnce串行。
+
+D3B3新增RevisionVerificationPlan：按持久RAW发布事件逐证券分页重核，含current已完整结果。RevisionScanRepository保存active事件、固定截止、页游标，创建本页任务与CAS同事务；失败/重启可续，事件完成才推进序号。任务key包含事件序号，以支持RAW头回切；实际证据采集最新有效头并记真实版本。网络在事务外。PREDICTION_REVISION_PLAN_ENABLED与共享MARKET_WORKER_ENABLED应同时true。HTTP专用REVISION_MARKET_URL直连已知内部行情服务；不把Feign空URL配置用于Java HttpClient。
+
+内部POST /internal/v1/tasks/verification-rechecks使用requestId UUID独立幂等键，用于同RAW因子变更；普通用户无入口，管理员UI尚未接入。新operation重新采集，相同证据去重，新证据保存版本，原预测不改写。真实未来误差仍依赖目标行情，不能声称RAW事件可自动发现全部因子修订。
+
+## 跨日修复决定
+active事件每个持久轮次固定cutoff；跨北京时间20点或跨日后仅前进cutoff，清空after并增加revision，重新扫描当前到期范围。提交时再次检查cutoff，旧页不得完成事件。事件HTTP返回后重新读取clock。任务key改为raw-加SHA256(predictionId,eventId,rawVersionId,ruleVersion,实际dueThrough)，同轮重复去重，新截止不冲突，长度68。保留MS03的due不回退保护；未完成事件不会只核对过时前缀而永久完成。
+
+COMPARISON_UPDATE上下文在MS04本库固定周期、RAW引用、窗口和尝试上限，日键由服务生成。claim与pendingReceipts按启用类型筛选；比较退避900/1800秒，人工retry按累计尝试守住原预算。
+
+ComparisonUpdatePlan在上海20点后只读就绪并建立当天任务；HttpComparisonTaskClient使用45/3/5秒独立期限、256KiB正文且不重试。TaskWorker按两类开关筛选领取与回执，未知比较POST立即核对原编号；两个新开关默认关闭。
+
+Task5D1：MarketUseTaskErrors仅分类明确许可拒绝；执行适配器以原attempt失败，不换冻结RAW、不扩大重试白名单；receipt失败仍是未知，保留原编号核对。

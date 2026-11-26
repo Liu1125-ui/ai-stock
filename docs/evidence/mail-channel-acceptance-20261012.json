@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-12",
+  "scope": "Standalone SMTP acceptance test, not production alert delivery",
+  "recipient": "354****424@qq.com",
+  "maximumAuthorizedMessages": 1,
+  "smtpSubmissions": 1,
+  "smtpAccepted": true,
+  "userConfirmedReceived": true,
+  "userConfirmedContentNormal": true,
+  "initialSerializationFailedBeforeSubmission": true,
+  "localProof": {
+    "originalRunId": "f9d652be-602c-4a91-ad79-8f1c1ae4b272",
+    "classification": "SERIALIZATION_FAILED_BEFORE_SMTP_SUBMIT",
+    "offlineReproduced": true,
+    "asciiMessageIdSerializationPassed": true,
+    "pythonSerializationPrecedesSendmail": true,
+    "initialEmailSubmitted": false
+  },
+  "alertWorkerEnabled": false,
+  "naturalAlertEndToEndVerified": false,
+  "notificationPreferenceScreenshotVerified": true,
+  "notificationPreferenceScreenshotState": "personal preference on; verified email; delivery service off",
+  "ruleChangedByThisVerification": false,
+  "maasCalls": 0
+}

@@ -1,0 +1,1 @@
+# 同构Transformer运行类：按provenance.json从本地THUML Time-Series-Library指定提交提取原类体，仅保留所需类并调整相对导入，MIT许可证完整保留，原研究源码不修改。用strict权重重载与历史逐点对照校验兼容，不添加训练或其他网络。

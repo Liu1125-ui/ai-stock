@@ -1,0 +1,15 @@
+[run]
+source = app
+branch = True
+parallel = True
+patch = subprocess
+
+[report]
+include =
+    app/forecast/*
+    app/inference/*
+omit =
+    app/inference/vendor/*
+include_namespace_packages = True
+precision = 2
+show_missing = True

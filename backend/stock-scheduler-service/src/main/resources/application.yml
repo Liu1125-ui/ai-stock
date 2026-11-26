@@ -1,0 +1,86 @@
+spring:
+  application:
+    name: stock-scheduler-service
+  datasource:
+    url: ${SCHEDULER_DB_URL:jdbc:h2:mem:scheduler;MODE=MySQL;DB_CLOSE_DELAY=-1}
+    username: ${SCHEDULER_DB_USER:sa}
+    password: ${SCHEDULER_DB_PASSWORD:}
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true
+    serialization:
+      write-dates-as-timestamps: false
+  cloud:
+    openfeign:
+      client:
+        config:
+          stock-user-service:
+            connectTimeout: 2000
+            readTimeout: 3000
+            followRedirects: false
+          market-receipt:
+            connectTimeout: 2000
+            readTimeout: 3000
+          stock-market-service:
+            connectTimeout: 2000
+            readTimeout: 45000
+    nacos:
+      discovery:
+        enabled: ${NACOS_ENABLED:false}
+        server-addr: ${NACOS_ADDR:127.0.0.1:8848}
+aistock:
+  training:
+    inbox-enabled: ${TRAINING_INBOX_ENABLED:false}
+    execution-enabled: ${TRAINING_EXECUTION_ENABLED:false}
+    registration-enabled: ${TRAINING_REGISTRATION_ENABLED:false}
+    algorithm-url: ${TRAINING_ALGORITHM_URL:http://127.0.0.1:18090}
+  admin-market-refresh:
+    actions-enabled: ${ADMIN_MARKET_REFRESH_ACTIONS_ENABLED:false}
+    cooldown-seconds: ${ADMIN_MARKET_REFRESH_COOLDOWN_SECONDS:60}
+  admin-task:
+    actions-enabled: ${ADMIN_TASK_ACTIONS_ENABLED:false}
+    retry-cooldown-seconds: ${ADMIN_TASK_RETRY_COOLDOWN_SECONDS:60}
+  user:
+    url: ${USER_SERVICE_URL:}
+  comparison-update:
+    plan-enabled: ${COMPARISON_UPDATE_PLAN_ENABLED:false}
+    worker-enabled: ${COMPARISON_UPDATE_WORKER_ENABLED:false}
+    instruments: ${COMPARISON_UPDATE_INSTRUMENTS:SH600030,SH600276,SZ000002}
+    scan-poll-ms: ${COMPARISON_UPDATE_SCAN_POLL_MS:60000}
+    max-attempts: ${COMPARISON_UPDATE_MAX_ATTEMPTS:3}
+    retry-first-seconds: ${COMPARISON_UPDATE_RETRY_FIRST_SECONDS:900}
+    retry-second-seconds: ${COMPARISON_UPDATE_RETRY_SECOND_SECONDS:1800}
+    market-url: ${COMPARISON_UPDATE_MARKET_URL:http://127.0.0.1:18082}
+  alert:
+    plan-enabled: ${ALERT_PLAN_ENABLED:false}
+    worker-enabled: ${ALERT_WORKER_ENABLED:false}
+    scan-poll-ms: ${ALERT_SCAN_POLL_MS:60000}
+    poll-ms: ${ALERT_WORKER_POLL_MS:1000}
+    reconcile-minutes: ${ALERT_RECONCILE_MINUTES:60}
+    page-size: ${ALERT_PAGE_SIZE:50}
+    max-active-jobs: ${ALERT_MAX_ACTIVE_JOBS:1000}
+    update-hour: 20 # 与当前MS-02/MS-05日线截止策略一致；更改需同步三服务。
+    instruments: ${ALERT_INSTRUMENTS:SH600030,SH600276,SZ000002}
+    market-url: ${ALERT_MARKET_URL:${REVISION_MARKET_URL:http://127.0.0.1:18082}}
+    notification-url: ${ALERT_NOTIFICATION_URL:http://127.0.0.1:18085}
+  market:
+    url: ${MARKET_URL:}
+  revision:
+    market-url: ${REVISION_MARKET_URL:http://127.0.0.1:18082}
+  prediction:
+    url: ${PREDICTION_URL:http://127.0.0.1:18083}
+  internal:
+    token: ${SERVICE_TOKEN:}
+  scheduler:
+    worker-enabled: ${MARKET_WORKER_ENABLED:false}
+    revision-plan-enabled: ${PREDICTION_REVISION_PLAN_ENABLED:false}
+    verification-plan-enabled: ${PREDICTION_VERIFY_PLAN_ENABLED:false}
+    plan-enabled: ${MARKET_PLAN_ENABLED:false}
+    instruments: ${MARKET_PLAN_INSTRUMENTS:}
+server:
+  port: ${SCHEDULER_PORT:8084}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

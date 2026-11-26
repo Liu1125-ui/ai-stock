@@ -1,0 +1,15 @@
+package com.aistock.prediction.portfolioquestion;
+import com.aistock.common.*;import com.aistock.prediction.modelcatalog.ModelRecords.Actor;import jakarta.servlet.http.HttpServletRequest;import java.util.*;import org.springframework.http.*;import org.springframework.security.core.Authentication;import org.springframework.web.bind.annotation.*;
+@RestController @RequestMapping("/api/v1/portfolio-questions")
+public final class PortfolioQuestionController {
+ private final PortfolioQuestionService service;
+ public PortfolioQuestionController(PortfolioQuestionService service){this.service=service;}
+ @PostMapping public ResponseEntity<ApiResponse<?>> ask(Authentication auth,HttpServletRequest request){UUID owner=user(auth);query(request,Set.of());byte[] bytes;try{bytes=request.getInputStream().readNBytes(4097);}catch(java.io.IOException e){throw PortfolioQuestionInput.invalid();}if(bytes.length>4096)throw new BusinessException("AI_REQUEST_TOO_LARGE","问题请求超过处理上限",HttpStatus.PAYLOAD_TOO_LARGE);var input=PortfolioQuestionInput.parse(bytes);var receipt=service.generate(owner,input);return ResponseEntity.status(receipt!=null&&"RUNNING".equals(receipt.state())?HttpStatus.ACCEPTED:HttpStatus.OK).header("Cache-Control","no-store").body(ok(receipt,request));}
+ @GetMapping("/rules") public ApiResponse<?> rules(Authentication auth,HttpServletRequest request){UUID owner=user(auth);query(request,Set.of("analysisId","topic"));return ok(service.rules(owner,PortfolioQuestionInput.uuid(request.getParameter("analysisId")),request.getParameter("topic")),request);}
+ @GetMapping public ApiResponse<?> list(Authentication auth,HttpServletRequest request){UUID owner=user(auth);query(request,Set.of("analysisId","before","upper"));return ok(service.list(owner,PortfolioQuestionInput.uuid(request.getParameter("analysisId")),request.getParameter("before"),request.getParameter("upper")),request);}
+ @GetMapping("/operations/{id}") public ApiResponse<?> operation(Authentication auth,@PathVariable String id,HttpServletRequest request){UUID owner=user(auth);query(request,Set.of());return ok(service.operation(owner,PortfolioQuestionInput.uuid(id)),request);}
+ @GetMapping("/{id}") public ApiResponse<?> get(Authentication auth,@PathVariable String id,HttpServletRequest request){UUID owner=user(auth);query(request,Set.of());return ok(service.get(owner,PortfolioQuestionInput.uuid(id)),request);}
+ private UUID user(Authentication auth){if(auth==null||!auth.isAuthenticated()||!(auth.getPrincipal() instanceof Actor actor))throw new BusinessException("AUTH_REQUIRED","请先登录",HttpStatus.UNAUTHORIZED);return actor.userId();}
+ private void query(HttpServletRequest request,Set<String> allowed){if(!allowed.containsAll(request.getParameterMap().keySet())||request.getParameterMap().values().stream().anyMatch(v->v.length!=1))throw PortfolioQuestionInput.invalid();}
+ private ApiResponse<?> ok(Object value,HttpServletRequest request){return ApiResponse.success(value,TraceIds.normalize(request.getHeader("X-Trace-Id")));}
+}

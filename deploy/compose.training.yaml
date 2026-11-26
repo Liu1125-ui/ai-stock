@@ -1,0 +1,83 @@
+services:
+  stock-prediction-service:
+    environment:
+      TRAINING_DISPATCH_ENABLED: "true"
+      TRAINING_WEEKLY_SCAN_ENABLED: "${TRAINING_WEEKLY_SCAN_ENABLED:-false}"
+      TRAINING_WEEKLY_SCAN_DELAY_MS: "${TRAINING_WEEKLY_SCAN_DELAY_MS:-3600000}"
+      TRAINING_WEEKLY_CALENDAR_PATH: /training-input/current/calendar.json
+      TRAINING_WEEKLY_READINESS_PATH: /training-input/current/readiness.json
+      TRAINING_WEEKLY_PRESET_ROOT: /training-input/presets
+      TRAINING_WEEKLY_CONFIGURATION_ID: "${TRAINING_WEEKLY_CONFIGURATION_ID:-five-day-rolling}"
+      TRAINING_WEEKLY_OWNER: "${TRAINING_WEEKLY_OWNER:?Set a dedicated training owner UUID}"
+    volumes:
+      - type: bind
+        source: "${TRAINING_INPUT_DIR:?Set the training input directory}"
+        target: /training-input
+        read_only: true
+        bind:
+          create_host_path: false
+
+  stock-scheduler-service:
+    environment:
+      TRAINING_INBOX_ENABLED: "true"
+      TRAINING_EXECUTION_ENABLED: "true"
+      TRAINING_REGISTRATION_ENABLED: "true"
+      TRAINING_ALGORITHM_URL: http://algorithm:8090
+
+  algorithm:
+    environment:
+      TRAINING_EXECUTION_ENABLED: "true"
+      TRAINING_EXECUTION_ROOT: /training-state/jobs
+      TRAINING_DATA_ROOT: /training-input/legacy
+      TRAINING_DATA_MANIFEST: /training-input/legacy/manifest.json
+      TRAINING_PRESET_DIRECTORY: /training-input/presets
+      TRAINING_ROLLING_SNAPSHOT_ROOT: /training-input/snapshots
+      TRAINING_CANDIDATE_ROOT: /model-artifacts
+    volumes:
+      - type: bind
+        source: "${TRAINING_INPUT_DIR:?Set the training input directory}"
+        target: /training-input
+        read_only: true
+        bind:
+          create_host_path: false
+      - training-executions:/training-state
+      - type: bind
+        source: "${TRAINING_ARTIFACT_DIR:?Set the model artifact output directory}"
+        target: /model-artifacts
+        bind:
+          create_host_path: false
+
+
+  training-refresh:
+    profiles: ["training-refresh"]
+    image: aistock/algorithm:sdd001
+    entrypoint: ["python", "-m", "app.training.refresh"]
+    command:
+      - --root
+      - /training-input
+      - --base
+      - /training-input/seed/archive
+      - --index
+      - /training-input/seed/archive/index.json
+      - --index-sha256
+      - "${TRAINING_SEED_INDEX_SHA256:-}"
+      - --cohort
+      - /training-input/seed/cohort.json
+      - --cohort-sha256
+      - "${TRAINING_COHORT_SHA256:-}"
+      - --template
+      - /training-input/seed/preset-template.json
+      - --start
+      - "${TRAINING_SEED_START:-}"
+      - --poll-seconds
+      - "${TRAINING_REFRESH_POLL_SECONDS:-3600}"
+    volumes:
+      - type: bind
+        source: "${TRAINING_INPUT_DIR:?Set the training input directory}"
+        target: /training-input
+        bind:
+          create_host_path: false
+    restart: unless-stopped
+
+volumes:
+  training-executions:

@@ -1,0 +1,25 @@
+package com.aistock.prediction.explanation;
+import java.util.*;import com.fasterxml.jackson.databind.*;import org.junit.jupiter.api.*;import static org.junit.jupiter.api.Assertions.*;
+class ExplanationTemplateTest {
+ final ObjectMapper m=new ObjectMapper();final Map<String,String> facts=Map.of("PRICE","25.805502元","DATE","2026-10-08","LIMIT","预测仅供参考，实际表现尚待核验");
+ String valid(){return "{\"paragraphs\":[{\"kind\":\"overview\",\"template\":\"模型参考价格为{{PRICE}}。\",\"refs\":[\"PRICE\"]},{\"kind\":\"readout\",\"template\":\"目标日期是{{DATE}}，后续需结合实际行情。\",\"refs\":[\"DATE\"]},{\"kind\":\"risk\",\"template\":\"{{LIMIT}}。\",\"refs\":[\"LIMIT\"]}]}";}
+ @Test void substitutesOnlyDeclaredFacts()throws Exception{var result=ExplanationTemplate.render(m.readTree(valid()),facts,m);assertEquals("模型参考价格为25.805502元。",result.get(0).path("text").asText());assertEquals("PRICE",result.get(0).path("refs").get(0).asText());}
+ @Test void independentNumbersAndUnknownRefsAreRejected()throws Exception{for(String changed:List.of(valid().replace("{{PRICE}}","26.8元"),valid().replace("{{PRICE}}","九成概率"),valid().replace("{{PRICE}}","{{OTHER}}"),valid().replace("{{PRICE}}","<script>ok</script>"),valid().replace("{{PRICE}}","稳赚，立即买入")))assertThrows(RuntimeException.class,()->ExplanationTemplate.render(m.readTree(changed),facts,m));}
+ @Test void kindShapeAndReferenceMismatchRejected()throws Exception{for(String changed:List.of(valid().replace("readout","overview"),valid().replace("[\"PRICE\"]","[\"DATE\"]"),valid().replace("{{PRICE}}", "x".repeat(501)),"[]"))assertThrows(RuntimeException.class,()->ExplanationTemplate.render(m.readTree(changed),facts,m));}
+ @Test void factsAreDeterministicAndFutureNotActual(){var snap=m.createObjectNode();var input=snap.putObject("input").put("originDate","2026-09-30").put("originRawClose","100").put("inputVersionId","input").put("rawVersionId","raw").put("inputHash","hash");var points=snap.putObject("prediction").putArray("points");for(int i=1;i<=5;i++)points.addObject().put("targetDate","2026-10-"+String.format("%02d",7+i)).put("referencePrice",Integer.toString(100+i));var model=m.createObjectNode().put("artifactId","model");model.putObject("manifest").put("trainingCutoff","2023-12-31");var a=ExplanationFacts.build(UUID.fromString("11111111-1111-1111-1111-111111111111"),snap,model,null,"deepseek-v4-flash",m);var b=ExplanationFacts.build(UUID.fromString("11111111-1111-1111-1111-111111111111"),snap,model,null,"deepseek-v4-flash",m);assertEquals(a.hash(),b.hash());assertTrue(a.values().get("VERIFICATION").contains("尚无"));assertTrue(a.values().get("P1").contains("参考"));assertTrue(a.values().get("TREND").contains("首个目标日起上行"));}
+ @Test void descendingSequenceAboveOriginIsNotRising(){var snap=m.createObjectNode();snap.putObject("input").put("originDate","2026-09-30").put("originRawClose","100");var points=snap.putObject("prediction").putArray("points");for(int i=0;i<5;i++)points.addObject().put("targetDate","2026-10-"+String.format("%02d",8+i)).put("referencePrice",Integer.toString(110-i));var model=m.createObjectNode().put("artifactId","model");model.putObject("manifest").put("trainingCutoff","2023-12-31");var f=ExplanationFacts.build(UUID.randomUUID(),snap,model,null,"provider",m);assertTrue(f.values().get("TREND").contains("首个目标日起下行"));assertEquals("均高于原点收盘价",f.values().get("RELATIVE_ORIGIN"));assertEquals("10.000000%（相对原点的预测变化，非实际收益）",f.values().get("R1"));}
+ @Test void unsupportedOriginComparisonOutsideFactsIsRejected()throws Exception{var incorrect=valid().replace("模型参考价格为{{PRICE}}。","{{PRICE}}意味着多数目标日高于原点。");assertThrows(RuntimeException.class,()->ExplanationTemplate.render(m.readTree(incorrect),facts,m));}
+ @Test void unsafeDiagnosticsUseOnlyFixedCategories(){assertEquals("NUMBER",ExplanationTemplate.unsafeCategory("9"));assertEquals("DIRECTION",ExplanationTemplate.unsafeCategory("低于"));assertEquals("HTML_OR_CONTROL",ExplanationTemplate.unsafeCategory("\n"));assertEquals("HTML_OR_CONTROL",ExplanationTemplate.unsafeCategory("<"));assertEquals("QUANTITY",ExplanationTemplate.unsafeCategory("五日"));assertEquals("TRADING",ExplanationTemplate.unsafeCategory("买入"));} @Test void verifiedMetricsUseThePageUnits(){
+  var snapshot=m.createObjectNode();
+  snapshot.putObject("input").put("originDate","2026-09-30").put("originRawClose","100");
+  var points=snapshot.putObject("prediction").putArray("points");
+  for(int day=10;day<=14;day++)points.addObject().put("targetDate","2026-10-"+day).put("referencePrice","101");
+  var model=m.createObjectNode().put("artifactId","model");
+  var verification=m.createObjectNode().put("dueThrough","2026-10-11");
+  verification.putObject("result").put("verifiedCount",2).putObject("metrics").put("priceMae","0.42").put("directionAccuracy","0.5");
+  var facts=ExplanationFacts.build(UUID.randomUUID(),snapshot,model,verification,"model",m).values();
+  assertTrue(facts.get("VERIFICATION").contains("验证证据截止日"));
+  assertTrue(facts.get("METRICS").contains("价格 MAE 0.42 元"));
+  assertTrue(facts.get("METRICS").contains("方向准确率 50%"));
+ }
+}

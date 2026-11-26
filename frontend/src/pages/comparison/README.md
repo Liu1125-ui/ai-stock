@@ -1,0 +1,6 @@
+# 股票对比页面
+ComparisonPage编排选源、创建与本人恢复；ComparisonResult展示固定结果；ComparisonChart绘制后端归一化序列，缺口断线；ComparisonHistory只加载摘要分页。comparisonState将原请求按本人保存到sessionStorage，不保存密码或会话。公式由后端负责，页面不调用AI。
+
+历史首页携服务端返回的固定upper；明确刷新才获取新上界。创建/恢复与历史详情共享代次，丢弃迟到结果。dataIssues保留请求范围内逐日缺失/停牌，列表摘要省略明细。
+
+ComparisonAiPanel独立展示多股解释；挂载/刷新仅GET，生成明确点击。comparisonAiState按owner与comparisonId保存原操作，未知状态先查询；过期不自动重发，迟到响应按账号/结果代次丢弃，旧解释和指标保持。

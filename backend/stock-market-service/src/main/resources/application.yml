@@ -1,0 +1,51 @@
+spring:
+  application:
+    name: stock-market-service
+  datasource:
+    url: ${MARKET_DB_URL:jdbc:h2:mem:market;MODE=MySQL;DB_CLOSE_DELAY=-1}
+    username: ${MARKET_DB_USER:sa}
+    password: ${MARKET_DB_PASSWORD:}
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true
+  cloud:
+    openfeign:
+      client:
+        config:
+          stock-user-service:
+            connectTimeout: 2000
+            readTimeout: 3000
+    nacos:
+      discovery:
+        enabled: ${NACOS_ENABLED:false}
+        server-addr: ${NACOS_ADDR:127.0.0.1:8848}
+aistock:
+  references:
+    prediction-url: ${REFERENCE_PREDICTION_URL:http://127.0.0.1:18083}
+    scheduler-url: ${REFERENCE_SCHEDULER_URL:http://127.0.0.1:18084}
+    notification-url: ${REFERENCE_NOTIFICATION_URL:http://127.0.0.1:18085}
+  market:
+    lifecycle:
+      local-alert-enabled: ${MARKET_LOCAL_ALERT_USE_ENABLED:false}
+      local-alert-recovery-enabled: ${MARKET_LOCAL_ALERT_USE_RECOVERY_ENABLED:false}
+      local-comparison-enabled: ${MARKET_LOCAL_COMPARISON_USE_ENABLED:false}
+      local-comparison-recovery-enabled: ${MARKET_LOCAL_COMPARISON_USE_RECOVERY_ENABLED:false}
+      evidence-gates-enabled: ${MARKET_VERSION_EVIDENCE_GATES_ENABLED:false}
+      protocol-enabled: ${MARKET_VERSION_USE_PROTOCOL_ENABLED:false}
+      reconcile-enabled: ${MARKET_VERSION_USE_RECONCILE_ENABLED:false}
+      enforced: ${MARKET_VERSION_USE_ENFORCED:false}
+    index-refresh-enabled: ${MARKET_INDEX_REFRESH_ENABLED:false}
+    calendar-ttl-days: ${CALENDAR_TTL_DAYS:7}
+  algorithm:
+    url: ${ALGORITHM_URL:http://127.0.0.1:18090}
+  user:
+    url: ${USER_SERVICE_URL:}
+  internal:
+    token: ${SERVICE_TOKEN:}
+server:
+  port: ${MARKET_PORT:8082}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

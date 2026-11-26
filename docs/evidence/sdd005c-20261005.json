@@ -1,0 +1,137 @@
+{
+  "checkedAt": "2026-10-05T14:24:07.6496289+08:00",
+  "scope": "SDD-005C_MODEL_REGISTRATION_AND_REVIEW",
+  "codeBase": "840b1e1",
+  "reviewedHead": "18b7cc0",
+  "reviewFixCommit": "1bc7036",
+  "tests": {
+    "backend": 177,
+    "backendFailures": 0,
+    "backendErrors": 0,
+    "backendSkipped": 0,
+    "frontend": 23,
+    "python": 46,
+    "metadataPreparation": 3,
+    "focusedReview": 6,
+    "frontendTypecheckAndBuild": true,
+    "pythonExternalDeprecationWarnings": 1
+  },
+  "registrations": [
+    {
+      "seed": 42,
+      "modelId": "55f8adad-2064-4cc8-b794-ec47f720e648",
+      "artifactId": "transformer-s3-2023-seed42-c698f02e6875e762",
+      "manifestHash": "45b43ebd1cf9131eb793e62cb73fe076000457fbc5b121f8ec94ca949be59c7e",
+      "checkpointHash": "280b0e5f7b809d86857ec97ed651e9dba82951d7a383540b8ee73651929963ef",
+      "sourceHash": "c98808f3d034bbf22768917fefcdd9dc1241bc5f2ddfb4332077d9d796eb157a",
+      "registrationHash": "26f2cae3c1f7dd989e81b98d4d65b79d45c3290f71cae01ace043b8964f8beb6",
+      "state": "PENDING",
+      "revision": 0,
+      "replayVerified": true
+    },
+    {
+      "seed": 43,
+      "modelId": "d31533cf-9d80-420d-8203-170bd11417a5",
+      "artifactId": "transformer-s3-2023-seed43-9a96167ecb00234d",
+      "manifestHash": "6894c7d52ba9a3968ef1f85cd0923b3d249a376281f79d752a0fe460d09f97d6",
+      "checkpointHash": "7d90bc81f0e83a70c2f1195bee7ed8637d3d40e2b53415c0fef77f956a1eb112",
+      "sourceHash": "90ddcf0fdaddefe217a34759257af8860584c1945e8d03580c6e995326857020",
+      "registrationHash": "521b006e505c75e4aba4c2466ade67c80ebba297e7578a79f66216c5f6a4a25f",
+      "state": "PENDING",
+      "revision": 0,
+      "replayVerified": true
+    },
+    {
+      "seed": 44,
+      "modelId": "9129d34b-c467-495b-b404-69cf3b860e68",
+      "artifactId": "transformer-s3-2023-seed44-809fa0c150e41590",
+      "manifestHash": "4cfb7609234a247d341c5f868bff65b2f7a45509bedd60ad74e7a3bffc458b8c",
+      "checkpointHash": "7ec2e5dd681f2365bd2ab578e1ae9b039dafdb996408384eeb27ca1001c42118",
+      "sourceHash": "bc6cc468a955e51610ba4bcff1cc31190a03d7544ad3c2c955ff7899b413cc67",
+      "registrationHash": "365043b8b4ce52412133412ee705f3d2f0a1f28c65a795235bc38a5e0520eae4",
+      "state": "PENDING",
+      "revision": 0,
+      "replayVerified": true
+    }
+  ],
+  "httpProbes": [
+    {
+      "name": "MS03 unauthenticated admin",
+      "status": 401,
+      "expected": 401
+    },
+    {
+      "name": "Gateway forged role ignored",
+      "status": 401,
+      "expected": 401
+    },
+    {
+      "name": "Internal auth before malformed JSON",
+      "status": 401,
+      "expected": 401
+    },
+    {
+      "name": "Gateway internal route not exposed",
+      "status": 404,
+      "expected": 404
+    },
+    {
+      "name": "Gateway bounded body",
+      "status": 413,
+      "expected": 413
+    },
+    {
+      "name": "MS03 authenticated oversized internal body",
+      "status": 413,
+      "expected": 413
+    },
+    {
+      "name": "Bad artifact keeps existing registration",
+      "status": 503,
+      "expected": 503
+    },
+    {
+      "name": "Formal inference still explicitly unavailable",
+      "status": 503,
+      "expected": 503
+    }
+  ],
+  "corsBeforeFix": {
+    "name": "untrusted Origin POST before fix",
+    "status": 503
+  },
+  "corsAfterFix": {
+    "status": 403,
+    "code": "ACCESS_DENIED",
+    "cacheControl": "no-store",
+    "verified": true
+  },
+  "restartPersistenceVerified": true,
+  "currentModelState": "PENDING",
+  "modelCount": 3,
+  "registerEvents": 3,
+  "headRevision": 0,
+  "currentRecommendedModel": null,
+  "liveAdminBrowserVerified": false,
+  "userSelectedIndependentAdminEmail": true,
+  "adminPasswordInput": "LOCAL_HIDDEN_ONLY",
+  "formalInferenceAvailable": false,
+  "retrospectiveMetricsAreNotFutureAccuracy": true,
+  "images": {
+    "aistock/stock-prediction-service:sdd001": "sha256:3ee3395e7f79392215fc6ccfac58fbc72dfef6d136f09f7bb71dbd97fcd47836",
+    "aistock/stock-gateway:sdd001": "sha256:dd844c824fc551eaaf7fa9d76584357ef02290f9816bb39ddb0c76a153fe648d",
+    "aistock/algorithm:sdd001": "sha256:ff6418f1b0f694c70b2f278c609b44d3782865c359571ba4a39584e8fdaae1b1",
+    "aistock/frontend:sdd001": "sha256:47c7a899e77b8c546d35facf8932f87211e26018744e1c3e96c126bdba24960c"
+  },
+  "review": {
+    "critical": 0,
+    "important": 2,
+    "importantFixed": 2,
+    "minor": 0,
+    "oneFinalReview": true
+  },
+  "codeGenerator": "Codex",
+  "verifiedCodeArtsDiff": false,
+  "remoteConfigured": false,
+  "remoteCIExecuted": false
+}

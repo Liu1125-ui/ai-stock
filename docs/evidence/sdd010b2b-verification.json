@@ -1,0 +1,142 @@
+{
+  "slice": "SDD010B2B",
+  "verifiedOn": "2026-10-29",
+  "state": "DEPLOYED_WITH_READONLY_UI_ACCEPTANCE",
+  "sourceHead": "7b0673783a12ed820fe1227c2809b38e5ea07e1c",
+  "scope": "Fixed-version administrator review progress, note and append-only history; NOT version disable/restore",
+  "tests": {
+    "unchangedOtherBackends": "Not rerun this slice; prior evidence retained",
+    "frontend": {
+      "existingLargeChunkWarning": true,
+      "files": 72,
+      "tests": 334,
+      "build": "PASS",
+      "typecheck": "PASS"
+    },
+    "reviewFixFocused": 32,
+    "affectedBackend": {
+      "total": 404,
+      "errors": 0,
+      "failures": 0,
+      "includesIsolatedMysql": true,
+      "cleanVerify": "PASS",
+      "modules": {
+        "stock-market-service": 257,
+        "stock-gateway": 93,
+        "stock-common": 54
+      },
+      "skipped": 0
+    }
+  },
+  "review": {
+    "minor": 1,
+    "unresolvedImportant": 0,
+    "fixCommit": "7b06737",
+    "minorFixed": 1,
+    "redGreen": "review-fixes-red/green and parent-denial-red; final frontend334 PASS",
+    "importantFixed": 1,
+    "important": 1,
+    "freshRounds": 1,
+    "critical": 0,
+    "range": "1324f57..e2ee826"
+  },
+  "deployment": {
+    "health": {
+      "stock-prediction-service": "UP",
+      "stock-user-service": "UP",
+      "stock-scheduler-service": "UP",
+      "algorithm": "UP",
+      "stock-gateway": "UP",
+      "stock-notification-service": "UP",
+      "stock-market-service": "UP"
+    },
+    "artifacts": {
+      "stock-prediction-service": {
+        "matches": true,
+        "sha256": "bdbacbbf3b33977b899de86cc9b96036e33bf3bee8316d947c515f71a322919f",
+        "image": "sha256:642ecd2c8e63c1bc01fcf83d841b44bde9f2d122467d567748c6e3357b9d452f"
+      },
+      "frontend": {
+        "sha256": "2a23a3ddd2a21606902deade0e3ee65fd54b1127e3f1e324372b3d2a7b38d5c1",
+        "matches": true
+      },
+      "stock-market-service": {
+        "matches": true,
+        "sha256": "cda021f3eb62d828a6ec2134b8aa8798deafdf216f8d7564edaebf34ddf3455e",
+        "image": "sha256:9572c3c56e60396116e8df139983dbe0e01952ee4d6cc328306c35b7c3d022c1"
+      },
+      "stock-gateway": {
+        "matches": true,
+        "sha256": "e6675a19972bc8be694c6c3a93fe434e3c0e5fd0593d9d3ed3c6e6e9edc88656",
+        "image": "sha256:2ae726081da2a0053f59855109628f35d05019dc1a345e2f3aecd2c4164d0be4"
+      },
+      "stock-notification-service": {
+        "matches": true,
+        "sha256": "0a979752999e0ddb94b0525db189a8b8980d4c34695c85d7c7357525fd5bfbaf",
+        "image": "sha256:f65a761adf092c7c9034537b27b72d8d4ce59de3385821f47742df4d59c67d8d"
+      },
+      "stock-scheduler-service": {
+        "matches": true,
+        "sha256": "17dfcb5c1c965700eebae4c443ca86198c6cf0ef710cfbdeb57d53a889fbf4f5",
+        "image": "sha256:e43c23fdb769b191ae40817caa180a818836af3a372dec3af87f9d7161eb3ffc"
+      }
+    },
+    "options": {
+      "15173": 200,
+      "18082": 200
+    },
+    "anonymous": {
+      "15173": 401,
+      "18082": 401
+    }
+  },
+  "readonlyProof": {
+    "originalMarketHash": "1EBFCF608FB87D82CD21741A47CA7061A391CE6138777C6E789498E6F16F6426",
+    "reviewRows": 0,
+    "reviewOperations": 0,
+    "originalMarketUnchanged": true,
+    "migration": 14,
+    "threeRawWindowsUnchanged": true
+  },
+  "ui": {
+    "reviewOperations": 0,
+    "beforeSuccessfulLoadSaveEnabled": false,
+    "originalVersionAvailabilityUnchanged": true,
+    "adminRead": "PASS",
+    "validDraftSaveEnabled": true,
+    "viewport": 390,
+    "keyboard": "Enter refresh and history toggle; Tab reaches select",
+    "panelWidth": 316,
+    "clearedDraftSaveEnabled": false,
+    "reviewRows": 0,
+    "submittedProductionReviews": 0,
+    "pageWidth": 375,
+    "fieldsInsideViewport": true,
+    "history": "EMPTY_AS_EXPECTED"
+  },
+  "safeguards": {
+    "maasCalls": 0,
+    "manualSupplierCalls": 0,
+    "existingAuthorizedTask": "One task, one SUCCEEDED attempt retained",
+    "backgroundActivity": "Original switches restored; natural work is not counted as manual calls",
+    "originalSchedulerFlagsRestored": true,
+    "newRefreshTasks": 0,
+    "manualRefreshGate": false,
+    "productionReviewWrites": 0,
+    "emailSends": 0
+  },
+  "backup": {
+    "databaseBackup": "runtime/sdd010b2b/backup-20261029/before.sql",
+    "imageArchive": "runtime/sdd010b2b/backup-20261028/old-images.tar",
+    "runningOldImagesMatchArchive": true
+  },
+  "restoreDrill": "NOT_PERFORMED",
+  "productionUserRelogin": "NOT_REPEATED",
+  "productionWriteAcceptance": "NOT_PERFORMED: no artificial review verdict added; writes/history/concurrency tested in isolated MySQL and frontend",
+  "screenshot": "docs/evidence/sdd010b2b-market-version-review-accepted.png",
+  "limitations": [
+    "Review progress does not certify prices or forecasts",
+    "Actual version disable/restore and distributed in-flight admission interlock remain future work",
+    "FR-11 remains partially complete"
+  ]
+}

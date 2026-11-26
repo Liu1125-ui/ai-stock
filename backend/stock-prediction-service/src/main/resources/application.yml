@@ -1,0 +1,75 @@
+spring:
+  application:
+    name: stock-prediction-service
+  cloud:
+    nacos:
+      discovery:
+        enabled: ${NACOS_ENABLED:false}
+        server-addr: ${NACOS_ADDR:127.0.0.1:8848}
+    openfeign:
+      client:
+        config:
+          stock-user-service:
+            connectTimeout: 2000
+            readTimeout: 5000
+          stock-market-service:
+            connectTimeout: 2000
+            readTimeout: 3000
+          trainingProgressScheduler:
+            connectTimeout: 1000
+            readTimeout: 2000
+          trainingProgressAlgorithm:
+            connectTimeout: 1000
+            readTimeout: 2000
+aistock:
+  training:
+    dispatch-enabled: ${TRAINING_DISPATCH_ENABLED:false}
+    weekly-scan-enabled: ${TRAINING_WEEKLY_SCAN_ENABLED:false}
+    weekly-scan-delay-ms: ${TRAINING_WEEKLY_SCAN_DELAY_MS:3600000}
+    weekly-calendar-path: ${TRAINING_WEEKLY_CALENDAR_PATH:}
+    weekly-readiness-path: ${TRAINING_WEEKLY_READINESS_PATH:}
+    weekly-preset-root: ${TRAINING_WEEKLY_PRESET_ROOT:}
+    weekly-configuration-id: ${TRAINING_WEEKLY_CONFIGURATION_ID:}
+    weekly-owner: ${TRAINING_WEEKLY_OWNER:}
+    scheduler-url: ${TRAINING_SCHEDULER_URL:http://127.0.0.1:18084}
+  market-use:
+    comparison-enabled: ${PREDICTION_MARKET_USE_COMPARISON_ENABLED:false}
+    portfolio-enabled: ${PREDICTION_MARKET_USE_PORTFOLIO_ENABLED:false}
+    forecast-enabled: ${PREDICTION_MARKET_USE_FORECAST_ENABLED:false}
+    verification-enabled: ${PREDICTION_MARKET_USE_VERIFICATION_ENABLED:false}
+    analysis-enabled: ${PREDICTION_MARKET_USE_ANALYSIS_ENABLED:false}
+    recovery-enabled: ${PREDICTION_MARKET_USE_RECOVERY_ENABLED:false}
+  portfolio-question:
+    enabled: ${PORTFOLIO_QUESTION_ENABLED:false}
+    max-facts: ${PORTFOLIO_QUESTION_MAX_FACTS:1800}
+    max-fact-bytes: ${PORTFOLIO_QUESTION_MAX_FACT_BYTES:98304}
+    max-prompt-chars: ${PORTFOLIO_QUESTION_MAX_PROMPT_CHARS:65536}
+  portfolio:
+    user-url: ${PORTFOLIO_USER_URL:http://127.0.0.1:18081}
+    market-url: ${PORTFOLIO_MARKET_URL:http://127.0.0.1:18082}
+    concentration-threshold-percent: ${PORTFOLIO_CONCENTRATION_THRESHOLD_PERCENT:50}
+    max-concurrent: ${PORTFOLIO_MAX_CONCURRENT:2}
+  comparison-ai:
+    enabled: ${COMPARISON_AI_ENABLED:false}
+  maas:
+    enabled: ${MAAS_ENABLED:false}
+    chat-url: ${MAAS_CHAT_URL:}
+    model: ${MAAS_MODEL:}
+    api-key: ${MAAS_API_KEY:}
+  forecast:
+    market-url: ${FORECAST_MARKET_URL:http://127.0.0.1:18082}
+  algorithm:
+    url: ${ALGORITHM_URL:http://127.0.0.1:18090}
+  user:
+    url: ${USER_SERVICE_URL:}
+  internal:
+    token: ${SERVICE_TOKEN:}
+  market:
+    url: ${MARKET_URL:}
+server:
+  port: ${PREDICTION_PORT:8083}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

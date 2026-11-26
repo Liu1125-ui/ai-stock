@@ -1,0 +1,54 @@
+{
+  "date": "2026-10-07",
+  "scope": "SDD005E2b",
+  "status": "implemented, deployed; single real generation/save/reload accepted",
+  "backendFullBeforeRuntimePromptFix": {
+    "tests": 311,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "backendRelatedAfterPromptFix": {
+    "tests": 29,
+    "result": "passed"
+  },
+  "frontend": {
+    "tests": 65,
+    "build": "passed"
+  },
+  "runtime": {
+    "health": "six UP",
+    "anonymousOptions": 401,
+    "oldSnapshotsUnchanged": true,
+    "predictionId": "19ddcb7c-3fba-4df3-ba4f-f8eebfeb3f14",
+    "firstOperationId": "75150fb6-6f18-47df-b8ff-d3c9059dd75c",
+    "firstState": "FAILED",
+    "firstCode": "AI_OUTPUT_INVALID",
+    "safeRule": "ROOT_SHAPE",
+    "seconds": 11.939,
+    "paidAttempts": 2,
+    "deployedPrompt": "grounded-stock-analysis-prediction-v2",
+    "originalPredictionLink": "observed after auth refresh fix",
+    "accountUnavailableBanner": "absent after fix",
+    "additionalAuthorizedCall": {
+      "operationId": "fea125b6-7d47-4601-9f06-ff58325f136f",
+      "state": "SUCCEEDED",
+      "analysisId": "60f636a8-bba3-4bd4-9e29-5c9e519b3a37",
+      "seconds": 16.985,
+      "paragraphs": 3,
+      "promptVersion": "grounded-stock-analysis-prediction-v2",
+      "contextHash": "1d6a87edc2d8452a493df7fab805dbb344275e9bba466bf783b9538f7c6a646a",
+      "paragraphsHash": "314745091ec0530c74e28235977366c05476d6fb1febd67c5a4d39f1e010a835",
+      "savedRecordRefresh": "observed",
+      "fullPageReload": "observed",
+      "predictionOperationCountAfterRefresh": 2,
+      "fiveReferencePricesUnchanged": true,
+      "noActualSamplesCaveat": "observed"
+    }
+  },
+  "pending": [
+    "whole FR09 not complete",
+    "actual target-day prediction accuracy remains unverified",
+    "single cloud success does not prove continuous availability"
+  ]
+}

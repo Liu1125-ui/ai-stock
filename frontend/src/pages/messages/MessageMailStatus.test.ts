@@ -1,0 +1,14 @@
+import {beforeEach,expect,it,vi} from 'vitest'
+import {mount,flushPromises} from '@vue/test-utils'
+import {reactive} from 'vue'
+import MessageMailStatus from './MessageMailStatus.vue'
+import * as api from '../../api/messages'
+import {useAuthStore} from '../../stores/auth'
+vi.mock('../../api/messages',()=>({getMessageEmailDelivery:vi.fn()}))
+vi.mock('../../stores/auth',()=>({useAuthStore:vi.fn()}))
+const auth=reactive({profile:{userId:'a'}})
+beforeEach(()=>{vi.resetAllMocks();auth.profile={userId:'a'};vi.mocked(useAuthStore).mockReturnValue(auth as never);vi.mocked(api.getMessageEmailDelivery).mockResolvedValue({deliveryId:'d1',state:'UNKNOWN',reasonCode:'SMTP_RESULT_UNKNOWN',attempts:1,updatedAt:'2026-10-12T08:00:00Z',sentAt:null})})
+it('loads only on request and never offers resend for unknown result',async()=>{const w=mount(MessageMailStatus,{props:{messageId:'m1'}});await flushPromises();expect(api.getMessageEmailDelivery).not.toHaveBeenCalled();await w.get('button').trigger('click');await flushPromises();expect(api.getMessageEmailDelivery).toHaveBeenCalledWith('m1');expect(w.text()).toContain('结果待确认');expect(w.text()).not.toContain('重新发送');w.unmount()})
+it('smtp acceptance is not presented as user receipt',async()=>{vi.mocked(api.getMessageEmailDelivery).mockResolvedValue({deliveryId:'d1',state:'SENT',reasonCode:null,attempts:1,updatedAt:'2026-10-12T08:00:00Z',sentAt:'2026-10-12T08:00:00Z'});const w=mount(MessageMailStatus,{props:{messageId:'m1'}});await w.get('button').trigger('click');await flushPromises();expect(w.text()).toContain('邮件服务器已接受');expect(w.text()).not.toContain('用户已收到');w.unmount()})
+it('unrecorded old message is distinct from failure',async()=>{vi.mocked(api.getMessageEmailDelivery).mockResolvedValue({deliveryId:null,state:'NOT_RECORDED',reasonCode:null,attempts:0,updatedAt:null,sentAt:null});const w=mount(MessageMailStatus,{props:{messageId:'m1'}});await w.get('button').trigger('click');await flushPromises();expect(w.text()).toContain('未记录邮件状态');expect(w.text()).not.toContain('发送失败');w.unmount()})
+it('ignores previous owner response and preserves old status on refresh failure',async()=>{const w=mount(MessageMailStatus,{props:{messageId:'m1'}});await w.get('button').trigger('click');await flushPromises();vi.mocked(api.getMessageEmailDelivery).mockRejectedValueOnce(new Error('读取失败'));await w.get('button').trigger('click');await flushPromises();expect(w.text()).toContain('结果待确认');expect(w.text()).toContain('读取失败');let finish!:(v:api.EmailDeliveryView)=>void;vi.mocked(api.getMessageEmailDelivery).mockReturnValueOnce(new Promise(r=>finish=r));await w.get('button').trigger('click');auth.profile={userId:'b'};await flushPromises();finish({deliveryId:'d1',state:'SENT',reasonCode:null,attempts:1,updatedAt:null,sentAt:null});await flushPromises();expect(w.text()).not.toContain('服务器已接受');w.unmount()})

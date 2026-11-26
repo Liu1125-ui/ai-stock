@@ -1,0 +1,4 @@
+ALTER TABLE scheduled_task DROP CHECK scheduled_task_chk_1,
+ ADD CONSTRAINT ck_task_state CHECK(state IN ('QUEUED','RUNNING','RECONCILING','RETRY_WAIT','SUCCEEDED','EMPTY','FAILED','CANCELLED'));
+ALTER TABLE task_attempt DROP CHECK task_attempt_chk_1,
+ ADD CONSTRAINT ck_attempt_state CHECK(state IN ('RUNNING','UNKNOWN','SUCCEEDED','EMPTY','FAILED','EXPIRED'));

@@ -1,0 +1,7 @@
+import {readFileSync} from 'node:fs'
+import {it,expect} from 'vitest'
+const config=readFileSync('nginx.conf','utf8')
+function budget(path){for(const match of config.matchAll(/location ~ ([^\n{]+) \{([^}]+)\}/g)){if(new RegExp(match[1].trim()).test(path))return Number(/proxy_read_timeout (\d+)s/.exec(match[2])?.[1]||0)}return Number(/location \/api\/ \{[^}]*proxy_read_timeout (\d+)s/.exec(config)?.[1]||0)}
+it('allows evidence plus bounded AI execution while keeping ordinary APIs short',()=>{for(const path of ['/api/v1/stock-questions','/api/v1/stock-questions/operations/11111111-1111-4111-8111-111111111111','/api/v1/stock-analyses','/api/v1/stock-analyses/11111111-1111-4111-8111-111111111111','/api/v1/predictions/11111111-1111-4111-8111-111111111111/explanation'])expect(budget(path)).toBeGreaterThan(40);expect(budget('/api/v1/users/me')).toBeLessThan(10);expect(budget('/api/v1/stock-analyses-other')).toBeLessThan(10)})
+
+it('gives comparison AI its full gateway budget without widening ordinary routes',()=>{for(const path of ['/api/v1/comparison-explanations','/api/v1/comparison-explanations/operations/11111111-1111-4111-8111-111111111111','/api/v1/comparison-explanations/11111111-1111-4111-8111-111111111111'])expect(budget(path)).toBeGreaterThan(65);for(const path of ['/api/v1/comparisons','/api/v1/comparison-explanations-other','/api/v1/users/me'])expect(budget(path)).toBeLessThan(10)})

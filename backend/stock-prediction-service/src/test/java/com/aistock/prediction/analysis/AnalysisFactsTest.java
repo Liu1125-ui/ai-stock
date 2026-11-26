@@ -1,0 +1,11 @@
+package com.aistock.prediction.analysis;
+import com.fasterxml.jackson.databind.*;import java.util.*;import org.junit.jupiter.api.Test;import static org.junit.jupiter.api.Assertions.*;
+class AnalysisFactsTest {
+ final ObjectMapper m=new ObjectMapper();
+ JsonNode sample()throws Exception{return m.readTree("""
+ {"instrumentId":"SH600030","versionId":"11111111-1111-4111-8111-111111111111","provider":"baostock","priceBasis":"RAW","state":"AVAILABLE","formulaVersion":"tech-v1","freshness":"UNKNOWN","requestedRange":{"from":"2026-07-07","to":"2026-10-07"},"actualRange":{"from":"2026-09-29","to":"2026-09-30"},"bars":[{"date":"2026-09-29","close":"25.5","tradeStatus":1},{"date":"2026-09-30","close":"25.86","tradeStatus":1,"ma5":"25.9","ma10":null,"ma20":"25.0","dif":"0.2","dea":"0.1","macd":"0.2","rsi14":null}]}
+ """);}
+ @Test void fixedFactsSeparateMissingAndDirectionAndRawLimit()throws Exception{var f=AnalysisFacts.build(sample(),"model",m);assertEquals("指标样本不足",f.values().get("RSI_STATE"));assertTrue(f.values().get("MA5_STATE").contains("低于"));assertTrue(f.values().get("BASIS_LIMIT").contains("未复权"));assertTrue(f.values().get("FRESHNESS_LIMIT").contains("无法确认"));assertEquals(f.hash(),AnalysisFacts.build(sample(),"model",m).hash());}
+ @Test void rsiBoundariesAndMissingDoNotBecomeZero()throws Exception{for(String r:List.of("0","30","70","100")){var n=sample();((com.fasterxml.jackson.databind.node.ObjectNode)n.path("bars").get(1)).put("rsi14",r);assertTrue(AnalysisFacts.build(n,"model",m).values().get("RSI14").startsWith(r));}var n=sample();((com.fasterxml.jackson.databind.node.ObjectNode)n.path("bars").get(1)).put("rsi14","100.1");assertThrows(com.aistock.common.BusinessException.class,()->AnalysisFacts.build(n,"model",m));}
+ @Test void rejectsBadOrderDuplicateAndUnusableEvidence()throws Exception{var n=sample();((com.fasterxml.jackson.databind.node.ObjectNode)n.path("bars").get(1)).put("date","2026-09-29");assertThrows(com.aistock.common.BusinessException.class,()->AnalysisFacts.build(n,"model",m));var bad=sample();((com.fasterxml.jackson.databind.node.ObjectNode)bad).put("priceBasis","ADJUSTED");assertThrows(com.aistock.common.BusinessException.class,()->AnalysisFacts.build(bad,"model",m));}
+}

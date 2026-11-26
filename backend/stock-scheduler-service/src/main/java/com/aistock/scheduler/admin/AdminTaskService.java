@@ -1,0 +1,10 @@
+package com.aistock.scheduler.admin;
+import java.time.Clock;import java.util.*;import org.springframework.stereotype.Service;import static com.aistock.scheduler.admin.AdminTaskRecords.*;
+@Service public class AdminTaskService {
+ private final AdminTaskRepository repository;private final AdminTaskCursorCodec codec;private final Clock clock;
+ public AdminTaskService(AdminTaskRepository repository,AdminTaskCursorCodec codec,Clock clock){this.repository=repository;this.codec=codec;this.clock=clock;}
+ public Page<TaskSummary> list(TaskQuery query,String value){AdminTaskQuery.validate(query);var cursor=value==null?null:codec.decodeList(value,query);return repository.read(()->{var rows=repository.list(query,cursor);boolean more=rows.size()>query.limit();var items=List.copyOf(rows.subList(0,Math.min(rows.size(),query.limit())));String next=null;if(more){var top=cursor==null?key(items.get(0)):cursor.upper();next=codec.encodeList(new ListCursor(1,query,top,key(items.get(items.size()-1))));}return new Page<>(items,next,more,clock.instant());});}
+ public Detail detail(String value){var id=AdminTaskQuery.validateId(value);return repository.read(()->new Detail(repository.detail(id),clock.instant()));}
+ public Page<Attempt> attempts(String value,AttemptQuery query,String token){var id=AdminTaskQuery.validateId(value);if(query==null||query.limit()<1||query.limit()>50)throw AdminTaskQuery.invalid();var cursor=token==null?null:codec.decodeAttempts(token,id,query.limit());return repository.read(()->{repository.detail(id);int upper=cursor==null?repository.maxOrdinal(id):cursor.upperOrdinal();int after=cursor==null?0:cursor.afterOrdinal();var rows=repository.attempts(id,query.limit(),after,upper);boolean more=rows.size()>query.limit();var items=List.copyOf(rows.subList(0,Math.min(rows.size(),query.limit())));var next=more?codec.encodeAttempts(new AttemptCursor(1,id,query.limit(),upper,items.get(items.size()-1).ordinal())):null;return new Page<>(items,next,more,clock.instant());});}
+ private SortKey key(TaskSummary t){return new SortKey(t.createdAt(),t.taskId());}
+}
