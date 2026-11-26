@@ -1,0 +1,59 @@
+spring:
+  application:
+    name: stock-gateway
+  cloud:
+    nacos:
+      discovery:
+        enabled: ${NACOS_ENABLED:false}
+        register-enabled: false
+        server-addr: ${NACOS_ADDR:127.0.0.1:8848}
+    openfeign:
+      client:
+        config:
+          forecast-public:
+            connectTimeout: 2000
+            readTimeout: 185000
+            followRedirects: false
+          stock-prediction-service:
+            connectTimeout: 2000
+            readTimeout: 20000
+          market-reference-public:
+            connectTimeout: 1000
+            readTimeout: 18000
+            followRedirects: false
+          stock-market-service:
+            connectTimeout: 2000
+            readTimeout: 5000
+          stock-notification-service:
+            connectTimeout: 2000
+            readTimeout: 12000
+            followRedirects: false
+          stock-scheduler-service:
+            connectTimeout: 2000
+            readTimeout: 5000
+            followRedirects: false
+          statistics-identity:
+            connectTimeout: 2000
+            readTimeout: 5000
+            followRedirects: false
+          stock-user-service:
+            connectTimeout: 2000
+            readTimeout: 5000
+aistock:
+  scheduler:
+    url: ${SCHEDULER_SERVICE_URL:}
+  notification:
+    url: ${NOTIFICATION_SERVICE_URL:}
+  prediction:
+    url: ${PREDICTION_SERVICE_URL:}
+  market:
+    url: ${MARKET_SERVICE_URL:}
+  user:
+    url: ${USER_SERVICE_URL:}
+server:
+  port: ${GATEWAY_PORT:8080}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

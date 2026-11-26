@@ -1,0 +1,14 @@
+package com.aistock.market.statistics;
+import com.aistock.common.*;import com.aistock.common.statistics.*;import static com.aistock.common.statistics.StatisticsNumbers.*;import static com.aistock.market.statistics.MarketStatisticsRecords.*;
+import java.time.*;import java.sql.*;import java.util.*;import org.springframework.dao.DataAccessException;import org.springframework.http.HttpStatus;import org.springframework.jdbc.core.JdbcTemplate;import org.springframework.jdbc.datasource.DataSourceTransactionManager;import org.springframework.stereotype.Repository;import org.springframework.transaction.*;import org.springframework.transaction.support.TransactionTemplate;
+@Repository public class MarketStatisticsRepository {
+ private static final String SOURCE=" from instrument i left join instrument_data_head h on h.instrument_id=i.instrument_id left join market_data_version v on v.version_id=h.version_id where i.demo_only=false";
+ private final JdbcTemplate jdbc;private final TransactionTemplate read;
+ public MarketStatisticsRepository(JdbcTemplate jdbc){this.jdbc=jdbc;read=new TransactionTemplate(new DataSourceTransactionManager(Objects.requireNonNull(jdbc.getDataSource())));read.setReadOnly(true);read.setIsolationLevel(TransactionDefinition.ISOLATION_REPEATABLE_READ);read.setTimeout(5);}
+ public MarketSummary summary(StatisticsWindow w,int page,int size,Instant now){if(page<1||page>10000||size<1||size>50)throw StatisticsQuery.invalid();try{return read.execute(s->{
+  var totals=jdbc.queryForMap("select count(case when v.status='AVAILABLE' then 1 end) heads,count(distinct case when v.status='AVAILABLE' then i.instrument_id end) instruments"+SOURCE);
+  var rows=jdbc.query("select i.instrument_id,h.provider,h.price_basis,h.version_id,v.status,v.quality,h.checked_at,v.fetched_at,v.published_at,v.coverage_end,h.last_error_code"+SOURCE+" order by i.instrument_id asc,h.provider asc,h.price_basis asc limit ? offset ?",(rs,n)->new HeadItem(rs.getString("instrument_id"),rs.getString("provider"),rs.getString("price_basis"),rs.getString("version_id"),rs.getString("status"),rs.getString("quality"),instant(rs,"checked_at"),instant(rs,"fetched_at"),instant(rs,"published_at"),rs.getDate("coverage_end")==null?null:rs.getDate("coverage_end").toLocalDate(),rs.getString("last_error_code")),size+1,(page-1)*size);
+  return new MarketSummary(StatisticsMeta.of(w,now),"CURRENT_HEADS",count(((Number)totals.get("instruments")).longValue()),count(((Number)totals.get("heads")).longValue()),rows.stream().limit(size).toList(),rows.size()>size);
+ });}catch(DataAccessException|TransactionException e){throw new BusinessException("STATISTICS_UNAVAILABLE","行情状态暂不可用，请稍后重试",HttpStatus.SERVICE_UNAVAILABLE);}}
+ private static Instant instant(ResultSet rs,String column)throws SQLException{var t=rs.getTimestamp(column);return t==null?null:t.toInstant();}
+}

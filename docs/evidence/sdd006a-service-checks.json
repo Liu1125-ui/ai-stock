@@ -1,0 +1,116 @@
+{
+  "checkedAt": "2026-10-10T13:18:47.004734+08:00",
+  "health": {
+    "18080": "UP",
+    "18081": "UP",
+    "18082": "UP",
+    "18083": "UP",
+    "18084": "UP",
+    "18085": "UP"
+  },
+  "boundaries": {
+    "SH600030": {
+      "instrumentId": "SH600030",
+      "provider": "baostock",
+      "rawVersionId": "2d8890da-4c38-4970-baa2-cef4e4c3df6b",
+      "latestPublishedTradeDate": "2026-10-09",
+      "expectedCompletedTradeDate": "2026-10-09",
+      "effectiveAfterTradeDate": "2026-10-09",
+      "calendarHash": "359ce7dd41c050bf7c1543bd6c5275fa3c310732b4bd43b15ad17eff4c6554fd",
+      "asOf": "2026-10-10T05:18:43.535409240Z",
+      "definition": "alert-boundary-v1"
+    },
+    "SH600276": {
+      "instrumentId": "SH600276",
+      "provider": "baostock",
+      "rawVersionId": "9df1d8bf-b0ef-43d6-adfc-c6d6cb86c7fa",
+      "latestPublishedTradeDate": "2026-10-09",
+      "expectedCompletedTradeDate": "2026-10-09",
+      "effectiveAfterTradeDate": "2026-10-09",
+      "calendarHash": "359ce7dd41c050bf7c1543bd6c5275fa3c310732b4bd43b15ad17eff4c6554fd",
+      "asOf": "2026-10-10T05:18:43.553247385Z",
+      "definition": "alert-boundary-v1"
+    },
+    "SZ000002": {
+      "instrumentId": "SZ000002",
+      "provider": "baostock",
+      "rawVersionId": "e4c2d65e-dff6-42d0-a52b-76393c0282bc",
+      "latestPublishedTradeDate": "2026-10-09",
+      "expectedCompletedTradeDate": "2026-10-09",
+      "effectiveAfterTradeDate": "2026-10-09",
+      "calendarHash": "359ce7dd41c050bf7c1543bd6c5275fa3c310732b4bd43b15ad17eff4c6554fd",
+      "asOf": "2026-10-10T05:18:43.589438230Z",
+      "definition": "alert-boundary-v1"
+    }
+  },
+  "internalBoundaryAnonymousDenied": true,
+  "internalBoundaryInvalidTokenDenied": true,
+  "internalBoundaryNotExposedByGateway": true,
+  "anonymousAlertsDenied": true,
+  "forgedOwnerAlertsDenied": true,
+  "anonymousPreferencesDenied": true,
+  "notificationMigrationV2Applied": true,
+  "browserAcceptance": {
+    "accountRole": "ADMIN",
+    "createdThenEditedThenDisabledAndReloaded": true,
+    "ruleId": "c32de52a-e997-429d-93f0-5889e7247b9a",
+    "instrumentId": "SH600030",
+    "threshold": "31.123456",
+    "enabled": false,
+    "revision": 2,
+    "effectiveAfterTradeDate": "2026-10-09",
+    "preferenceOnThenOff": true,
+    "finalPreferenceEnabled": false,
+    "preferenceRevision": 2
+  },
+  "backendReports": {
+    "stock-common": {
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "stock-gateway": {
+      "tests": 23,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "stock-market-service": {
+      "tests": 83,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "stock-notification-service": {
+      "tests": 28,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "stock-prediction-service": {
+      "tests": 126,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "stock-scheduler-service": {
+      "tests": 37,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "stock-user-service": {
+      "tests": 57,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "backendTestCount": 356,
+  "frontendTests": 90,
+  "emailDeliveryCountAndAttemptsUnchanged": true,
+  "cloudModelCalls": 0,
+  "alertEmailsSent": 0,
+  "scope": "A only; no automatic evaluation, inbox or alert email delivery"
+}

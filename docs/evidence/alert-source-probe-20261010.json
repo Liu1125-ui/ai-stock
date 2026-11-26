@@ -1,0 +1,70 @@
+{
+  "checkedAt": "2026-10-10T00:58:00.534061+08:00",
+  "scope": "read-only source feasibility probe; existing paired-source collector reused without prediction generation or publication",
+  "requestRange": [
+    "2026-07-01",
+    "2026-10-09"
+  ],
+  "futureCalendarOnlyForExistingCollectorContract": true,
+  "results": [
+    {
+      "instrumentId": "SH600030",
+      "state": "VERIFIED",
+      "rawVersionId": "2d8890da-4c38-4970-baa2-cef4e4c3df6b",
+      "sampleBars": 67,
+      "latestTradeDate": "2026-10-09",
+      "previousTradeDate": "2026-10-08",
+      "rawClose": "25.9100",
+      "backwardClose": "129.3888657100",
+      "previousBackwardClose": "126.8420374000",
+      "adjustedChangePercent": "2.007874015748031496062992125984251968500",
+      "rawChangePercent": "2.007874015748031496062992125984251968500",
+      "pairedRawMatchesPublished": true,
+      "sourcePayloadHash": "c09504846eb34675211d87a7ba01e6b4763675c08c6adee28756a249653067f1",
+      "calendarHash": "04e9a07c05fd4881e39d6e4231493305b18f1ca3cacc99e68890ca5fcb11f4a7",
+      "factorChangeCandidates": []
+    },
+    {
+      "instrumentId": "SH600276",
+      "state": "VERIFIED",
+      "rawVersionId": "9df1d8bf-b0ef-43d6-adfc-c6d6cb86c7fa",
+      "sampleBars": 67,
+      "latestTradeDate": "2026-10-09",
+      "previousTradeDate": "2026-10-08",
+      "rawClose": "46.8500",
+      "backwardClose": "2454.0590794500",
+      "previousBackwardClose": "2462.4400709700",
+      "adjustedChangePercent": "-0.3403531163582216549670282918527972771800",
+      "rawChangePercent": "-0.3403531163582216549670282918527972771800",
+      "pairedRawMatchesPublished": true,
+      "sourcePayloadHash": "effdab430bc09ccd30fb754db4f600ece3ae952b89d66ef78d32e67dc3bea348",
+      "calendarHash": "04e9a07c05fd4881e39d6e4231493305b18f1ca3cacc99e68890ca5fcb11f4a7",
+      "factorChangeCandidates": []
+    },
+    {
+      "instrumentId": "SZ000002",
+      "state": "VERIFIED",
+      "rawVersionId": "e4c2d65e-dff6-42d0-a52b-76393c0282bc",
+      "sampleBars": 67,
+      "latestTradeDate": "2026-10-09",
+      "previousTradeDate": "2026-10-08",
+      "rawClose": "4.0600",
+      "backwardClose": "545.1954963000",
+      "previousBackwardClose": "545.1954963000",
+      "adjustedChangePercent": "0",
+      "rawChangePercent": "0",
+      "pairedRawMatchesPublished": true,
+      "sourcePayloadHash": "0be763891eb30ade0a5512a9c3ef8e3d11cc2ddb67899816f2d90046d8ab2f9a",
+      "calendarHash": "04e9a07c05fd4881e39d6e4231493305b18f1ca3cacc99e68890ca5fcb11f4a7",
+      "factorChangeCandidates": []
+    }
+  ],
+  "allThreeVerified": true,
+  "maasCalls": 0,
+  "emailsSent": 0,
+  "limits": [
+    "single availability sample, no continuous source guarantee",
+    "factor changes are candidates, not independently confirmed corporate-action events",
+    "dedicated alert evidence API is not implemented"
+  ]
+}

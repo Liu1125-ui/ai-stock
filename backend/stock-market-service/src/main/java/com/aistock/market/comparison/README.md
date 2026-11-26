@@ -1,0 +1,8 @@
+作用：独立股票对比历史证据，不改变预测60日窗口。实现方法：指定RAW版本与后复权候选逐日核对，完整交易日历、价格/成交量独立状态及规范哈希；数据由MS-02拥有，跨服务通过内部接口读取。
+持续更新就绪：ComparisonUpdateQuery仅只读检查独立日历、固定RAW和一年窗口；ComparisonUpdatePolicy比较窗口内价格、量、状态与日历，允许目标日停牌。内部GET不采集，新版本ID变化但投影相同返回CURRENT。
+
+刷新执行：ComparisonRefreshService先回放原编号，再固定窗口核对和登记回执；ComparisonCollectorClient仅发送五字段，30秒总期限/2MiB上限。成功回执与证据同事务，租约到期整体回滚；GET只读派生过期状态。
+
+SDD010B3 Task3B：计算证据读取/派生发布接入MarketEvidenceGate.local短事务校验，按业务凭据固定RAW；外部采集在事务外，发布前再次校验。门禁默认关闭，实际owner转发和完整上线仍在后续阶段，历史快照与只读元数据保留。
+
+Task5D2本地owner开启时先begin再准入RAW，fixedWindow和采集位于该scope内；结果/终态同事务，scope关闭后通知。开关关闭保留原流程。父比较receipt原RAW外键继续保留引用。

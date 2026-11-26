@@ -1,0 +1,26 @@
+CREATE TABLE email_delivery (
+ delivery_id CHAR(36) PRIMARY KEY,
+ request_id CHAR(36) NOT NULL UNIQUE,
+ challenge_id CHAR(36) NOT NULL,
+ recipient_email VARCHAR(254) NOT NULL,
+ template_code VARCHAR(32) NOT NULL,
+ state VARCHAR(16) NOT NULL,
+ attempt_count INT NOT NULL DEFAULT 0,
+ next_attempt_at DATETIME(3) NOT NULL,
+ lease_until DATETIME(3) NULL,
+ claim_version BIGINT NOT NULL DEFAULT 0,
+ payload_ciphertext BLOB NULL,
+ payload_nonce BINARY(12) NULL,
+ payload_key_id VARCHAR(32) NULL,
+ payload_digest CHAR(64) NOT NULL,
+ expires_at DATETIME(3) NOT NULL,
+ last_error_code VARCHAR(64) NULL,
+ created_at DATETIME(3) NOT NULL,
+ last_attempt_at DATETIME(3) NULL,
+ KEY ix_mail_pending (state,next_attempt_at), KEY ix_mail_expiry (expires_at),
+ CHECK (state IN ('PENDING','CLAIMED','SENT','FAILED','EXPIRED')),
+ CHECK (template_code='REGISTER_CODE'), CHECK (attempt_count>=0 AND claim_version>=0),
+ CHECK (expires_at>created_at),
+ CHECK ((payload_ciphertext IS NULL AND payload_nonce IS NULL AND payload_key_id IS NULL)
+ OR (payload_ciphertext IS NOT NULL AND payload_nonce IS NOT NULL AND payload_key_id IS NOT NULL))
+) ENGINE=InnoDB DEFAULT CHARSET=ascii COLLATE=ascii_bin;

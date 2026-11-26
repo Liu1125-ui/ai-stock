@@ -1,0 +1,7 @@
+package com.aistock.common.marketreview;
+import org.junit.jupiter.api.Test;import static org.junit.jupiter.api.Assertions.*;import com.aistock.common.BusinessException;import java.nio.charset.StandardCharsets;
+class MarketReviewContractTest {
+ String json="{\"operationId\":\"11111111-1111-1111-1111-111111111111\",\"expectedRevision\":\"0\",\"reviewState\":\"REVIEWED\",\"note\":\"已核对来源\"}";
+ @Test void strictCommand(){var c=MarketReviewContract.parse(json.getBytes(StandardCharsets.UTF_8));assertEquals("0",c.expectedRevision());for(String s:new String[]{json+"{}",json.replace("\"0\"","0"),json.replace("已核对来源"," "),json.replace("REVIEWED","AVAILABLE"),json.replace("\"note\":","\"actor\":\"x\",\"note\":"),json.replace("已核对来源","a".repeat(301)),json.replace("\"note\":","\"note\":\"duplicate\",\"note\":"),json.replace("\"0\"","\"9223372036854775807\"")})assertThrows(BusinessException.class,()->MarketReviewContract.parse(s.getBytes(StandardCharsets.UTF_8)));}
+ @Test void precisePaths(){String p="/api/v1/admin/market-data/SH600030/versions/11111111-1111-1111-1111-111111111111/reviews";assertTrue(MarketReviewContract.readPath(p));assertTrue(MarketReviewContract.writePath(p));assertTrue(MarketReviewContract.readPath(p+"/11111111-1111-1111-1111-111111111111"));assertFalse(MarketReviewContract.writePath(p+"/11111111-1111-1111-1111-111111111111"));assertFalse(MarketReviewContract.readPath(p+"/bad"));}
+}

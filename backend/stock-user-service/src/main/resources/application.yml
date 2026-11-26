@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: stock-user-service
+  cloud:
+    openfeign:
+      client:
+        config:
+          stock-market-service:
+            connectTimeout: 2000
+            readTimeout: 3000
+          stock-notification-service:
+            connectTimeout: 2000
+            readTimeout: 3000
+aistock:
+  watchlist:
+    market-preparation-enabled: ${WATCHLIST_MARKET_PREPARATION_ENABLED:false}
+    scheduler-url: ${WATCHLIST_SCHEDULER_URL:}
+  positions:
+    max-items: 100
+    max-quantity: 1000000000
+    max-average-cost: 1000000
+  market:
+    url: ${MARKET_SERVICE_URL:}
+  internal:
+    token: ${SERVICE_TOKEN:}
+  auth:
+    digest-key: ${AUTH_DIGEST_KEY:}
+    payload-key: ${AUTH_PAYLOAD_KEY:}
+  notification:
+    url: ${NOTIFICATION_URL:}
+server:
+  port: ${USER_PORT:8081}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

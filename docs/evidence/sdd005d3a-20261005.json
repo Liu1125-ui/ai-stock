@@ -1,0 +1,405 @@
+{
+  "date": "2026-10-05",
+  "slice": "SDD-005D3A",
+  "D3AInternalAccepted": true,
+  "FR06FullyAccepted": false,
+  "codeProvenance": "Codex; no verified CodeArts source difference",
+  "tests": {
+    "backendCleanVerify": {
+      "total": 236,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "modules": {
+        "stock-common": {
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "stock-gateway": {
+          "tests": 16,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "stock-market-service": {
+          "tests": 73,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "stock-notification-service": {
+          "tests": 10,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "stock-prediction-service": {
+          "tests": 66,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "stock-scheduler-service": {
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "stock-user-service": {
+          "tests": 57,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      }
+    },
+    "pythonForecastSource": 8,
+    "actualMs02Ms03ReadOnlyContractProbe": 1
+  },
+  "review": {
+    "freshReadOnlyReviews": 1,
+    "critical": 0,
+    "important": 2,
+    "minor": 0,
+    "fixes": [
+      "Persist original calendar and verify its hash",
+      "Shared 90-second execution deadline",
+      "Additional concurrency test exposed repeatable-read winner visibility; final current read fixed"
+    ]
+  },
+  "runtimeProof": {
+    "checkedAt": "2026-10-05T11:36:11.463741+00:00",
+    "scope": "D3A internal evidence and persistence; not user UI or future accuracy",
+    "health18082": {
+      "httpStatus": 200,
+      "response": {
+        "status": "UP"
+      }
+    },
+    "health18083": {
+      "httpStatus": 200,
+      "response": {
+        "status": "UP"
+      }
+    },
+    "health18080": {
+      "httpStatus": 200,
+      "response": {
+        "status": "UP"
+      }
+    },
+    "predictionId": "19ddcb7c-3fba-4df3-ba4f-f8eebfeb3f14",
+    "snapshotHashBefore": "9411aa1d8664dc69419d65175f7c1ae6bc3742e763e450c0d256978138cf2993",
+    "unauthorized": {
+      "httpStatus": 401,
+      "response": {
+        "code": "INTERNAL_AUTH_REQUIRED",
+        "message": "缺少有效服务身份",
+        "data": null,
+        "traceId": "20eab680-ea15-43a7-be64-3bb26b395e02"
+      }
+    },
+    "gatewayInternal": {
+      "httpStatus": 404,
+      "response": {
+        "code": "RESOURCE_NOT_FOUND",
+        "message": "接口不存在",
+        "data": null,
+        "traceId": "b4d343c4-e967-4f58-9e60-9021dee19c04"
+      }
+    },
+    "notDue": {
+      "httpStatus": 200,
+      "response": {
+        "code": "OK",
+        "message": "成功",
+        "data": {
+          "operationId": "0b6a274e-d6e2-4a19-8d3c-d47257a49a58",
+          "state": "SKIPPED_NOT_DUE",
+          "versionId": null,
+          "errorCode": null
+        },
+        "traceId": "65598caa-e805-4e26-8a0b-ba02e72a9eec"
+      }
+    },
+    "notDueReplay": {
+      "httpStatus": 200,
+      "response": {
+        "code": "OK",
+        "message": "成功",
+        "data": {
+          "operationId": "0b6a274e-d6e2-4a19-8d3c-d47257a49a58",
+          "state": "SKIPPED_NOT_DUE",
+          "versionId": null,
+          "errorCode": null
+        },
+        "traceId": "119e94d8-5379-4d1d-9f1d-06601586a39b"
+      }
+    },
+    "unknownOperation": {
+      "httpStatus": 404,
+      "response": {
+        "code": "RESOURCE_NOT_FOUND",
+        "message": "预测验证暂未完成，已有预测与验证保留",
+        "data": null,
+        "traceId": "1211f765-a62e-4961-bb2e-b3dfcbe44e76"
+      }
+    },
+    "notDueReceipt": {
+      "httpStatus": 200,
+      "response": {
+        "code": "OK",
+        "message": "成功",
+        "data": {
+          "operationId": "0b6a274e-d6e2-4a19-8d3c-d47257a49a58",
+          "state": "SKIPPED_NOT_DUE",
+          "versionId": null,
+          "errorCode": null
+        },
+        "traceId": "a826ddd0-09ec-44a3-a8d7-76054d7a0153"
+      }
+    },
+    "historicalEvidenceOnlyRequest": {
+      "operationId": "3765ab34-914c-42d9-bca4-b3fae7a65cfe",
+      "instrumentId": "SH600030",
+      "originDate": "2026-09-21",
+      "targetDates": [
+        "2026-09-22",
+        "2026-09-23",
+        "2026-09-24",
+        "2026-09-28",
+        "2026-09-29"
+      ],
+      "dueThrough": "2026-09-29",
+      "leaseUntil": "2026-10-05T11:37:42.182163+00:00"
+    },
+    "historicalEvidenceOnly": {
+      "httpStatus": 200,
+      "response": {
+        "code": "OK",
+        "message": "成功",
+        "data": {
+          "operationId": "3765ab34-914c-42d9-bca4-b3fae7a65cfe",
+          "state": "AVAILABLE",
+          "versionId": "6bc2a016-8594-466d-ba8a-c193d2fcc61c",
+          "errorCode": null
+        },
+        "traceId": "28b6aac5-c3c3-40b5-a745-d8b86063d520"
+      }
+    },
+    "historicalFixedEvidence": {
+      "httpStatus": 200,
+      "response": {
+        "code": "OK",
+        "message": "成功",
+        "data": {
+          "realizationVersionId": "6bc2a016-8594-466d-ba8a-c193d2fcc61c",
+          "instrumentId": "SH600030",
+          "provider": "baostock",
+          "definition": "baostock-backward-close-over-raw-v1",
+          "originDate": "2026-09-21",
+          "targetDates": [
+            "2026-09-22",
+            "2026-09-23",
+            "2026-09-24",
+            "2026-09-28",
+            "2026-09-29"
+          ],
+          "dueThrough": "2026-09-29",
+          "rawVersionId": "1dd82b9f-ce8b-44e6-bfc5-9168d2d78a32",
+          "rawContentHash": "d3aea07c9fd07780adc5ccab4fe07ce398f3b11f08c229bb66f12f7e33c45beb",
+          "sourcePayloadHash": "2b66e85df9d01fec5b8ae3849d10418b157e7b23ef586c02ed36a8c698af2571",
+          "calendarHash": "38284af9fec1aea4b97e48326d4ccf61725fc971e5c6e55fd915257147d1c8c4",
+          "contentHash": "e4b8460cde56886098b051bebd696887dec48d02df66dcfe880e3d5b092f9de6",
+          "capturedAt": "2026-10-05T11:36:14.648032Z",
+          "originRawClose": "26.74",
+          "originBackwardClose": "133.53370394",
+          "observations": [
+            {
+              "date": "2026-09-22",
+              "state": "VERIFIED",
+              "rawClose": "26.89",
+              "backwardClose": "134.28277109"
+            },
+            {
+              "date": "2026-09-23",
+              "state": "VERIFIED",
+              "rawClose": "26.79",
+              "backwardClose": "133.78339299"
+            },
+            {
+              "date": "2026-09-24",
+              "state": "VERIFIED",
+              "rawClose": "26.29",
+              "backwardClose": "131.28650249"
+            },
+            {
+              "date": "2026-09-28",
+              "state": "VERIFIED",
+              "rawClose": "25.94",
+              "backwardClose": "129.53867914"
+            },
+            {
+              "date": "2026-09-29",
+              "state": "VERIFIED",
+              "rawClose": "25.82",
+              "backwardClose": "128.93942542"
+            }
+          ],
+          "calendar": [
+            {
+              "date": "2026-09-21",
+              "open": true
+            },
+            {
+              "date": "2026-09-22",
+              "open": true
+            },
+            {
+              "date": "2026-09-23",
+              "open": true
+            },
+            {
+              "date": "2026-09-24",
+              "open": true
+            },
+            {
+              "date": "2026-09-25",
+              "open": false
+            },
+            {
+              "date": "2026-09-26",
+              "open": false
+            },
+            {
+              "date": "2026-09-27",
+              "open": false
+            },
+            {
+              "date": "2026-09-28",
+              "open": true
+            },
+            {
+              "date": "2026-09-29",
+              "open": true
+            },
+            {
+              "date": "2026-09-30",
+              "open": true
+            },
+            {
+              "date": "2026-10-01",
+              "open": false
+            },
+            {
+              "date": "2026-10-02",
+              "open": false
+            },
+            {
+              "date": "2026-10-03",
+              "open": false
+            },
+            {
+              "date": "2026-10-04",
+              "open": false
+            }
+          ]
+        },
+        "traceId": "e6089702-6d6d-48bf-a8cb-e97dc03df537"
+      }
+    },
+    "historicalReplay": {
+      "httpStatus": 200,
+      "response": {
+        "code": "OK",
+        "message": "成功",
+        "data": {
+          "operationId": "3765ab34-914c-42d9-bca4-b3fae7a65cfe",
+          "state": "AVAILABLE",
+          "versionId": "6bc2a016-8594-466d-ba8a-c193d2fcc61c",
+          "errorCode": null
+        },
+        "traceId": "e6c43cca-a2df-46c9-8fe1-55256b257bb8"
+      }
+    },
+    "historicalCalendarHashVerified": true,
+    "historicalContentHashVerified": true,
+    "snapshotHashAfter": "9411aa1d8664dc69419d65175f7c1ae6bc3742e763e450c0d256978138cf2993",
+    "actualPredictionVerificationVersionCount": 0,
+    "completed": true
+  },
+  "databaseProof": {
+    "marketMigration": "7\t1",
+    "predictionMigration": "4\t1",
+    "rawHead": "1dd82b9f-ce8b-44e6-bfc5-9168d2d78a32\td3aea07c9fd07780adc5ccab4fe07ce398f3b11f08c229bb66f12f7e33c45beb",
+    "storedCalendarLength": 14,
+    "models": [
+      [
+        "55f8adad-2064-4cc8-b794-ec47f720e648",
+        "PENDING",
+        "0",
+        "45b43ebd1cf9131eb793e62cb73fe076000457fbc5b121f8ec94ca949be59c7e",
+        "280b0e5f7b809d86857ec97ed651e9dba82951d7a383540b8ee73651929963ef"
+      ],
+      [
+        "9129d34b-c467-495b-b404-69cf3b860e68",
+        "PENDING",
+        "0",
+        "4cfb7609234a247d341c5f868bff65b2f7a45509bedd60ad74e7a3bffc458b8c",
+        "7ec2e5dd681f2365bd2ab578e1ae9b039dafdb996408384eeb27ca1001c42118"
+      ],
+      [
+        "d31533cf-9d80-420d-8203-170bd11417a5",
+        "PUBLISHED",
+        "1",
+        "6894c7d52ba9a3968ef1f85cd0923b3d249a376281f79d752a0fe460d09f97d6",
+        "7d90bc81f0e83a70c2f1195bee7ed8637d3d40e2b53415c0fef77f956a1eb112"
+      ]
+    ],
+    "snapshotHash": "9411aa1d8664dc69419d65175f7c1ae6bc3742e763e450c0d256978138cf2993",
+    "verified": true
+  },
+  "firstHistoricalProbe": {
+    "scope": "historical evidence only; not an actual user forecast",
+    "observations": [
+      {
+        "date": "2026-09-22",
+        "state": "VERIFIED",
+        "rawClose": "26.89",
+        "backwardClose": "134.28277109"
+      },
+      {
+        "date": "2026-09-23",
+        "state": "VERIFIED",
+        "rawClose": "26.79",
+        "backwardClose": "133.78339299"
+      },
+      {
+        "date": "2026-09-24",
+        "state": "VERIFIED",
+        "rawClose": "26.29",
+        "backwardClose": "131.28650249"
+      },
+      {
+        "date": "2026-09-25",
+        "state": "CALENDAR_CHANGED",
+        "rawClose": null,
+        "backwardClose": null
+      },
+      {
+        "date": "2026-09-28",
+        "state": "VERIFIED",
+        "rawClose": "25.94",
+        "backwardClose": "129.53867914"
+      }
+    ],
+    "note": "September25 is closed in the actual source calendar; software excluded it. Final five-day probe used actual open dates."
+  },
+  "pending": [
+    "MS-04 automatic verification tasks",
+    "Authenticated own-user verification history and UI",
+    "Actual forecast observations begin October8; no future outcome or accuracy claim"
+  ]
+}

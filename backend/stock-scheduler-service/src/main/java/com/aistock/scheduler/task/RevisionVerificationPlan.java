@@ -1,0 +1,8 @@
+package com.aistock.scheduler.task;
+import java.time.*;import org.springframework.beans.factory.annotation.Value;import org.springframework.scheduling.annotation.Scheduled;import org.springframework.stereotype.Component;import org.slf4j.Logger;import org.slf4j.LoggerFactory;
+@Component public class RevisionVerificationPlan {
+ private static final Logger LOG=LoggerFactory.getLogger(RevisionVerificationPlan.class);private final RevisionScanRepository repo;private final RevisionClient client;private final Clock clock;private final String token;private final boolean enabled;
+ public RevisionVerificationPlan(RevisionScanRepository repo,RevisionClient client,Clock clock,@Value("${aistock.internal.token:}")String token,@Value("${aistock.scheduler.revision-plan-enabled:false}")boolean enabled){this.repo=repo;this.client=client;this.clock=clock;this.token=token;this.enabled=enabled;}
+ @Scheduled(fixedDelayString="${aistock.scheduler.revision-plan-poll-ms:60000}")public synchronized void tick(){if(enabled&&!token.isBlank())runOnce();}
+ public synchronized boolean runOnce(){try{var now=clock.instant();var c=repo.cursor(now);if(c.event()==null){var e=client.next(c.completedEventId());if(e==null)return true;now=clock.instant();var local=now.atZone(ZoneId.of("Asia/Shanghai"));var cutoff=local.toLocalDate().minusDays(local.getHour()<20?1:0);if(!repo.begin(c,e,cutoff,now))return false;c=repo.cursor(clock.instant());}var p=client.affected(c.event().instrumentId(),c.cutoffDate(),c.afterId());return repo.publish(c,p,clock.instant());}catch(RuntimeException e){LOG.warn("Revision verification scan incomplete; saved progress retained");return false;}}
+}

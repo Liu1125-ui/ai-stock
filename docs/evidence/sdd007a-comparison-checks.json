@@ -1,0 +1,229 @@
+{
+  "checkedAt": "2026-10-12T20:09:17.7636787+08:00",
+  "stage": "SDD007A_HISTORY_EVIDENCE_ONLY",
+  "backendTests": {
+    "errors": 0,
+    "tests": 557,
+    "failures": 0,
+    "skipped": 0
+  },
+  "algorithmTests": {
+    "warnings": 1,
+    "warning": "existing Starlette/anyio deprecation",
+    "passed": 94
+  },
+  "cacheTests": "exclusive lock, atomic save, no repeated source attempt PASS",
+  "providerComparisonAcquisitions": 3,
+  "providerComparisonSdkQueriesBySuccessfulCodePath": 9,
+  "providerBudgetScope": "Comparison acceptance only; existing daily refresh ran separately",
+  "fixedHistoricalCutoff": "2026-10-09",
+  "rawPriceBasis": "RAW",
+  "comparisonPriceBasis": "BACKWARD",
+  "actualErrors": {
+    "unknownEvidence": 404,
+    "changedSameKey": 409,
+    "unknownQuery": 422
+  },
+  "anonymousInternalStatus": 401,
+  "anonymousMatrixInternalStatus": 401,
+  "gatewayInternalStatus": 404,
+  "migration": {
+    "version": 11,
+    "success": true
+  },
+  "storedEvidenceCount": 3,
+  "storedOperationCount": 3,
+  "savedCandidateReplay": true,
+  "paidAiCalls": 0,
+  "emailsSent": 0,
+  "forecastInputsUnchanged": true,
+  "originalRawVersionsRetained": true,
+  "rawHeadsUnchanged": false,
+  "rawHeadMovement": "Existing daily scheduler updated all 3 heads to 2026-10-12; all tasks SUCCEEDED, comparison remains fixed to old versions.",
+  "postRefreshFixedEvidenceUnchanged": true,
+  "health": [
+    {
+      "port": 18080,
+      "status": "UP"
+    },
+    {
+      "port": 18081,
+      "status": "UP"
+    },
+    {
+      "port": 18082,
+      "status": "UP"
+    },
+    {
+      "port": 18083,
+      "status": "UP"
+    },
+    {
+      "port": 18084,
+      "status": "UP"
+    },
+    {
+      "port": 18085,
+      "status": "UP"
+    },
+    {
+      "port": 18090,
+      "status": "UP"
+    }
+  ],
+  "rollbackImagesRetained": true,
+  "actualRollbackSwitchTested": false,
+  "comparisonPageImplemented": false,
+  "comparisonAiImplemented": false,
+  "audit": {
+    "check": "independent_saved_evidence_audit",
+    "provider": "baostock",
+    "basis": "BACKWARD",
+    "results": [
+      {
+        "instrumentId": "SH600030",
+        "evidenceId": "289165c9-fec1-41fa-881e-7299dc2f99a8",
+        "rawVersionId": "96c6a740-b16d-437a-8bbc-6e6bb21fde4f",
+        "contentHash": "14fcbe24bf77bbc295216952fa05142ff85268ef3c9b8f098e3b808b1bec5872",
+        "sourcePayloadHash": "de049c76de04b5cf1d5ad0f796d69dc4012d522755996cb8e012686fbe538510",
+        "periods": [
+          {
+            "months": 3,
+            "requestedFrom": "2026-07-09",
+            "requestedTo": "2026-10-09",
+            "openDays": 61,
+            "verifiedPrices": 61,
+            "verifiedVolumes": 61,
+            "missingPrices": 0,
+            "suspended": 0,
+            "complete": true,
+            "actualFrom": "2026-07-09",
+            "actualTo": "2026-10-09"
+          },
+          {
+            "months": 6,
+            "requestedFrom": "2026-04-09",
+            "requestedTo": "2026-10-09",
+            "openDays": 122,
+            "verifiedPrices": 122,
+            "verifiedVolumes": 122,
+            "missingPrices": 0,
+            "suspended": 0,
+            "complete": true,
+            "actualFrom": "2026-04-09",
+            "actualTo": "2026-10-09"
+          },
+          {
+            "months": 12,
+            "requestedFrom": "2025-10-09",
+            "requestedTo": "2026-10-09",
+            "openDays": 243,
+            "verifiedPrices": 243,
+            "verifiedVolumes": 243,
+            "missingPrices": 0,
+            "suspended": 0,
+            "complete": true,
+            "actualFrom": "2025-10-09",
+            "actualTo": "2026-10-09"
+          }
+        ]
+      },
+      {
+        "instrumentId": "SH600276",
+        "evidenceId": "63f40574-fe84-4b2f-9576-268f13df70be",
+        "rawVersionId": "cac7c894-ae50-41e9-a096-6c911310d5dc",
+        "contentHash": "bc63637056556bf1904c12db80b13eed6ad34d9354e4e89f0a6f42e7fc7db3a0",
+        "sourcePayloadHash": "eaa02c4ac6f18b3bb581f673b1c2fc87a14153eea4b69963adcee0e7de4ced97",
+        "periods": [
+          {
+            "months": 3,
+            "requestedFrom": "2026-07-09",
+            "requestedTo": "2026-10-09",
+            "openDays": 61,
+            "verifiedPrices": 61,
+            "verifiedVolumes": 61,
+            "missingPrices": 0,
+            "suspended": 0,
+            "complete": true,
+            "actualFrom": "2026-07-09",
+            "actualTo": "2026-10-09"
+          },
+          {
+            "months": 6,
+            "requestedFrom": "2026-04-09",
+            "requestedTo": "2026-10-09",
+            "openDays": 122,
+            "verifiedPrices": 122,
+            "verifiedVolumes": 122,
+            "missingPrices": 0,
+            "suspended": 0,
+            "complete": true,
+            "actualFrom": "2026-04-09",
+            "actualTo": "2026-10-09"
+          },
+          {
+            "months": 12,
+            "requestedFrom": "2025-10-09",
+            "requestedTo": "2026-10-09",
+            "openDays": 243,
+            "verifiedPrices": 243,
+            "verifiedVolumes": 243,
+            "missingPrices": 0,
+            "suspended": 0,
+            "complete": true,
+            "actualFrom": "2025-10-09",
+            "actualTo": "2026-10-09"
+          }
+        ]
+      },
+      {
+        "instrumentId": "SZ000002",
+        "evidenceId": "01643def-da02-487d-b5cc-a9bb9ba50ba5",
+        "rawVersionId": "a84332b9-92f5-4478-862f-e9c337241b63",
+        "contentHash": "05acb3a4944167b1f6743bbf7eb8561824ef703a97c0adf652751382290aad39",
+        "sourcePayloadHash": "26dd3f3d6fa88764d13d46e2bf68445e6206ee7b4c620d4dcfd7423ce5377a97",
+        "periods": [
+          {
+            "months": 3,
+            "requestedFrom": "2026-07-09",
+            "requestedTo": "2026-10-09",
+            "openDays": 61,
+            "verifiedPrices": 61,
+            "verifiedVolumes": 61,
+            "missingPrices": 0,
+            "suspended": 0,
+            "complete": true,
+            "actualFrom": "2026-07-09",
+            "actualTo": "2026-10-09"
+          },
+          {
+            "months": 6,
+            "requestedFrom": "2026-04-09",
+            "requestedTo": "2026-10-09",
+            "openDays": 122,
+            "verifiedPrices": 122,
+            "verifiedVolumes": 122,
+            "missingPrices": 0,
+            "suspended": 0,
+            "complete": true,
+            "actualFrom": "2026-04-09",
+            "actualTo": "2026-10-09"
+          },
+          {
+            "months": 12,
+            "requestedFrom": "2025-10-09",
+            "requestedTo": "2026-10-09",
+            "openDays": 243,
+            "verifiedPrices": 243,
+            "verifiedVolumes": 243,
+            "missingPrices": 0,
+            "suspended": 0,
+            "complete": true,
+            "actualFrom": "2025-10-09",
+            "actualTo": "2026-10-09"
+          }
+        ]
+      }
+    ]
+  }
+}

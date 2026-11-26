@@ -1,0 +1,12 @@
+<script setup lang="ts">
+import {onMounted,ref} from 'vue'
+import {comparisonHistory,type HistoryPage} from '../../api/comparisons'
+const emit=defineEmits<{open:[id:string]}>(),data=ref<HistoryPage|null>(null),error=ref(''),busy=ref(false)
+let current:{before?:string;upper?:string}={},previous:{before?:string;upper?:string}[]=[]
+async function load(before?:string,upper?:string,mode:'refresh'|'next'|'previous'='refresh'){if(busy.value)return;busy.value=true;error.value='';try{const next=await comparisonHistory(before,upper);if(mode==='next')previous.push(current);else if(mode==='previous')previous.pop();else previous=[];current={before,upper:next.upper??undefined};data.value=next}catch(e){error.value=(e as Error).message}finally{busy.value=false}}
+function next(){if(data.value?.nextBefore&&data.value.upper)void load(data.value.nextBefore,data.value.upper,'next')}
+function prev(){const target=previous.at(-1);if(target)void load(target.before,target.upper,'previous')}
+onMounted(()=>void load())
+</script>
+<template><section class="history-panel" :aria-busy="busy"><div class="history-head"><h2>我的对比记录</h2><button :disabled="busy" @click="load()">刷新记录</button></div><p v-if="error" role="alert">{{error}}</p><p v-if="busy" role="status">正在读取本人历史…</p><p v-if="data&&!data.items.length">暂无对比记录。</p><ul v-if="data"><li v-for="item in data.items" :key="item.comparisonId"><div><strong>{{item.stocks.map(s=>s.instrumentId).join(' / ')}}</strong><p>{{item.requestedRange.from}} — {{item.requestedRange.to}} · 保存于 {{item.createdAt}}</p></div><button @click="emit('open',item.comparisonId)">查看结果</button></li></ul><div class="history-actions"><button :disabled="busy||!previous.length" @click="prev">上一页</button><button data-test="history-next" :disabled="busy||!data?.nextBefore" @click="next">下一页</button></div></section></template>
+<style scoped>.history-head,.history-actions,li{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}h2{margin:0}ul{list-style:none;padding:0}li{padding:16px 0;border-bottom:1px solid var(--border)}p{color:var(--muted);font-size:14px;overflow-wrap:anywhere}button{background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--accent);padding:8px 16px;font:inherit;min-height:44px;cursor:pointer}button:disabled{opacity:.55;cursor:default}.history-actions{justify-content:flex-end;margin-top:16px}</style>

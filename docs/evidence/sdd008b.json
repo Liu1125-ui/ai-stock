@@ -1,0 +1,88 @@
+{
+  "checked_at": "2026-10-19T22:21:48.434513+08:00",
+  "code_head": "52f9bfba9cfbbb6fa9104fdaa1ff7c8962909ca9",
+  "backend": {
+    "tests": 745,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "command": "mvn -B -Pauth-integration,cli-build clean verify"
+  },
+  "frontend": {
+    "tests": 187,
+    "build_passed": true
+  },
+  "review": {
+    "critical": 0,
+    "important": 0,
+    "minor_deferred": 1
+  },
+  "backup": {
+    "backup_path": "runtime/sdd008b/prediction-before-v10-20261019_141555.sql",
+    "sha256": "a3ec15aaa0876ae657be5cdf32af5969188e690a9d0917d839444d001b45448d",
+    "bytes": 507841,
+    "source_schema_version": "9",
+    "restore_schema_version": "9",
+    "restored_table_count": 20,
+    "restore_schema": "stock_prediction_restore_sdd008b_20261019141555",
+    "isolated_tmpfs": true,
+    "production_schema_modified": false,
+    "record_bodies_reported": false
+  },
+  "health": {
+    "gateway": {
+      "http_status": 200
+    },
+    "user": {
+      "http_status": 200
+    },
+    "market": {
+      "http_status": 200
+    },
+    "prediction": {
+      "http_status": 200
+    },
+    "scheduler": {
+      "http_status": 200
+    },
+    "notification": {
+      "http_status": 200
+    },
+    "algorithm": {
+      "http_status": 200
+    }
+  },
+  "images": {
+    "stock-user-service": "sha256:7e8eaaa5a4985bdae2144396d912a56b55c0239acd719320ae13602956ef94db",
+    "stock-market-service": "sha256:0fc6a515e6db0bdf9e2b2e5fb7a9bb2682f6af5928159f377268ecf15ebffe65",
+    "stock-prediction-service": "sha256:7a1588579b8dc0aa8c94030277c0fd806b3d44190221a0ebdaf4015dd815a1c9",
+    "stock-gateway": "sha256:01fef6affe1da884bd71a8c1af621ba240786d6e8f731acb872fe5606f989a74",
+    "frontend": "sha256:4a9fee811c616ebb35393486e9e4b014a960a6e00c46383b4972615fb4b3f6a9"
+  },
+  "prediction_schema_version": "10",
+  "frontend_html_matches_build": true,
+  "anonymous_analysis_status": 401,
+  "internal_snapshot_via_frontend_status": 404,
+  "user_acceptance": {
+    "generation": "user_confirmed_pass",
+    "refresh_persistence": "user_confirmed_pass",
+    "display_fields": "user_confirmed_normal",
+    "history_selection": "user_confirmed_pass"
+  },
+  "independent_saved_result_recalculation": {
+    "analysis_id": "e9a812d1-11e1-4067-9623-d3b16838a04f",
+    "scope": "latest result restricted to the two user-provided account identities; private input processed in memory only",
+    "independent_decimal_recalculation": true,
+    "all_checks_passed": true,
+    "check_count": 15,
+    "private_values_reported": false,
+    "database_writes": 0,
+    "external_calls": 0
+  },
+  "keyboard_narrow_screen": "user_confirmed_pass",
+  "manual_supplier_calls": 0,
+  "manual_maas_calls": 0,
+  "manual_mail_sends": 0,
+  "existing_background_settings_changed": false,
+  "slice_acceptance": "passed_with_deferred_minor"
+}

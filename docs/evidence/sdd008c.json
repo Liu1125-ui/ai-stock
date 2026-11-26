@@ -1,0 +1,219 @@
+{
+  "date": "2026-10-20",
+  "baseline": "d5a2c95d66279dad58896ef7cb9595d206e648f9",
+  "feature_review_head": "60141db210607aeb1b4654b117d98f0070ee1a54",
+  "review_fix_commit": "b441c0b",
+  "backend": {
+    "command": "mvn -B -Pauth-integration,cli-build clean verify",
+    "tests": 791,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "source_unchanged_after_run": false,
+    "note": "791 full-reactor baseline predates this bugfix; current changed module independently verify245 passed, other backend modules unchanged"
+  },
+  "frontend": {
+    "files": 45,
+    "tests": 206,
+    "build_passed": true,
+    "existing_large_chunk_warning": true
+  },
+  "review": {
+    "reviewer": "sdd008c_final_review",
+    "critical": 0,
+    "important_found": 1,
+    "important_fixed_red_green": 1,
+    "minor": 0,
+    "second_review_dispatched": false
+  },
+  "nginx_probe": {
+    "scope": "isolated synthetic HTTP upstream; no production or cloud calls",
+    "question": {
+      "status": 200,
+      "seconds": 9.015
+    },
+    "ordinary": {
+      "status": 503,
+      "seconds": 8.024
+    },
+    "internal": {
+      "status": 404,
+      "seconds": 0.017
+    },
+    "external_calls": 0,
+    "production_containers_changed": false
+  },
+  "deployment": "V11 deployed; original Docker data recovered; manual browser and cloud acceptance pending",
+  "production_v11_migration": true,
+  "real_browser_acceptance": {
+    "free_rules": "user confirmed normal",
+    "refresh_preserves_valuation": "user confirmed preserved",
+    "narrow_keyboard_selection": "user confirmed narrow layout, Tab/Enter and rule switching normal",
+    "ai_generation": "SUCCEEDED 2.737s, one answer saved, actual reload restored it; required refs verified"
+  },
+  "real_maas_semantic_acceptance": "one authorized retest succeeded; one LIMITATION response checked; not all-question guarantee",
+  "manual_business_data_source_calls": 0,
+  "manual_maas_calls": 2,
+  "manual_mail_sends": 0,
+  "isolated_test_database": "backup restore verified in labelled tmpfs; stopped",
+  "environment": {
+    "docker_contexts_checked": [
+      "desktop-linux",
+      "default"
+    ],
+    "original_compose_containers_found": true,
+    "original_named_volumes_found": true,
+    "user_reports_no_reset": true,
+    "existing_local_backups": [
+      {
+        "path": "runtime/sdd008a/user-before-v3.sql",
+        "bytes": 23149,
+        "sha256": "48dca9dacffd1d067bd5f2f1c7eb7cdcc8fbb0b10f4c358e93d497407a5d9679",
+        "table_count": 11,
+        "has_positions_table": false,
+        "has_saved_valuation_table": false,
+        "contents_reported": false
+      },
+      {
+        "path": "runtime/sdd008b/prediction-before-v10-20261019_141555.sql",
+        "bytes": 507841,
+        "sha256": "a3ec15aaa0876ae657be5cdf32af5969188e690a9d0917d839444d001b45448d",
+        "table_count": 20,
+        "has_positions_table": false,
+        "has_saved_valuation_table": false,
+        "contents_reported": false
+      }
+    ],
+    "conclusion": "Original volume and records recovered; previous configuration-change cause not established.",
+    "candidate_original_disk": {
+      "path": "D:/DockerData/DockerDesktopWSL/disk/docker_data.vhdx",
+      "bytes": 21128806400,
+      "last_modified_local": "2026-10-20T00:22:29+08:00",
+      "contents_not_mounted_or_verified": false
+    },
+    "current_disk_root": "D:/DockerData/DockerDesktopWSL",
+    "older_disk_backup_root": "D:/DockerMigrationBackup-20261013",
+    "candidate_restore_approval": "explicit user approval; executed",
+    "disk_backup": {
+      "root": "D:/DockerMigrationBackup-20261020-sdd008c",
+      "bytes": 21128806400,
+      "sha256": "1e895ec42baccda60fcd50980fc1c169a9666bdae95e60e5dfbc8f953e512850",
+      "copy_matches": true
+    },
+    "stale_socket_directories": "Renamed and preserved docker-secrets-engine and Docker/run siblings, each containing only its zero-byte stale socket; nothing deleted."
+  },
+  "ai_gate_enabled": false,
+  "backup_before_v11": {
+    "at": "2026-10-20T14:17:19.525489+08:00",
+    "backup": "E:\\aiStock\\项目代码\\stock-system\\runtime\\sdd008c\\prediction-before-v11-20261020_141717.sql",
+    "bytes": 521513,
+    "sha256": "d30f32f3d8aa5b0c04d1acf34dec39f3b21b730140ff1d5e8102885eacfe6f8e",
+    "dedicatedAccount": true,
+    "isolatedRestore": true,
+    "originalAndRestoredMetadata": [
+      "10\t1",
+      "1",
+      "22"
+    ],
+    "productionV11Applied": false
+  },
+  "deployed_checks": {
+    "18080": {
+      "status": 200,
+      "health": {
+        "status": "UP"
+      }
+    },
+    "18081": {
+      "status": 200,
+      "health": {
+        "status": "UP"
+      }
+    },
+    "18082": {
+      "status": 200,
+      "health": {
+        "status": "UP"
+      }
+    },
+    "18083": {
+      "status": 200,
+      "health": {
+        "status": "UP"
+      }
+    },
+    "18085": {
+      "status": 200,
+      "health": {
+        "status": "UP"
+      }
+    },
+    "/api/v1/portfolio-questions?analysisId=00000000-0000-4000-8000-000000000000": 401,
+    "/internal/portfolio-questions": 404,
+    "migration": [
+      "11\t1",
+      "portfolio_question_operation",
+      "portfolio_question_result"
+    ],
+    "oldValuationUnchanged": true,
+    "servedPortfolioAssetMatches": true,
+    "scheduler_health": 200,
+    "algorithm_health": 200,
+    "frontend_health": 200
+  },
+  "old_images_preserved_suffix": "before-sdd008c-20261020",
+  "full_image_rollback_executed": false,
+  "scheduler": "Original container restarted with original flags unchanged; periodic external activity distinct from manual acceptance calls.",
+  "real_maas_attempt": {
+    "authorized_max": 1,
+    "attempts": 1,
+    "safe_metadata": [
+      "FAILED\tAI_UNAVAILABLE\t35.0370",
+      "0",
+      "1"
+    ],
+    "root_cause": "35.037s elapsed matches configured 35s deadline; generic error mapping prevents definitive transport/provider diagnosis",
+    "additional_calls": 0,
+    "gate_closed_after_attempt": true
+  },
+  "timeout_bugfix": {
+    "commit": "e080f78",
+    "at": "2026-10-20T15:12:11.388370+08:00",
+    "prediction_module_tests": 245,
+    "frontend_tests": 206,
+    "frontend_build": true,
+    "red_then_green": true,
+    "new_real_calls": 0,
+    "ai_gate_enabled": false,
+    "health": 200,
+    "saved_valuation_and_failed_operation_unchanged": true,
+    "served_asset_matches": "PortfolioPage-B_sXK6ph.js",
+    "original_live_failure_unique_root_cause_proven": false,
+    "official_reference": "https://support.huaweicloud.com/intl/en-us/model-call-maas/model-call-005.html",
+    "fix": "portfolio V4 thinking disabled; safe timeout/connection categories; clear terminal UI; no retry or deadline increase",
+    "retest": "authorized once; SUCCEEDED2.737s and persisted/actual reload verified"
+  },
+  "real_maas_retest": {
+    "at": "2026-10-20T15:20:43.358964+08:00",
+    "operation": {
+      "error": null,
+      "state": "SUCCEEDED",
+      "seconds": 2.737
+    },
+    "status": "ANSWERED",
+    "topic": "LIMITATION",
+    "paragraphs": 1,
+    "referenceCount": 5,
+    "allReferencesExistAndMatchSavedValues": true,
+    "requiredLimitReferencesPresent": true,
+    "newManualModelAttempts": 1,
+    "automaticRetries": 0,
+    "answerContentSha256": "c8817fc4b0110467a6d18b4420a22e9092f07b2d372ad470786c2454b854914d",
+    "privateContentPrinted": false,
+    "gateClosed": true,
+    "refreshBrowserAcceptance": "actual browser reload restored saved answer without new send; source details expanded",
+    "sourceIdHashBookAndDateMatch": true,
+    "semanticCheck": "one LIMITATION answer directly describes saved coverage, date freshness and profit exclusions; not a guarantee of other questions or all semantic correctness",
+    "screenshot": "runtime/sdd008c/retest-proof.png"
+  }
+}

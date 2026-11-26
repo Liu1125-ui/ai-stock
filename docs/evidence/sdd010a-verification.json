@@ -1,0 +1,319 @@
+{
+  "checkedAt": "2026-10-23T18:26:31.308106+08:00",
+  "stage": "DEPLOYED_ACCEPTED",
+  "base": "82e8beb9cbec6f8ef7adeef081c8aeb71efbeb8f",
+  "implementationHead": "a3f18c35aef75c70ed3cfaaae07a0f3662704d40",
+  "backend": {
+    "command": "mvn -B -Pauth-integration,cli-build clean verify",
+    "result": "BUILD SUCCESS",
+    "modules": {
+      "stock-common": {
+        "tests": 17,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "stock-gateway": {
+        "tests": 78,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "stock-market-service": {
+        "tests": 210,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "stock-notification-service": {
+        "tests": 109,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "stock-prediction-service": {
+        "tests": 250,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "stock-scheduler-service": {
+        "tests": 249,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "stock-user-service": {
+        "tests": 99,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    "tests": 1012
+  },
+  "frontend": {
+    "files": 64,
+    "tests": 295,
+    "fullTestMaxWorkers": 2,
+    "typecheck": true,
+    "viteBuild": true,
+    "lastCssOnlyChange": "build and actual390/1280 browser geometry verified after full logic tests",
+    "existingLargeChunkWarning": true
+  },
+  "review": {
+    "logicalReviewCount": 1,
+    "initialQuotaFailure": true,
+    "resumedSameAgent": true,
+    "completed": true,
+    "codeRange": "82e8beb..5bac2e2",
+    "critical": 0,
+    "important": 1,
+    "importantFixed": 1,
+    "minorDeferred": 2,
+    "runtimeBugsFixed": 2,
+    "secondReviewDispatched": false
+  },
+  "deployment": {
+    "performed": true,
+    "schemaChanged": false,
+    "productionDataChangedBySlice": false,
+    "proof": {
+      "checkedAt": "2026-10-23T18:21:50.887710+08:00",
+      "health": {
+        "gateway": true,
+        "user": true,
+        "market": true,
+        "prediction": true,
+        "scheduler": true,
+        "notification": true,
+        "algorithm": true
+      },
+      "nacosSingleHealthy": {
+        "user": 1,
+        "market": 1,
+        "prediction": 1,
+        "scheduler": 1,
+        "notification": 1
+      },
+      "anonymous": [
+        {
+          "port": 15173,
+          "resource": "market-data",
+          "status": 401,
+          "noStore": true
+        },
+        {
+          "port": 15173,
+          "resource": "versions",
+          "status": 401,
+          "noStore": true
+        },
+        {
+          "port": 15173,
+          "resource": "00000000-0000-0000-0000-000000000001",
+          "status": 401,
+          "noStore": true
+        },
+        {
+          "port": 18080,
+          "resource": "market-data",
+          "status": 401,
+          "noStore": true
+        },
+        {
+          "port": 18080,
+          "resource": "versions",
+          "status": 401,
+          "noStore": true
+        },
+        {
+          "port": 18080,
+          "resource": "00000000-0000-0000-0000-000000000001",
+          "status": 401,
+          "noStore": true
+        },
+        {
+          "port": 18082,
+          "resource": "market-data",
+          "status": 401,
+          "noStore": true
+        },
+        {
+          "port": 18082,
+          "resource": "versions",
+          "status": 401,
+          "noStore": true
+        },
+        {
+          "port": 18082,
+          "resource": "00000000-0000-0000-0000-000000000001",
+          "status": 401,
+          "noStore": true
+        }
+      ],
+      "assets": {
+        "/assets/DataPage-DsXJ_xjV.js": {
+          "byteIdentical": true,
+          "sha256": "2261cb84b3934dd9c00ba3219f469902f03e5831498bc51867c86dc3dde679ac"
+        },
+        "/assets/index-BXWKcCiI.css": {
+          "byteIdentical": true,
+          "sha256": "24274daf56cedbb0a99a8b87c0bfbf0ee0cbf72dab801089b144e42b3dda1bb0"
+        },
+        "/assets/index-BvK0nmXE.js": {
+          "byteIdentical": true,
+          "sha256": "1e97090858804094f02c7cc66029d4ecaa32bb9476b5afd5d267dc786a560a65"
+        }
+      },
+      "htmlByteIdentical": true,
+      "untouchedContainers": {
+        "aistock-sdd001-stock-user-service-1": true,
+        "aistock-sdd001-stock-prediction-service-1": true,
+        "aistock-sdd001-stock-scheduler-service-1": true,
+        "aistock-sdd001-stock-notification-service-1": true,
+        "aistock-sdd001-algorithm-1": true
+      },
+      "flagsUnchanged": {
+        "aistock-sdd001-stock-user-service-1": true,
+        "aistock-sdd001-stock-market-service-1": true,
+        "aistock-sdd001-stock-prediction-service-1": true,
+        "aistock-sdd001-stock-scheduler-service-1": true,
+        "aistock-sdd001-stock-notification-service-1": true,
+        "aistock-sdd001-stock-gateway-1": true,
+        "aistock-sdd001-frontend-1": true,
+        "aistock-sdd001-algorithm-1": true
+      },
+      "envHashUnchanged": true
+    }
+  },
+  "manualPaidModelCalls": 0,
+  "manualSupplierCalls": 0,
+  "manualEmails": 0,
+  "automaticWorkers": "Existing settings retained; no claim of zero natural activity",
+  "backupDirectory": "backup-20261023-180237",
+  "databaseBefore": {
+    "instrument": {
+      "rows": 4,
+      "sha256": "0ef30b64efba3c8f5687af22799efe0addeca5028b8f869bebd8f837f3a9ca4f"
+    },
+    "instrument_data_head": {
+      "rows": 3,
+      "sha256": "040c32bf8da89db643148f2aed9af4838f8fe5446d462c0088d4459c191377fe"
+    },
+    "market_data_version": {
+      "rows": 47,
+      "sha256": "9618f1edcc2cabbdf18268ba2a9eb0cbd7a550d0a7b3cfd9a2d489f8730f1f05"
+    },
+    "market_daily_bar": {
+      "rows": 20067,
+      "sha256": "ea2e5bf8a75b684eb14d23d2fdd57c2ab264c96b03f05ef3a08610e9245c73d7"
+    },
+    "market_calendar_day": {
+      "rows": 28501,
+      "sha256": "0c0a2d7326a5f17ac08a6bac9e3e8abc463b87502c06b372ec12e4b8d6c18121"
+    },
+    "market_ingestion_operation": {
+      "rows": 54,
+      "sha256": "402665b9c52b39605161c423ff989a274af815d5d65f1f15ffe753fcbc438020"
+    },
+    "market_refresh_receipt": {
+      "rows": 95,
+      "sha256": "d8cbe8c37f27afc753c2013bc8687938d7ef2e4cc0ed596243fdbaeabb6ab986"
+    },
+    "schemaVersion": "13"
+  },
+  "acceptance": {
+    "checkedAt": "2026-10-23T18:24:49.356437+08:00",
+    "instrumentId": "SH600030",
+    "versionId": "b7c0f3e6-1ce1-44e7-8685-a60030175896",
+    "window": {
+      "from": "2026-07-26",
+      "to": "2026-10-23",
+      "timeZone": "Asia/Shanghai"
+    },
+    "visibleCounts": {
+      "outsideCoverageDays": "1",
+      "barDays": "58",
+      "tradedRowDays": "58",
+      "suspendedRowDays": "0",
+      "knownOpenDays": "58",
+      "unknownCalendarDays": "0"
+    },
+    "findings": {
+      "suspectedMissingOpenDays": "0",
+      "barsOnClosedDays": "0",
+      "invalidRowDays": "0"
+    },
+    "independentMatches": true,
+    "fixedDetailPreservedAfterListAndHistoryRefresh": true,
+    "wide": {
+      "viewport": 1280,
+      "documentWidth": 1265
+    },
+    "narrow": {
+      "viewport": 390,
+      "documentWidth": 375,
+      "tableVisible": 316,
+      "tableContent": 880
+    },
+    "keyboard": {
+      "TabToProvider": true,
+      "TabToRefresh": true,
+      "EnterRefresh": true
+    },
+    "detailFocus": {
+      "heading": "固定版本详情 · SH600030",
+      "narrowTop": 419.0833435058594,
+      "viewportHeight": 844
+    },
+    "roleChecks": {
+      "anonymous": "9 actual requests401/no-store; deployment-proof",
+      "ordinaryUser": {
+        "gatewayDenied": true,
+        "directMarketDenied": true,
+        "evidenceSource": "user confirmation2026-10-23, HTTP code not independently captured"
+      },
+      "admin": "actual page list/history/detail returned saved data"
+    },
+    "marketTablesUnchanged": true,
+    "finalContainerReadCounts": {
+      "heads:401": 1,
+      "history:401": 1,
+      "detail:401": 1,
+      "heads:200": 2,
+      "history:200": 1,
+      "detail:200": 1
+    },
+    "readCountScope": "Current frontend container only. Initial observed container window saved separately; intermediate replacement logs not retained, no exact all-session total claimed. Local read counts are not a paid-call budget.",
+    "screenshots": {
+      "sdd010a-wide.png": {
+        "path": "C:\\Users\\刘太荃\\.codex\\visualizations\\2026\\09\\15\\01a0a3b5-3b19-7d70-8e97-67127675e352\\sdd010a-wide.png",
+        "sha256": "040c4d4adfbaf0d5d191089979caabf5d466c90192ba353443f959f2d380d2ae"
+      },
+      "sdd010a-narrow.png": {
+        "path": "C:\\Users\\刘太荃\\.codex\\visualizations\\2026\\09\\15\\01a0a3b5-3b19-7d70-8e97-67127675e352\\sdd010a-narrow.png",
+        "sha256": "5a0dea86bb4f2a9ff8517308fb819e74e5b4cc7da6316b10bb74897c4c678110"
+      },
+      "sdd010a-narrow-detail.png": {
+        "path": "C:\\Users\\刘太荃\\.codex\\visualizations\\2026\\09\\15\\01a0a3b5-3b19-7d70-8e97-67127675e352\\sdd010a-narrow-detail.png",
+        "sha256": "33f90718973777837be1e6a5b41f164d331420a1ca41d3cda7c0f8a736216cf0"
+      }
+    }
+  },
+  "rulings": [
+    "Ruling: Keep fixed checkout/branch per user-approved plan rather than create worktree — preserves explicit workflow — cost if wrong: selective staging must protect unrelated work.",
+    "Final: minor (deferred): Frontend equality barDays=traded+suspended rejects invalid trade_status diagnosis; current DB CHECK blocks these rows, add compatibility before allowing dirty legacy/imported records.",
+    "Final: minor (deferred): Complete Chinese text for every whitelisted safe error code; current fallback safely displays machine code but requires technical interpretation.",
+    "Final: Ruling: Keep replenishment/unavailable-mark/global orphan audit in SDD010B — approved read-only scope — cost if wrong: admin write workflows need later delivery.",
+    "Final: Ruling: Diagnose stored-version evidence only, not external truth/suspension certainty/cross-source accuracy — no independent external validation in scope — cost if wrong: diagnostic cleanliness cannot guarantee data truth.",
+    "Final: Ruling: Keep keyset pagination without cross-page atomic snapshot — approved stable cursor contract — cost if wrong: current-head facts can change between pages, each page has its own query time.",
+    "Final: Ruling: Capacity and pre-decode memory/network hard limits remain unverified — small EXPLAIN and decoded256KiB bound are not load/streaming tests — cost if wrong: large datasets/responses may timeout or allocate memory before rejection.",
+    "Final: Ruling: Same-shape malformed-argument CORS preflight may succeed — actual GET still strict path/role/query validation — cost if wrong: preflight alone does not guarantee eventual query acceptance; no expanded data permission.",
+    "Final: Ruling: Do not duplicate all history metadata in fixed detail — listing already displays state/time and detail labels fixed identity/window — cost if wrong: administrator may need to return to history list for some metadata.",
+    "Final: Ruling: Production/roles/responsive/keyboard remain separate Task6 gates, full image rollback remains unperformed — review is code-only — cost if wrong: cannot claim real acceptance from automated tests alone.",
+    "Final: Ruling: Limit verification run to2 Vitest workers after default64-worker run caused unrelated Users/Messages5s timeouts — both unchanged suites passed separately8/8 with2 workers and no timeout increase — cost if wrong: longer suite wall time; functional assertions and deadlines unchanged. Full bounded run required before deploy.",
+    "Final: Ruling: Add explicit-selection focus/scroll during real acceptance — user report proved result below viewport, reasonable usability without new business — cost if wrong: explicit version click moves focus; background refresh and stale responses cannot move it.",
+    "Final: Ruling: Contain absolute accessibility text within table scroll regions — real narrow-screen overflow affects reading/navigation — cost if wrong: wrapper establishes positioning context; labels and table scrolling must remain verified."
+  ]
+}

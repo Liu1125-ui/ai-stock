@@ -1,0 +1,214 @@
+{
+  "slice": "SDD-009B",
+  "recordedAt": "2026-10-21T21:44:18.257422+08:00",
+  "codeHead": "f534ba6e6b77391d5e5d20cfede261800b9a95d4",
+  "implementationBase": "969041b4e7aa77cceb524e0276aabb6aa0369dc1",
+  "status": "DEPLOYED_RETRY_ACCEPTED_CANCEL_PENDING",
+  "backend": {
+    "command": "mvn -B -Pauth-integration,cli-build clean verify",
+    "buildSuccess": true,
+    "completedAt": "2026-10-20T22:51:45+08:00",
+    "modules": {
+      "stock-common": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "suites": 2
+      },
+      "stock-gateway": {
+        "tests": 52,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "suites": 22
+      },
+      "stock-market-service": {
+        "tests": 188,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "suites": 42
+      },
+      "stock-notification-service": {
+        "tests": 109,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "suites": 26
+      },
+      "stock-prediction-service": {
+        "tests": 245,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "suites": 64
+      },
+      "stock-scheduler-service": {
+        "tests": 243,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "suites": 34
+      },
+      "stock-user-service": {
+        "tests": 94,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "suites": 33
+      }
+    },
+    "total": 933,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "databaseScope": "Owned tmpfs localhost:13316 five *_test databases",
+    "postReviewVerification": {
+      "command": "mvn -B -Pauth-integration,cli-build -pl stock-gateway -am verify",
+      "gatewayTests": 53,
+      "commonTests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "buildSuccess": true,
+      "note": "Full 933-test baseline retained; changed gateway/common rerun after fixes. These are separate runs, not one full 934-test run."
+    }
+  },
+  "frontend": {
+    "tests": 261,
+    "files": 56,
+    "testSuccess": true,
+    "typecheckAndBuild": true,
+    "existingWarning": "chunks >500kB"
+  },
+  "review": {
+    "status": "COMPLETED_TWO_IMPORTANT_FINDINGS_FIXED",
+    "reviewer": "sdd009b_final_review",
+    "initialFailure": "account usage limit; no review conclusion produced",
+    "secondCompletedReview": false,
+    "findings": [
+      {
+        "severity": "P1",
+        "issue": "Dedicated raw Feign Client bypassed discovery",
+        "resolution": "Non-retrying load-balancer wrapper; SchedulerDiscoveryWiringTest RED to GREEN",
+        "commit": "118305a"
+      },
+      {
+        "severity": "P2",
+        "issue": "Post-action refresh dropped during earlier detail/list reads",
+        "resolution": "Replacement GET invalidates older epoch; two deferred-response tests RED to GREEN",
+        "commit": "f534ba6"
+      }
+    ],
+    "deferredMinors": [],
+    "fixPasses": 1
+  },
+  "deployment": {
+    "performed": true,
+    "writeEntryEnabled": false,
+    "productionSchemaBefore": "8",
+    "fullRollbackExercised": false,
+    "productionSchemaAfter": "9",
+    "checkedAt": "2026-10-21T14:57:02.330714+08:00",
+    "readonlyChecks": {
+      "checkedAt": "2026-10-21T14:57:02.330714+08:00",
+      "health": {
+        "18081": "UP",
+        "18082": "UP",
+        "18083": "UP",
+        "18084": "UP",
+        "18085": "UP",
+        "18080": "UP",
+        "18090": "UP"
+      },
+      "checks": {
+        "singleHealthyNacosInstances": true,
+        "frontendHtmlMatchesBuild": true,
+        "taskAssetMatchesBuild": true,
+        "anonymousRoutes": [
+          {
+            "pathSuffix": "",
+            "status": 401
+          },
+          {
+            "pathSuffix": "/00000000-0000-0000-0000-000000000001",
+            "status": 401
+          },
+          {
+            "pathSuffix": "/00000000-0000-0000-0000-000000000001/attempts",
+            "status": 401
+          },
+          {
+            "pathSuffix": "/00000000-0000-0000-0000-000000000001/action-options",
+            "status": 401
+          },
+          {
+            "pathSuffix": "/00000000-0000-0000-0000-000000000001/operations",
+            "status": 401
+          }
+        ],
+        "externalPostDenied": 403,
+        "originalFlagsPreserved": true,
+        "actionsEnabled": false,
+        "schemaVersion": "9",
+        "operationRows": 0
+      }
+    },
+    "backup": {
+      "bytes": 71974,
+      "sha256": "11a4ca6731b527ad4d10a3d94ee0b0387f887038ab5b1fb35737560e8f3eff74",
+      "file": "scheduler-before-v9-20261021-145512.sql"
+    },
+    "oldImagesRetained": true
+  },
+  "browserAcceptance": {
+    "status": "USER_CONFIRMED_PASS",
+    "recordedAt": "2026-10-21T15:03:23.407108+08:00",
+    "source": "用户回复：检查完毕，没有问题",
+    "scope": [
+      "管理员任务详情操作入口关闭提示",
+      "操作记录区域",
+      "窄屏布局",
+      "Tab键按钮访问"
+    ],
+    "productionRetryOrCancelPerformed": true
+  },
+  "externalAcceptanceCalls": {
+    "MaaS": 0,
+    "email": 0,
+    "marketSupplier": "NOT_SEPARATELY_METERED_DURING_REAL_RETRY",
+    "newPredictions": 0,
+    "note": "One real retry used the existing verification data path; no manual MaaS/email/new prediction. Supplier calls were not separately counted. Existing automatic workers keep prior settings."
+  },
+  "limitations": [
+    "Production retry accepted; cancellation awaits a naturally eligible task",
+    "FR13 remains partially complete",
+    "No alert adapter, training tasks or system-wide statistics",
+    "Test counts do not establish coverage percentage",
+    "CodeArts real usage evidence remains pending"
+  ],
+  "liveAcceptance": {
+    "checkedAt": "2026-10-21T21:44:18.257422+08:00",
+    "taskId": "b7b67788-35a4-41f0-b50a-c0d9b36274f7",
+    "operationId": "d9439b4a-5a6b-4549-9e32-5b4ee94bffd7",
+    "retryCommands": 1,
+    "commandOutcome": "APPLIED",
+    "commandTransition": "FAILED -> QUEUED",
+    "commandRevision": "0 -> 1",
+    "finalState": "SUCCEEDED",
+    "finalRevision": "3",
+    "newWorkerAttempts": 1,
+    "priorAttemptsRetained": 3,
+    "resultVersionId": "e28355b7-093e-4f78-8a94-b483657d0bb3",
+    "browserReceiptAndHistoryVerified": true,
+    "historyReadableAfterGateClosed": true,
+    "actionsEnabledAfterAcceptance": false,
+    "eligibleCancelTasks": 0,
+    "cancelCommands": 0,
+    "cancelAcceptance": "PENDING_NO_ELIGIBLE_NATURAL_TASK",
+    "MaaSCalls": 0,
+    "emailCalls": 0,
+    "supplierCalls": "NOT_SEPARATELY_METERED; execution used existing verification data path, no direct supplier acceptance request"
+  }
+}

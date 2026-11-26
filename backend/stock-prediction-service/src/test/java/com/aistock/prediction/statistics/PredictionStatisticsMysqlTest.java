@@ -1,0 +1,17 @@
+package com.aistock.prediction.statistics;
+import com.aistock.prediction.modelcatalog.StatisticsPredictionFixture;import com.aistock.common.statistics.*;import java.time.*;import java.sql.Timestamp;import java.util.*;import org.junit.jupiter.api.*;import org.springframework.util.LinkedMultiValueMap;import static org.junit.jupiter.api.Assertions.*;
+@Tag("mysql") class PredictionStatisticsMysqlTest {
+ static final Clock CLOCK=Clock.fixed(Instant.parse("2026-10-22T04:00:00Z"),ZoneOffset.UTC);
+ static StatisticsWindow window(){var q=new LinkedMultiValueMap<String,String>();q.add("from","2026-10-20");q.add("to","2026-10-22");return StatisticsWindow.parse(q,CLOCK);}
+ @Test void countsHiddenAndMissingHistoricalVersionsAndDoesNotReclassifyAsNewRequests(){
+  var jdbc=StatisticsPredictionFixture.fresh();String a=UUID.randomUUID().toString(),b=UUID.randomUUID().toString();var now=Timestamp.from(CLOCK.instant());
+  jdbc.update("insert into model_version(model_id,artifact_id,manifest_hash,checkpoint_hash,status,registration_hash,manifest_json,evaluation_json,created_at) values(?,'transformer-s3-2023-seed42',?,?,'PUBLISHED',?,'{}','{}',?)",a,"a".repeat(64),"b".repeat(64),"c".repeat(64),now);
+  String running=null;String user=UUID.randomUUID().toString();String firstOperation=UUID.randomUUID().toString();
+  for(int i=0;i<6;i++){String state=i==3?"RUNNING":i==2||i==5?"FAILED":"SUCCEEDED";String id=UUID.randomUUID().toString();if(i==3)running=id;
+   jdbc.update("insert into forecast_request(prediction_id,user_id,operation_id,request_hash,model_id,instrument_id,horizon,state,model_json,snapshot_json,hidden,created_at,expires_at) values(?,?,?,?,?,'SH600030',5,?,'{}',?,?,?,?)",id,user,i==0?firstOperation:UUID.randomUUID().toString(),"d".repeat(64),i<4?a:b,state,state.equals("SUCCEEDED")?"{}":null,i==0,Timestamp.from(Instant.parse(i==0?"2026-10-19T16:00:00Z":"2026-10-20T16:00:00Z")),now);
+  }
+  var before=jdbc.queryForList("select * from forecast_request order by prediction_id");var repo=new PredictionStatisticsRepository(jdbc);var result=repo.summary(window(),CLOCK.instant());assertEquals("6",result.acceptedRequests());assertEquals("3",result.stateCounts().stream().filter(x->x.key().equals("SUCCEEDED")).findFirst().orElseThrow().count());assertEquals("4",result.modelUsage().get(0).acceptedRequests());assertEquals("66.67",result.modelUsage().get(0).usagePercent());assertEquals("33.33",result.modelUsage().get(1).usagePercent());assertEquals("历史版本信息暂缺",result.modelUsage().get(1).label());assertEquals("1",result.requestDaily().get(0).accepted());assertEquals("5",result.requestDaily().get(1).accepted());assertEquals(before,jdbc.queryForList("select * from forecast_request order by prediction_id"));assertEquals(result,repo.summary(window(),CLOCK.instant()));
+  jdbc.update("update forecast_request set state='SUCCEEDED',snapshot_json='{}' where prediction_id=?",running);var changed=repo.summary(window(),CLOCK.instant());assertEquals("6",changed.acceptedRequests());assertEquals("4",changed.stateCounts().stream().filter(x->x.key().equals("SUCCEEDED")).findFirst().orElseThrow().count());
+ }
+ @Test void emptyWindowUsesNoSampleNotFictitiousModelShare(){var result=new PredictionStatisticsRepository(StatisticsPredictionFixture.fresh()).summary(window(),CLOCK.instant());assertEquals("0",result.acceptedRequests());assertTrue(result.modelUsage().isEmpty());assertEquals(3,result.requestDaily().size());assertEquals(3,result.stateCounts().size());}
+}

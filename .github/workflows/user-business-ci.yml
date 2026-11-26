@@ -1,0 +1,73 @@
+name: Account business checks
+on: [push, pull_request]
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0.46
+        env:
+          MYSQL_ROOT_PASSWORD: isolated-ci-test-password
+          MYSQL_DATABASE: stock_user_test
+        ports: ['13316:3306']
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 --silent"
+          --health-interval=5s --health-timeout=3s --health-retries=30
+    env:
+      AUTH_TEST_DB_URL: jdbc:mysql://127.0.0.1:13316/stock_user_test?serverTimezone=UTC
+      AUTH_TEST_DB_PASSWORD: isolated-ci-test-password
+      SCHEDULER_TEST_DB_URL: jdbc:mysql://127.0.0.1:13316/stock_scheduler_test?serverTimezone=UTC
+      SCHEDULER_TEST_DB_PASSWORD: isolated-ci-test-password
+      MARKET_TEST_DB_URL: jdbc:mysql://127.0.0.1:13316/stock_market_test?serverTimezone=UTC
+      MARKET_TEST_DB_PASSWORD: isolated-ci-test-password
+      MAIL_TEST_DB_URL: jdbc:mysql://127.0.0.1:13316/stock_notification_test?serverTimezone=UTC
+      MAIL_TEST_DB_PASSWORD: isolated-ci-test-password
+      PREDICTION_TEST_DB_URL: jdbc:mysql://127.0.0.1:13316/stock_prediction_test?serverTimezone=UTC
+      PREDICTION_TEST_DB_PASSWORD: isolated-ci-test-password
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+      - name: Create service test databases
+        env:
+          MYSQL_PWD: isolated-ci-test-password
+        run: mysql -h 127.0.0.1 -P 13316 -u root -e 'CREATE DATABASE stock_notification_test; CREATE DATABASE stock_market_test; CREATE DATABASE stock_scheduler_test; CREATE DATABASE stock_prediction_test;'
+      - name: Backend and isolated MySQL tests
+        working-directory: backend
+        run: mvn -B -Pauth-integration,cli-build clean verify
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Frontend tests and production build
+        working-directory: frontend
+        run: |
+          corepack enable
+          corepack prepare pnpm@11.19.0 --activate
+          pnpm install --frozen-lockfile
+          pnpm test
+          pnpm build
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Python algorithm tests
+        working-directory: backend/algorithm
+        run: |
+          python -m pip install -r requirements.txt -r requirements-inference.txt
+          python -m pip install --index-url https://download.pytorch.org/whl/cpu torch==2.14.0+cpu
+          python -m pip install coverage==7.10.7
+          python -m coverage run -m pytest tests -q -p no:cacheprovider
+          python -m coverage combine
+          python -m coverage report
+          python -m coverage json -o forecast-core-coverage.json
+      - name: Upload forecast core coverage
+        uses: actions/upload-artifact@v4
+        with:
+          name: forecast-core-coverage
+          path: backend/algorithm/forecast-core-coverage.json
+          if-no-files-found: error
+      - name: Local live quote collector tests
+        run: python -m pytest tests/test_futu_live_quote.py -q -p no:cacheprovider

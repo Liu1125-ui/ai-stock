@@ -1,0 +1,4 @@
+# 刷新测试
+作用：验证完整日历、故障保留、去重与截止发布。方法：仅独立MySQL测试库，注入假采集边界和可控Clock。
+
+AdminRefreshContextMysqlTest验证只读预检、归属和服务认证；AdminRefreshConstraintTest使用测试专用夹具验证采集前保护与发布竞争；RefreshRequestCompatibilityTest用独立固定旧哈希和真实旧回执验证升级兼容。所有MySQL测试必须连接13316专用stock_market_test。

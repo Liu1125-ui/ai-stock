@@ -1,0 +1,67 @@
+{
+  "checkedAt": "2026-10-05T17:11:14.848960+08:00",
+  "stock": "SH600030",
+  "note": "Real published model and source input; internal inference only, no user prediction record created.",
+  "input": {
+    "inputVersionId": "797cfe14-fb5d-4311-ab3b-3d1308d8007d",
+    "rawVersionId": "1dd82b9f-ce8b-44e6-bfc5-9168d2d78a32",
+    "inputHash": "7dfd7cd277af900d39ef898f069c6f9e76478f25005ffb063fa04bdc47e5bc4e",
+    "originDate": "2026-09-30",
+    "freshness": "FRESH",
+    "targetDates": [
+      "2026-10-08",
+      "2026-10-09",
+      "2026-10-12",
+      "2026-10-13",
+      "2026-10-14"
+    ]
+  },
+  "http": 200,
+  "state": "AVAILABLE",
+  "prediction": {
+    "formalInference": true,
+    "validationOnly": false,
+    "publicationRevision": 1,
+    "originDate": "2026-09-30",
+    "inputVersionId": "797cfe14-fb5d-4311-ab3b-3d1308d8007d",
+    "points": [
+      {
+        "step": 1,
+        "targetDate": "2026-10-08",
+        "ratio": "0.997892558575",
+        "referencePrice": "25.805502",
+        "displayReferencePrice": "25.81"
+      },
+      {
+        "step": 2,
+        "targetDate": "2026-10-09",
+        "ratio": "0.998139500618",
+        "referencePrice": "25.811887",
+        "displayReferencePrice": "25.81"
+      },
+      {
+        "step": 3,
+        "targetDate": "2026-10-12",
+        "ratio": "0.999020099640",
+        "referencePrice": "25.834660",
+        "displayReferencePrice": "25.83"
+      },
+      {
+        "step": 4,
+        "targetDate": "2026-10-13",
+        "ratio": "0.999949753284",
+        "referencePrice": "25.858701",
+        "displayReferencePrice": "25.86"
+      },
+      {
+        "step": 5,
+        "targetDate": "2026-10-14",
+        "ratio": "1.000574946404",
+        "referencePrice": "25.874868",
+        "displayReferencePrice": "25.87"
+      }
+    ]
+  },
+  "errorCode": null,
+  "identityAndFiveDateChecks": "PASSED"
+}

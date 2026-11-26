@@ -1,0 +1,550 @@
+{
+  "checkedAt": "2026-10-03T12:19:13.4636497+08:00",
+  "scope": "SDD-005B_CANDIDATE_RUNTIME",
+  "validationOnly": true,
+  "published": false,
+  "runtime": {
+    "numpy": "2.5.3",
+    "python": "3.13.15",
+    "torch": "2.14.0+cpu"
+  },
+  "tests": {
+    "passed": 44,
+    "command": "docker compose --env-file .env -f deploy/compose.yaml exec -T algorithm python -m pytest -q -p no:cacheprovider",
+    "externalDeprecationWarnings": 1,
+    "failures": 0,
+    "initialPassedBeforeReview": 43
+  },
+  "artifacts": [
+    {
+      "seed": 42,
+      "artifactId": "transformer-s3-2023-seed42-c698f02e6875e762",
+      "manifestHash": "45b43ebd1cf9131eb793e62cb73fe076000457fbc5b121f8ec94ca949be59c7e",
+      "checkpointHash": "280b0e5f7b809d86857ec97ed651e9dba82951d7a383540b8ee73651929963ef",
+      "status": "CANDIDATE",
+      "epoch": 3
+    },
+    {
+      "seed": 43,
+      "artifactId": "transformer-s3-2023-seed43-9a96167ecb00234d",
+      "manifestHash": "6894c7d52ba9a3968ef1f85cd0923b3d249a376281f79d752a0fe460d09f97d6",
+      "checkpointHash": "7d90bc81f0e83a70c2f1195bee7ed8637d3d40e2b53415c0fef77f956a1eb112",
+      "status": "CANDIDATE",
+      "epoch": 4
+    },
+    {
+      "seed": 44,
+      "artifactId": "transformer-s3-2023-seed44-809fa0c150e41590",
+      "manifestHash": "4cfb7609234a247d341c5f868bff65b2f7a45509bedd60ad74e7a3bffc458b8c",
+      "checkpointHash": "7ec2e5dd681f2365bd2ab578e1ae9b039dafdb996408384eeb27ca1001c42118",
+      "status": "CANDIDATE",
+      "epoch": 5
+    }
+  ],
+  "historicalReplay": {
+    "repeatExactlyEqual": true,
+    "windows": 45,
+    "points": 225,
+    "maxCsvDifference": 5.960504978475001E-08,
+    "historicalOrigins": [
+      {
+        "stock": "SH600030",
+        "seed": 42,
+        "originDate": "2026-01-08",
+        "maxCsvDifference": 3.6282088444750116E-13
+      },
+      {
+        "stock": "SH600030",
+        "seed": 42,
+        "originDate": "2026-03-13",
+        "maxCsvDifference": 4.943823128655822E-13
+      },
+      {
+        "stock": "SH600030",
+        "seed": 42,
+        "originDate": "2026-05-14",
+        "maxCsvDifference": 4.150013666048835E-13
+      },
+      {
+        "stock": "SH600030",
+        "seed": 42,
+        "originDate": "2026-07-10",
+        "maxCsvDifference": 4.654054919228656E-13
+      },
+      {
+        "stock": "SH600030",
+        "seed": 42,
+        "originDate": "2026-09-11",
+        "maxCsvDifference": 4.524158825347513E-13
+      },
+      {
+        "stock": "SH600276",
+        "seed": 42,
+        "originDate": "2026-01-08",
+        "maxCsvDifference": 4.956035581926699E-13
+      },
+      {
+        "stock": "SH600276",
+        "seed": 42,
+        "originDate": "2026-03-13",
+        "maxCsvDifference": 4.988232049640828E-13
+      },
+      {
+        "stock": "SH600276",
+        "seed": 42,
+        "originDate": "2026-05-14",
+        "maxCsvDifference": 4.241051954068098E-13
+      },
+      {
+        "stock": "SH600276",
+        "seed": 42,
+        "originDate": "2026-07-10",
+        "maxCsvDifference": 4.662936703425657E-13
+      },
+      {
+        "stock": "SH600276",
+        "seed": 42,
+        "originDate": "2026-09-11",
+        "maxCsvDifference": 3.930189507173054E-13
+      },
+      {
+        "stock": "SZ000002",
+        "seed": 42,
+        "originDate": "2026-01-08",
+        "maxCsvDifference": 4.780620344035924E-13
+      },
+      {
+        "stock": "SZ000002",
+        "seed": 42,
+        "originDate": "2026-03-13",
+        "maxCsvDifference": 3.8480330033507926E-13
+      },
+      {
+        "stock": "SZ000002",
+        "seed": 42,
+        "originDate": "2026-05-14",
+        "maxCsvDifference": 4.0034642267983145E-13
+      },
+      {
+        "stock": "SZ000002",
+        "seed": 42,
+        "originDate": "2026-07-10",
+        "maxCsvDifference": 2.5435209494162336E-13
+      },
+      {
+        "stock": "SZ000002",
+        "seed": 42,
+        "originDate": "2026-09-11",
+        "maxCsvDifference": 4.733990977001667E-13
+      },
+      {
+        "stock": "SH600030",
+        "seed": 43,
+        "originDate": "2026-01-08",
+        "maxCsvDifference": 4.310996004619483E-13
+      },
+      {
+        "stock": "SH600030",
+        "seed": 43,
+        "originDate": "2026-03-13",
+        "maxCsvDifference": 4.585221091701897E-13
+      },
+      {
+        "stock": "SH600030",
+        "seed": 43,
+        "originDate": "2026-05-14",
+        "maxCsvDifference": 4.740652315149418E-13
+      },
+      {
+        "stock": "SH600030",
+        "seed": 43,
+        "originDate": "2026-07-10",
+        "maxCsvDifference": 4.801714581503802E-13
+      },
+      {
+        "stock": "SH600030",
+        "seed": 43,
+        "originDate": "2026-09-11",
+        "maxCsvDifference": 4.707345624410664E-13
+      },
+      {
+        "stock": "SH600276",
+        "seed": 43,
+        "originDate": "2026-01-08",
+        "maxCsvDifference": 4.1866510258614653E-13
+      },
+      {
+        "stock": "SH600276",
+        "seed": 43,
+        "originDate": "2026-03-13",
+        "maxCsvDifference": 2.1926904736346842E-13
+      },
+      {
+        "stock": "SH600276",
+        "seed": 43,
+        "originDate": "2026-05-14",
+        "maxCsvDifference": 2.5224267119483557E-13
+      },
+      {
+        "stock": "SH600276",
+        "seed": 43,
+        "originDate": "2026-07-10",
+        "maxCsvDifference": 4.382050278195493E-13
+      },
+      {
+        "stock": "SH600276",
+        "seed": 43,
+        "originDate": "2026-09-11",
+        "maxCsvDifference": 3.467226505904364E-13
+      },
+      {
+        "stock": "SZ000002",
+        "seed": 43,
+        "originDate": "2026-01-08",
+        "maxCsvDifference": 3.6648462042876417E-13
+      },
+      {
+        "stock": "SZ000002",
+        "seed": 43,
+        "originDate": "2026-03-13",
+        "maxCsvDifference": 3.076428001236309E-13
+      },
+      {
+        "stock": "SZ000002",
+        "seed": 43,
+        "originDate": "2026-05-14",
+        "maxCsvDifference": 4.99711383383783E-13
+      },
+      {
+        "stock": "SZ000002",
+        "seed": 43,
+        "originDate": "2026-07-10",
+        "maxCsvDifference": 4.756195437494171E-13
+      },
+      {
+        "stock": "SZ000002",
+        "seed": 43,
+        "originDate": "2026-09-11",
+        "maxCsvDifference": 3.141931159689193E-13
+      },
+      {
+        "stock": "SH600030",
+        "seed": 44,
+        "originDate": "2026-01-08",
+        "maxCsvDifference": 4.4064751847372463E-13
+      },
+      {
+        "stock": "SH600030",
+        "seed": 44,
+        "originDate": "2026-03-13",
+        "maxCsvDifference": 4.809486142676178E-13
+      },
+      {
+        "stock": "SH600030",
+        "seed": 44,
+        "originDate": "2026-05-14",
+        "maxCsvDifference": 4.867217739956686E-13
+      },
+      {
+        "stock": "SH600030",
+        "seed": 44,
+        "originDate": "2026-07-10",
+        "maxCsvDifference": 4.927169783286445E-13
+      },
+      {
+        "stock": "SH600030",
+        "seed": 44,
+        "originDate": "2026-09-11",
+        "maxCsvDifference": 4.4719783431901305E-13
+      },
+      {
+        "stock": "SH600276",
+        "seed": 44,
+        "originDate": "2026-01-08",
+        "maxCsvDifference": 4.565237077258644E-13
+      },
+      {
+        "stock": "SH600276",
+        "seed": 44,
+        "originDate": "2026-03-13",
+        "maxCsvDifference": 4.780620344035924E-13
+      },
+      {
+        "stock": "SH600276",
+        "seed": 44,
+        "originDate": "2026-05-14",
+        "maxCsvDifference": 4.524158825347513E-13
+      },
+      {
+        "stock": "SH600276",
+        "seed": 44,
+        "originDate": "2026-07-10",
+        "maxCsvDifference": 4.2454928461665986E-13
+      },
+      {
+        "stock": "SH600276",
+        "seed": 44,
+        "originDate": "2026-09-11",
+        "maxCsvDifference": 4.760636329592671E-13
+      },
+      {
+        "stock": "SZ000002",
+        "seed": 44,
+        "originDate": "2026-01-08",
+        "maxCsvDifference": 5.960504978475001E-08
+      },
+      {
+        "stock": "SZ000002",
+        "seed": 44,
+        "originDate": "2026-03-13",
+        "maxCsvDifference": 4.4020342926387457E-13
+      },
+      {
+        "stock": "SZ000002",
+        "seed": 44,
+        "originDate": "2026-05-14",
+        "maxCsvDifference": 4.980460488468452E-13
+      },
+      {
+        "stock": "SZ000002",
+        "seed": 44,
+        "originDate": "2026-07-10",
+        "maxCsvDifference": 4.988232049640828E-13
+      },
+      {
+        "stock": "SZ000002",
+        "seed": 44,
+        "originDate": "2026-09-11",
+        "maxCsvDifference": 4.846123502488808E-13
+      }
+    ],
+    "qaIdsAreNotMs02VersionIds": true,
+    "tolerance": 1E-06
+  },
+  "currentFrozenWindows": {
+    "httpCallsIncludingRepeats": 18,
+    "points": 45,
+    "runs": 9,
+    "checks": [
+      {
+        "inputHash": "7815c6a23351371d96afbcc27c60db3cc316c075654601a059642342589a9cff",
+        "seed": 42,
+        "validationOnly": true,
+        "points": 5,
+        "elapsedMillis": 1659,
+        "targets": [
+          "2026-10-08",
+          "2026-10-09",
+          "2026-10-12",
+          "2026-10-13",
+          "2026-10-14"
+        ],
+        "manifestHash": "45b43ebd1cf9131eb793e62cb73fe076000457fbc5b121f8ec94ca949be59c7e",
+        "clippedFraction": 0.0,
+        "inputVersionId": "6f58ff7a-5fce-41b7-a870-65f4d2b6e507",
+        "instrumentId": "SH600030",
+        "repeatExactlyEqual": true,
+        "artifactId": "transformer-s3-2023-seed42-c698f02e6875e762"
+      },
+      {
+        "inputHash": "7815c6a23351371d96afbcc27c60db3cc316c075654601a059642342589a9cff",
+        "seed": 43,
+        "validationOnly": true,
+        "points": 5,
+        "elapsedMillis": 1425,
+        "targets": [
+          "2026-10-08",
+          "2026-10-09",
+          "2026-10-12",
+          "2026-10-13",
+          "2026-10-14"
+        ],
+        "manifestHash": "6894c7d52ba9a3968ef1f85cd0923b3d249a376281f79d752a0fe460d09f97d6",
+        "clippedFraction": 0.0,
+        "inputVersionId": "6f58ff7a-5fce-41b7-a870-65f4d2b6e507",
+        "instrumentId": "SH600030",
+        "repeatExactlyEqual": true,
+        "artifactId": "transformer-s3-2023-seed43-9a96167ecb00234d"
+      },
+      {
+        "inputHash": "7815c6a23351371d96afbcc27c60db3cc316c075654601a059642342589a9cff",
+        "seed": 44,
+        "validationOnly": true,
+        "points": 5,
+        "elapsedMillis": 1352,
+        "targets": [
+          "2026-10-08",
+          "2026-10-09",
+          "2026-10-12",
+          "2026-10-13",
+          "2026-10-14"
+        ],
+        "manifestHash": "4cfb7609234a247d341c5f868bff65b2f7a45509bedd60ad74e7a3bffc458b8c",
+        "clippedFraction": 0.0,
+        "inputVersionId": "6f58ff7a-5fce-41b7-a870-65f4d2b6e507",
+        "instrumentId": "SH600030",
+        "repeatExactlyEqual": true,
+        "artifactId": "transformer-s3-2023-seed44-809fa0c150e41590"
+      },
+      {
+        "inputHash": "6217cf80d7cfe8a4191184adc2bbc8ad4f4e895be1e4815c805ff202295c0ff2",
+        "seed": 42,
+        "validationOnly": true,
+        "points": 5,
+        "elapsedMillis": 1367,
+        "targets": [
+          "2026-10-08",
+          "2026-10-09",
+          "2026-10-12",
+          "2026-10-13",
+          "2026-10-14"
+        ],
+        "manifestHash": "45b43ebd1cf9131eb793e62cb73fe076000457fbc5b121f8ec94ca949be59c7e",
+        "clippedFraction": 0.0,
+        "inputVersionId": "2559db33-790b-4e55-99ba-3fac33f18609",
+        "instrumentId": "SH600276",
+        "repeatExactlyEqual": true,
+        "artifactId": "transformer-s3-2023-seed42-c698f02e6875e762"
+      },
+      {
+        "inputHash": "6217cf80d7cfe8a4191184adc2bbc8ad4f4e895be1e4815c805ff202295c0ff2",
+        "seed": 43,
+        "validationOnly": true,
+        "points": 5,
+        "elapsedMillis": 1355,
+        "targets": [
+          "2026-10-08",
+          "2026-10-09",
+          "2026-10-12",
+          "2026-10-13",
+          "2026-10-14"
+        ],
+        "manifestHash": "6894c7d52ba9a3968ef1f85cd0923b3d249a376281f79d752a0fe460d09f97d6",
+        "clippedFraction": 0.0,
+        "inputVersionId": "2559db33-790b-4e55-99ba-3fac33f18609",
+        "instrumentId": "SH600276",
+        "repeatExactlyEqual": true,
+        "artifactId": "transformer-s3-2023-seed43-9a96167ecb00234d"
+      },
+      {
+        "inputHash": "6217cf80d7cfe8a4191184adc2bbc8ad4f4e895be1e4815c805ff202295c0ff2",
+        "seed": 44,
+        "validationOnly": true,
+        "points": 5,
+        "elapsedMillis": 1304,
+        "targets": [
+          "2026-10-08",
+          "2026-10-09",
+          "2026-10-12",
+          "2026-10-13",
+          "2026-10-14"
+        ],
+        "manifestHash": "4cfb7609234a247d341c5f868bff65b2f7a45509bedd60ad74e7a3bffc458b8c",
+        "clippedFraction": 0.0,
+        "inputVersionId": "2559db33-790b-4e55-99ba-3fac33f18609",
+        "instrumentId": "SH600276",
+        "repeatExactlyEqual": true,
+        "artifactId": "transformer-s3-2023-seed44-809fa0c150e41590"
+      },
+      {
+        "inputHash": "9001d7cc5f3123fa54f84ae9e38b3d84eed879af513d504069bc9f9c4cf59fb8",
+        "seed": 42,
+        "validationOnly": true,
+        "points": 5,
+        "elapsedMillis": 1470,
+        "targets": [
+          "2026-10-08",
+          "2026-10-09",
+          "2026-10-12",
+          "2026-10-13",
+          "2026-10-14"
+        ],
+        "manifestHash": "45b43ebd1cf9131eb793e62cb73fe076000457fbc5b121f8ec94ca949be59c7e",
+        "clippedFraction": 0.0,
+        "inputVersionId": "631a59a0-c9dd-44e3-ae29-a2d8e22930b7",
+        "instrumentId": "SZ000002",
+        "repeatExactlyEqual": true,
+        "artifactId": "transformer-s3-2023-seed42-c698f02e6875e762"
+      },
+      {
+        "inputHash": "9001d7cc5f3123fa54f84ae9e38b3d84eed879af513d504069bc9f9c4cf59fb8",
+        "seed": 43,
+        "validationOnly": true,
+        "points": 5,
+        "elapsedMillis": 1319,
+        "targets": [
+          "2026-10-08",
+          "2026-10-09",
+          "2026-10-12",
+          "2026-10-13",
+          "2026-10-14"
+        ],
+        "manifestHash": "6894c7d52ba9a3968ef1f85cd0923b3d249a376281f79d752a0fe460d09f97d6",
+        "clippedFraction": 0.0,
+        "inputVersionId": "631a59a0-c9dd-44e3-ae29-a2d8e22930b7",
+        "instrumentId": "SZ000002",
+        "repeatExactlyEqual": true,
+        "artifactId": "transformer-s3-2023-seed43-9a96167ecb00234d"
+      },
+      {
+        "inputHash": "9001d7cc5f3123fa54f84ae9e38b3d84eed879af513d504069bc9f9c4cf59fb8",
+        "seed": 44,
+        "validationOnly": true,
+        "points": 5,
+        "elapsedMillis": 1347,
+        "targets": [
+          "2026-10-08",
+          "2026-10-09",
+          "2026-10-12",
+          "2026-10-13",
+          "2026-10-14"
+        ],
+        "manifestHash": "4cfb7609234a247d341c5f868bff65b2f7a45509bedd60ad74e7a3bffc458b8c",
+        "clippedFraction": 0.0,
+        "inputVersionId": "631a59a0-c9dd-44e3-ae29-a2d8e22930b7",
+        "instrumentId": "SZ000002",
+        "repeatExactlyEqual": true,
+        "artifactId": "transformer-s3-2023-seed44-809fa0c150e41590"
+      }
+    ],
+    "maxClippedFraction": 0.0
+  },
+  "httpSecurity": {
+    "formalInferBody": {
+      "detail": "PUBLISHED_MODEL_NOT_CONFIGURED"
+    },
+    "oversizedStatus": 413,
+    "unauthenticatedStatus": 401,
+    "badManifestResult": null,
+    "health": {
+      "status": "UP",
+      "inference": "UNAVAILABLE",
+      "candidateValidation": "CONFIGURED"
+    },
+    "formalInferStatus": 503,
+    "badManifestState": "MODEL_MANIFEST_HASH_MISMATCH",
+    "deepJsonStatus": 422,
+    "deepJsonDetail": "MODEL_REQUEST_INVALID",
+    "deepJsonHealth": "UP"
+  },
+  "limits": [
+    "Migration equivalence is not prediction accuracy.",
+    "Candidates are not published models.",
+    "No Java/frontend changes or new broad Java/frontend test claims.",
+    "Original research source/checkpoints retained.",
+    "No Git remote or remote CI execution."
+  ],
+  "finalReview": {
+    "fixCommit": "52fbfa9",
+    "importantFixed": 1,
+    "scope": "f868780..c24234e",
+    "green": "422 MODEL_REQUEST_INVALID before worker; health UP",
+    "finalSuitePassed": 44,
+    "red": "RecursionError from json.loads",
+    "critical": 0,
+    "minor": 0,
+    "reReviewPerformed": false,
+    "important": 1,
+    "regression": "test_deeply_nested_json_is_controlled_before_worker"
+  }
+}

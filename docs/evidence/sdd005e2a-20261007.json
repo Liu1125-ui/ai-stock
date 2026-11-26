@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-07",
+  "scope": "SDD005E2a",
+  "backend": {
+    "tests": 303,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "frontend": {
+    "tests": 54,
+    "build": "passed"
+  },
+  "runtime": {
+    "health": "six UP",
+    "migration": "V6 success",
+    "nginx_test": "passed",
+    "operationId": "7a919995-42ec-434a-b7fc-cf3102076e4c",
+    "analysisId": "b97e45d7-815d-4450-bf43-f2fd5dbbab22",
+    "state": "SUCCEEDED",
+    "durationSeconds": 13.08,
+    "instrumentId": "SH600030",
+    "marketVersionId": "545baa86-871c-4174-bc01-483e38eddbb9",
+    "asOf": "2026-09-30",
+    "readAfterFrontendDeploy": "observed",
+    "oldVersionNotice": "observed",
+    "providerCallsForAcceptance": 1
+  },
+  "limits": [
+    "New slow POST after proxy fix not tested with second paid call",
+    "Account connection banner remains; services healthy",
+    "E2b and complete FR09 pending",
+    "Not proof of predictive accuracy"
+  ]
+}

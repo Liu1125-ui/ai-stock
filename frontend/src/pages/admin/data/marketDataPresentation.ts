@@ -1,0 +1,7 @@
+export {time} from '../statistics/statisticsPresentation'
+import {defaultWindow as windowFrom} from '../statistics/statisticsPresentation'
+import type {DetailFilter} from '../../../api/adminMarketData'
+export function defaultWindow(){return windowFrom(new Date(),90)}
+export function validateWindow(w:DetailFilter){const valid=(v:string)=>/^\d{4}-\d{2}-\d{2}$/.test(v)&&Number.isFinite(Date.parse(v+'T00:00:00Z'))&&new Date(v+'T00:00:00Z').toISOString().slice(0,10)===v;if(!valid(w.from)||!valid(w.to)||w.from>w.to||w.from<'1990-01-01'||w.to>defaultWindow().to)return '请选择有效日期，结束日期不能晚于上海今天';if((Date.parse(w.to)-Date.parse(w.from))/86400000>=366)return '每次最多查询366个自然日';return ''}
+const labels:Record<string,string>={QUEUED:'已排队',ATTACHED:'已关联原任务',RETRY_WAIT:'等待重试',RECONCILING:'结果核对中',SUCCEEDED:'执行完成',CANCELLED:'已取消',EMPTY:'无数据',SKIPPED:'已跳过',AVAILABLE:'可用',STAGING:'暂存',REJECTED:'已拒绝',UNAVAILABLE:'不可用',NO_VERSION:'尚无版本',REFERENCE_ERROR:'版本关联待核对',PENDING:'等待处理',RUNNING:'执行中',FAILED:'失败',LEGITIMATE_EMPTY:'合法无数据',ROW_VALIDATED:'已做行级校验',CALENDAR_UNKNOWN:'日历证据未知',SOURCE_UNAVAILABLE:'数据源暂不可用',SOURCE_TIMEOUT:'数据源超时',SOURCE_BUSY:'数据源繁忙',SOURCE_INVALID:'数据源响应未通过校验',UNKNOWN_ERROR:'原因待核对',ATTEMPT_EXPIRED:'处理租约已过期',RAW:'未复权',OUTSIDE_COVERAGE:'不在此版本覆盖范围',ISSUES:'存在已记录问题',NEEDS_REVIEW:'疑似缺失，需要核对',INCOMPLETE_EVIDENCE:'日历证据不完整',NO_RECORDED_ISSUES:'本窗口未发现已记录问题'}
+export function label(value:string|null|undefined){return value?(labels[value]||'待核对（'+value+'）'):'暂无记录'}

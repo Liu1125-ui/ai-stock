@@ -1,0 +1,9 @@
+package com.aistock.scheduler.admin;
+import com.aistock.common.*;import java.time.*;import java.util.*;import org.junit.jupiter.api.*;import org.springframework.http.HttpStatus;import org.springframework.test.web.servlet.*;import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import static org.mockito.Mockito.*;import static org.mockito.ArgumentMatchers.*;import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+class AdminTaskHttpTest {
+ AdminTaskService service;MockMvc mvc;String id="00000000-0000-0000-0000-000000000001";
+ @BeforeEach void setup(){service=mock(AdminTaskService.class);mvc=MockMvcBuilders.standaloneSetup(new AdminTaskController(service)).setControllerAdvice(new ApiExceptionHandler()).build();}
+ @Test void repeatedUnknownAndInvalidQueriesRejected()throws Exception{for(var name:List.of("limit","unknown"))mvc.perform(get("/api/v1/admin/tasks").param("createdFrom","2026-10-01").param("createdTo","2026-10-20").param(name,"20","20")).andExpect(status().isBadRequest()).andExpect(jsonPath("$.code").value("TASK_QUERY_INVALID"));mvc.perform(get("/api/v1/admin/tasks/not-uuid")).andExpect(status().isBadRequest());mvc.perform(get("/api/v1/admin/tasks/"+id).param("unexpected","x")).andExpect(status().isBadRequest());verifyNoInteractions(service);}
+ @Test void validAttemptQueryAndMissingTask()throws Exception{when(service.attempts(eq(id),any(),isNull())).thenReturn(new AdminTaskRecords.Page<>(List.of(),null,false,Instant.now()));mvc.perform(get("/api/v1/admin/tasks/"+id+"/attempts").param("limit","50")).andExpect(status().isOk()).andExpect(jsonPath("$.data.items").isArray());when(service.detail(id)).thenThrow(new BusinessException("TASK_NOT_FOUND","任务不存在",HttpStatus.NOT_FOUND));mvc.perform(get("/api/v1/admin/tasks/"+id)).andExpect(status().isNotFound());}
+}

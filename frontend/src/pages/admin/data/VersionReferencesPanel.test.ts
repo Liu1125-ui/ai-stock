@@ -1,0 +1,17 @@
+import {mount,flushPromises} from '@vue/test-utils'
+import {beforeEach,afterEach,it,expect,vi} from 'vitest'
+import {ApiError} from '../../../api/auth'
+import {referenceStock as stock,referenceVersion as version,referenceOwner as actor,referenceReport,referenceTime} from './versionReferenceFixtures'
+vi.mock('../../../api/marketVersionReferences',()=>({getMarketVersionReferences:vi.fn()}))
+import * as api from '../../../api/marketVersionReferences'
+import Panel from './VersionReferencesPanel.vue'
+let wrapper:ReturnType<typeof mount>|undefined
+beforeEach(()=>vi.mocked(api.getMarketVersionReferences).mockResolvedValue(referenceReport()))
+afterEach(()=>{wrapper?.unmount();vi.resetAllMocks()})
+function panel(){wrapper=mount(Panel,{props:{instrumentId:stock,versionId:version,actorUserId:actor}});return wrapper}
+async function inspect(){const w=panel();await w.get('[data-test="inspect-version-references"]').trigger('click');await flushPromises();return w}
+it('waits for explicit click and explains zero is not a stop permission',async()=>{const w=panel();expect(api.getMarketVersionReferences).not.toHaveBeenCalled();await w.get('[data-test="inspect-version-references"]').trigger('click');await flushPromises();expect(api.getMarketVersionReferences).toHaveBeenCalledOnce();expect(w.text()).toContain('不能直接');expect(w.text()).toContain('停用或删除');expect(w.text()).toContain('2条记录');expect(w.text()).toContain('0条记录')})
+it('shows unknown instead of zero for an unavailable owner',async()=>{const data=referenceReport();data.state='PARTIAL';data.owners[1]={owner:'scheduler',versionId:version,queriedAt:referenceTime,state:'UNKNOWN',reasonCode:'REFERENCE_SERVICE_UNAVAILABLE',groups:[]};vi.mocked(api.getMarketVersionReferences).mockResolvedValue(data);const w=await inspect();expect(w.get('[data-owner="scheduler"]').text()).toContain('未能核对');expect(w.get('[data-owner="scheduler"]').text()).not.toContain('0条记录')})
+it('does not double-submit and ignores late old-version responses',async()=>{let resolve!:(v:ReturnType<typeof referenceReport>)=>void;vi.mocked(api.getMarketVersionReferences).mockReturnValue(new Promise(r=>{resolve=r}));const w=panel();await w.get('[data-test="inspect-version-references"]').trigger('click');await w.get('[data-test="inspect-version-references"]').trigger('click');expect(api.getMarketVersionReferences).toHaveBeenCalledOnce();await w.setProps({versionId:'22222222-2222-2222-2222-222222222222'});resolve(referenceReport());await flushPromises();expect(w.text()).not.toContain('2条记录');expect(w.find('[data-owner="prediction"]').exists()).toBe(false)})
+it('retains same-version previous results and labels a failed refresh',async()=>{const w=await inspect();vi.mocked(api.getMarketVersionReferences).mockRejectedValueOnce(new ApiError('MARKET_ADMIN_UNAVAILABLE','暂不可用',503));await w.get('[data-test="inspect-version-references"]').trigger('click');await flushPromises();expect(w.text()).toContain('未刷新');expect(w.text()).toContain('2条记录')})
+it('clears private data and tells parent about role revocation',async()=>{const w=await inspect();vi.mocked(api.getMarketVersionReferences).mockRejectedValueOnce(new ApiError('ACCESS_DENIED','仅管理员',403));await w.get('[data-test="inspect-version-references"]').trigger('click');await flushPromises();expect(w.emitted('accessDenied')).toHaveLength(1);expect(w.text()).not.toContain('2条记录');expect(w.get('[data-test="inspect-version-references"]').attributes('disabled')).toBeDefined()})

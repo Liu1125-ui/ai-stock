@@ -1,0 +1,210 @@
+{
+  "slice": "SDD-009A",
+  "verifiedAt": "2026-10-20T20:43:01.794748+08:00",
+  "codeHead": "f2aa95a",
+  "implementationBase": "09abd0596a3718c83daad000ad58d04c9273d0a1",
+  "status": "DEPLOYED_ACCEPTED_READONLY_SLICE",
+  "backend": {
+    "command": "mvn -B -Pauth-integration,cli-build clean verify",
+    "total": 847,
+    "modules": {
+      "stock-common": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "suites": 2
+      },
+      "stock-gateway": {
+        "tests": 46,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "suites": 20
+      },
+      "stock-market-service": {
+        "tests": 188,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "suites": 42
+      },
+      "stock-notification-service": {
+        "tests": 109,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "suites": 26
+      },
+      "stock-prediction-service": {
+        "tests": 245,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "suites": 64
+      },
+      "stock-scheduler-service": {
+        "tests": 163,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "suites": 27
+      },
+      "stock-user-service": {
+        "tests": 94,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "suites": 33
+      }
+    },
+    "buildSuccess": true,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "databaseScope": "owned tmpfs test fixture, localhost:13316, five *_test databases"
+  },
+  "frontend": {
+    "tests": 237,
+    "files": 52,
+    "testSuccess": true,
+    "vueTscAndViteBuild": true,
+    "existingWarning": "large chunks >500kB"
+  },
+  "composeConfigQuiet": true,
+  "backup": {
+    "schemaBefore": "7",
+    "bytes": 65580,
+    "sha256": "dfe7c2b5eb2dcc996ff308d6e32a51f3924e9714b781f64d0db2afbfa977935c",
+    "oldImagesPreserved": [
+      "stock-scheduler-service",
+      "stock-gateway",
+      "frontend"
+    ],
+    "file": "scheduler-before-v8-20261020-203330.sql"
+  },
+  "review": {
+    "status": "COMPLETE_ONE_IMPORTANT_FIXED",
+    "reviewer": "sdd009a_final_review",
+    "reviewedHead": "063190f",
+    "finding": "Child 403 did not invalidate whole administrator workspace",
+    "fixCommit": "f2aa95a",
+    "redGreenVerified": true,
+    "sameIdentityProfileRegressionVerified": true,
+    "fullFrontendSuiteAfterFix": 237,
+    "secondReviewPerformed": false,
+    "initialFailure": "account usage limit; same interrupted review resumed after quota recovery",
+    "deferredMinors": []
+  },
+  "deployment": {
+    "performed": true,
+    "status": "HEALTHY_ACCEPTED",
+    "originalDataFolderConfirmed": "D:/DockerData/DockerDesktopWSL",
+    "noResetOrDiskMove": true,
+    "schemaVersion": "8",
+    "sortingIndexColumns": 2,
+    "servicesUpdated": [
+      "stock-scheduler-service",
+      "stock-gateway",
+      "frontend"
+    ],
+    "enabledFlagsUnchanged": true,
+    "fullRollbackExercised": false,
+    "probe": {
+      "checkedAt": "2026-10-20T20:37:07.311374+08:00",
+      "health": {
+        "18080": {
+          "status": 200
+        },
+        "18081": {
+          "status": 200
+        },
+        "18082": {
+          "status": 200
+        },
+        "18083": {
+          "status": 200
+        },
+        "18084": {
+          "status": 200
+        },
+        "18085": {
+          "status": 200
+        },
+        "18090": {
+          "status": 200
+        }
+      },
+      "anonymousAndMethodChecks": [
+        {
+          "path": "/api/v1/admin/tasks",
+          "status": 401,
+          "code": "AUTH_REQUIRED"
+        },
+        {
+          "path": "/api/v1/admin/tasks/00000000-0000-0000-0000-000000000001",
+          "status": 401,
+          "code": "AUTH_REQUIRED"
+        },
+        {
+          "path": "/api/v1/admin/tasks/00000000-0000-0000-0000-000000000001/attempts",
+          "status": 401,
+          "code": "AUTH_REQUIRED"
+        },
+        {
+          "path": "/api/v1/admin/tasks",
+          "method": "POST",
+          "status": 404
+        },
+        {
+          "path": "/api/v1/admin/tasks",
+          "method": "HEAD",
+          "status": 404
+        },
+        {
+          "path": "/internal/v1/tasks",
+          "method": "GET",
+          "status": 404
+        },
+        {
+          "preflightOrigin": "http://127.0.0.1:15173",
+          "status": 200
+        },
+        {
+          "preflightOrigin": "https://untrusted.example",
+          "status": 403
+        }
+      ],
+      "indexHtmlMatchesBuild": true,
+      "taskAssetMatchesBuild": true,
+      "taskAsset": "TasksPage-DpWNJQmF.js",
+      "schedulerSchemaVersion": "8",
+      "schedulerTaskCount": 76,
+      "schedulerAttemptCount": 106,
+      "sortingIndexColumns": 2,
+      "paidCalls": 0
+    },
+    "finalReadonlyCheckAt": "2026-10-20T20:43:01.794748+08:00"
+  },
+  "browserAcceptance": {
+    "admin": "USER_CONFIRMED_LIST_FILTER_DETAIL_REFRESH_NORMAL",
+    "ordinaryUser": "USER_CONFIRMED_ACCESS_RESTRICTED",
+    "narrowViewportKeyboard": "USER_CONFIRMED_NORMAL",
+    "source": "User manual acceptance replies in this conversation",
+    "tool": "cua_repl unavailable; no automated browser execution claimed",
+    "confirmedAt": "2026-10-20T20:43:01.794748+08:00"
+  },
+  "externalAcceptanceCalls": {
+    "MaaS": 0,
+    "email": 0,
+    "marketSupplier": 0,
+    "newPredictions": 0
+  },
+  "limitations": [
+    "No retry/cancel actions",
+    "No alert-job adapter",
+    "No training/weekly-update tasks",
+    "No whole-system activity/model usage/performance statistics",
+    "Test counts are not coverage percentages"
+  ]
+}

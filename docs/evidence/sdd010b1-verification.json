@@ -1,0 +1,218 @@
+{
+  "checkedAt": "2026-10-27T20:43:19.8916796+08:00",
+  "health": [
+    {
+      "port": 18081,
+      "status": "UP"
+    },
+    {
+      "port": 18082,
+      "status": "UP"
+    },
+    {
+      "port": 18083,
+      "status": "UP"
+    },
+    {
+      "port": 18084,
+      "status": "UP"
+    },
+    {
+      "port": 18085,
+      "status": "UP"
+    },
+    {
+      "port": 18080,
+      "status": "UP"
+    },
+    {
+      "port": 18090,
+      "status": "UP"
+    }
+  ],
+  "anonymous": [
+    {
+      "cache": "no-store",
+      "url": "http://127.0.0.1:15173/api/v1/admin/market-data/SH600030/refresh-options",
+      "status": 401
+    },
+    {
+      "cache": "no-store",
+      "url": "http://127.0.0.1:18084/api/v1/admin/market-data/SH600030/refresh-options",
+      "status": 401
+    },
+    {
+      "cache": "no-store",
+      "url": "http://127.0.0.1:15173/api/v1/admin/market-data/SH600030/refresh-operations",
+      "status": 401
+    }
+  ],
+  "artifactMatch": [
+    {
+      "service": "stock-market-service",
+      "sha256": "48f4ab7a2456e46e1e90779d84b5595d919a7d150451bb240aafe701fb152e05",
+      "image": "sha256:97424f8c5fd7cbec1ecaff0db7062cde1b52aed31375d970528b204c8dd20d5b"
+    },
+    {
+      "service": "stock-scheduler-service",
+      "sha256": "883f7e8f3c9c193cbc634107c7a11912a267143051aef5e29edfd15395ab7ff0",
+      "image": "sha256:17b40f39f403319233e64bab53bb531b7e76e38d0ba2495e331e2adf442ca7cc"
+    },
+    {
+      "service": "stock-gateway",
+      "sha256": "4bcc69599622e2aebf12466a4152d78660f28ce6e82c56076193941690ec8c82",
+      "image": "sha256:64204525a4520b04a4f69ab1a14dc9bab389a3fb5c0e2380c950e441e0623644"
+    }
+  ],
+  "stage": "implemented and deployed; bounded real refresh accepted",
+  "sourceCommits": [
+    "3e185cd",
+    "0c655e0",
+    "4765b25",
+    "49fd3ca",
+    "392f769",
+    "185287b"
+  ],
+  "backend": {
+    "modules": {
+      "stock-common": {
+        "tests": 43,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "stock-gateway": {
+        "tests": 85,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "stock-market-service": {
+        "tests": 236,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "stock-notification-service": {
+        "tests": 109,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "stock-prediction-service": {
+        "tests": 250,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "stock-scheduler-service": {
+        "tests": 272,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "stock-user-service": {
+        "tests": 99,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    "total": 1094,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "command": "scripts/check-auth-task1.ps1: mvn -B -Pauth-integration,cli-build clean verify"
+  },
+  "frontend": {
+    "tests": 312,
+    "testFiles": 68,
+    "typecheck": "PASS",
+    "build": "PASS",
+    "indexSha256": "cb850de681e787a8d18239c313510f104119a23466cc8e07e6ddb936225a1b13",
+    "deployedImage": "sha256:cbfe5fd0a494f9c43861192f8da1484d45657f44fd273a7fc23fe13ccf791460"
+  },
+  "independentReview": {
+    "critical": 0,
+    "important": 2,
+    "minor": 0,
+    "importantFixed": 2,
+    "secondReview": "not performed; one fix pass plus regression"
+  },
+  "schema": {
+    "market": 13,
+    "scheduler": 10,
+    "newAdminRefreshOperationCountAtSmoke": 0,
+    "newContextCountAtSmoke": 0,
+    "newGuardCountAtSmoke": 0
+  },
+  "preservation": {
+    "originalVolume": "aistock-sdd001_mysql-data",
+    "backupDirectory": "runtime/sdd010b1/backup-20261027-page-entry",
+    "databaseBackupSha256": "56e5bccc9f4ad53c843d9c6a4e0825a9f40c2bc7f5e66a478d5c440f34f1f53f",
+    "marketDataBeforeSha256": "bc18f6165309135b65e9ff3841f6baa25477505df49bccd12473b60eb98618c9",
+    "marketDataAfterSha256": "bc18f6165309135b65e9ff3841f6baa25477505df49bccd12473b60eb98618c9",
+    "rawWindowsUnchanged": true,
+    "backupRestoreRehearsal": "not performed"
+  },
+  "internalContextErrorNoStore": "PASS production 400/404/401",
+  "preflight": [
+    {
+      "method": "GET",
+      "status": 200,
+      "cache": "no-store"
+    },
+    {
+      "method": "POST",
+      "status": 200,
+      "cache": "no-store"
+    }
+  ],
+  "manualExternalCalls": {
+    "supplierLogicalDataMethods": 2,
+    "maas": 0,
+    "email": 0
+  },
+  "background": {
+    "maintenanceDuringSmoke": true,
+    "originalFlagsRestored": true,
+    "automaticActivityExcludedFromManualCounters": true,
+    "restoredSchedulerHealth": "UP"
+  },
+  "writeGate": false,
+  "authenticatedBrowser": "PASS administrator precheck, history, keyboard, narrow-screen containment, reload recovery",
+  "liveOrdinaryRoleCheck": "not repeated; isolated HTTP tests passed",
+  "realWrite": {
+    "authorization": "explicit user reply allowing one bounded trial",
+    "instrumentId": "SH600030",
+    "start": "2025-01-02",
+    "targetDate": "2026-10-23",
+    "operationId": "be8f9c86-8cab-4a8f-a02e-3a9e05a0f8a1",
+    "taskId": "e5da163d-28ff-4027-b796-4e2d51b32429",
+    "state": "SUCCEEDED",
+    "attempts": 1,
+    "maxAuthorizedAttempts": 3,
+    "maxAuthorizedDataQueries": 6,
+    "logicalDataMethodsOnSuccessfulPath": 2,
+    "wirePacketCount": "not independently instrumented",
+    "newVersion": "711006fe-1e84-4a0a-b944-ba8a9eeb9cdc",
+    "baselineVersion": "58dacade-f1f4-41f4-8817-71a80381ee10",
+    "newRows": 436,
+    "oldRows": 436,
+    "differentMatchedBarRows": 0,
+    "oldVersionState": "AVAILABLE",
+    "newOperations": 1,
+    "newContexts": 1,
+    "newGuards": 1,
+    "gateClosedAfterSubmission": true
+  },
+  "nacosHostPort": 18489,
+  "portConflictOwnerPreserved": "WorkBuddy",
+  "remaining": [
+    "live ordinary role check not repeated; isolated role tests passed",
+    "SDD010B2 version disabling and in-flight admission guards",
+    "long-term Docker startup recurrence and backup restore exercise"
+  ],
+  "acceptedOn": "2026-10-28",
+  "screenshot": "sdd010b1-admin-refresh-accepted.png"
+}

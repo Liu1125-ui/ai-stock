@@ -1,0 +1,5 @@
+# 管理员任务访问安全
+
+公开任务GET接口逐请求调用账号服务解析会话，校验ADMIN后才读取数据；内部任务服务Token过滤器保持独立。CORS只允许本机既有前端来源及GET/OPTIONS。
+
+管理员操作由会话解析结果绑定AdminTaskPrincipal，浏览器actor/role/内部Token不能代替身份。仅精确retry/cancel路径允许POST，要求允许Origin、固定动作头及最多4096字节JSON；直连同样校验。只读与写预检按精确路径分别配置，未知写路径不开放。所有响应no-store，身份服务失败拒绝访问。

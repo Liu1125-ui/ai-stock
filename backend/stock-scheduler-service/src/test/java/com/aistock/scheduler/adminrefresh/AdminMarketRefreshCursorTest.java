@@ -1,0 +1,6 @@
+package com.aistock.scheduler.adminrefresh;
+import com.aistock.common.BusinessException;import java.time.*;import java.util.*;import java.nio.charset.StandardCharsets;import org.junit.jupiter.api.Test;import static org.junit.jupiter.api.Assertions.*;
+class AdminMarketRefreshCursorTest {
+ @Test void bindsStockSizeAndStableKeys(){var codec=new AdminMarketRefreshCursor();var key=new AdminMarketRefreshCursor.Key(Instant.parse("2026-10-27T12:00:00Z"),"00000000-0000-0000-0000-000000000001");var c=new AdminMarketRefreshCursor.Cursor(1,"SH600030",20,key,key);String token=codec.encode(c);assertEquals(c,codec.decode(token,"SH600030",20));assertThrows(BusinessException.class,()->codec.decode(token,"SZ000002",20));assertThrows(BusinessException.class,()->codec.decode(token,"SH600030",50));assertThrows(BusinessException.class,()->codec.decode("a".repeat(769),"SH600030",20));}
+ @Test void rejectsUnknownDuplicateOrCoercedFields(){var codec=new AdminMarketRefreshCursor();for(var json:List.of("{\"v\":1,\"v\":1}","{\"v\":\"1\"}","{\"v\":1.0}","{\"extra\":true}")){String token=Base64.getUrlEncoder().withoutPadding().encodeToString(json.getBytes(StandardCharsets.UTF_8));assertThrows(BusinessException.class,()->codec.decode(token,"SH600030",20));}}
+}

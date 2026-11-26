@@ -1,0 +1,5 @@
+package com.aistock.market.quotation;
+import com.aistock.market.ingestion.CandidateRequestFilter;import org.junit.jupiter.api.Test;import org.springframework.test.web.servlet.setup.MockMvcBuilders;import static org.mockito.Mockito.*;import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+class AnalysisEvidenceHttpTest {
+ @Test void authenticateBeforeFixedVersionRead()throws Exception{var service=mock(MarketQueryService.class);var mvc=MockMvcBuilders.standaloneSetup(new AnalysisEvidenceController(service)).addFilters(new CandidateRequestFilter("private",64)).build();var path="/internal/v1/market/analysis-evidence/SH600030";mvc.perform(get(path)).andExpect(status().isUnauthorized());verifyNoInteractions(service);mvc.perform(get(path).header("X-Service-Token","private").param("from","2026-07-07").param("to","2026-10-07").param("versionId","11111111-1111-4111-8111-111111111111")).andExpect(status().isOk());verify(service).daily("SH600030","2026-07-07","2026-10-07","RAW","11111111-1111-4111-8111-111111111111");}
+}

@@ -1,0 +1,7 @@
+分析owner市场使用协议。固定原请求和RAW再POST，64KiB/4秒/禁止重定向；协议和实际证据门禁都就绪才计算。V13保存原request/bundle/全集，超时只查原回执、不重新登记。证明仅取AnalysisRepository真实不可再写终态，不返回用户或问题。完成通知在提交后，失败留下未确认行；默认关闭的恢复每批25条并轮转。只向market客户端转发五项头，不向MaaS附加。本片只接单股分析，预测/验证/Python和其余owner尚未接入，禁止启用全局保护。
+
+Task4C：Request与scope扩展FORECAST/PREDICTION_VERIFICATION及单股CURRENT_HEADS；原分析RAW构造仍兼容。PredictionMarketUseOwner使用V14通用本库表保存原选择/回执，不跨库；未知提交只GET原编号、坏回执先轮转。实际证明由各业务仓储终态生成，关闭新登记不妨碍核对历史绑定。支持目的能力如实列三条，仍报告PARTIAL（比较/持仓尚待Task5）。每类owner恢复最多25条，不触发计算。
+
+Task5A加入ComparisonMarketUseOwner与COMPARISON_EVIDENCE的2—3RAW收据。所有version/use集合唯一且完全对应，单股调用保持原构造与expectedRaw；多股用expectedVersions。比较每轮执行单独持久请求、回执和终态，未知仅GET原编号；恢复最多25条、坏回执/坏键先轮转、不触发计算。内部证明增加COMPARISON，仍PARTIAL（持仓/通知等未齐）。
+
+Task5B: PortfolioMarketUseOwner复用不可重领的原lease UUID（协议generation=1）。CURRENT_HEADS支持1—100股原子集合；持仓proof锁父操作后重读Clock并物理过期，恢复每批25条仅查询原登记。独立开关默认false，PARTIAL仍禁止生命周期动作。

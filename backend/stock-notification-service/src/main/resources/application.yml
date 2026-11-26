@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: stock-notification-service
+aistock:
+  user:
+    url: ${USER_SERVICE_URL:}
+  market:
+    url: ${MARKET_SERVICE_URL:}
+  alert:
+    max-rules: ${ALERT_MAX_RULES:50}
+    evaluation-enabled: ${ALERT_EVALUATION_ENABLED:false}
+    mail-worker-enabled: ${ALERT_MAIL_WORKER_ENABLED:false}
+    mail-ttl-seconds: ${ALERT_MAIL_TTL_SECONDS:86400}
+    mail-max-attempts: ${ALERT_MAIL_MAX_ATTEMPTS:3}
+    mail-lease-seconds: ${ALERT_MAIL_LEASE_SECONDS:120}
+    mail-poll-ms: ${ALERT_MAIL_POLL_MS:2000}
+    mail-retry-initial-seconds: ${ALERT_MAIL_RETRY_INITIAL_SECONDS:60}
+    mail-retry-later-seconds: ${ALERT_MAIL_RETRY_LATER_SECONDS:300}
+  market-use:
+    market-url: ${NOTIFICATION_MARKET_USE_URL:http://127.0.0.1:18082}
+    alert-enabled: ${NOTIFICATION_MARKET_USE_ALERT_ENABLED:false}
+    recovery-enabled: ${NOTIFICATION_MARKET_USE_RECOVERY_ENABLED:false}
+  internal:
+    token: ${SERVICE_TOKEN:}
+  mail:
+    payload-key: ${MAIL_PAYLOAD_KEY:}
+    digest-key: ${MAIL_DIGEST_KEY:}
+  smtp:
+    host: ${SMTP_HOST:}
+    port: ${SMTP_PORT:465}
+    username: ${SMTP_USERNAME:}
+    password: ${SMTP_PASSWORD:}
+    from: ${SMTP_FROM:}
+    ssl-enabled: ${SMTP_SSL_ENABLED:true}
+    starttls-required: ${SMTP_STARTTLS_REQUIRED:false}
+server:
+  port: ${NOTIFICATION_PORT:8085}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

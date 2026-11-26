@@ -1,0 +1,100 @@
+{
+  "health": {
+    "18080": "UP",
+    "18081": "UP",
+    "18082": "UP",
+    "18083": "UP",
+    "18084": "UP",
+    "18085": "UP",
+    "18090": "UP"
+  },
+  "access": {
+    "accountInternal": 401,
+    "dueInternal": 401,
+    "messagesAnonymous": 401,
+    "hiddenInternal": 404
+  },
+  "boundaries": [
+    {
+      "instrumentId": "SH600030",
+      "provider": "baostock",
+      "rawVersionId": "96c6a740-b16d-437a-8bbc-6e6bb21fde4f",
+      "latestPublishedTradeDate": "2026-10-09",
+      "expectedCompletedTradeDate": "2026-10-09",
+      "effectiveAfterTradeDate": "2026-10-09",
+      "calendarHash": "3597d73a95e188e7defdb05eb15e8f4219fe623950e61a794c748138f0fae0b0",
+      "asOf": "2026-10-10T16:01:38.498394666Z",
+      "definition": "alert-boundary-v1"
+    },
+    {
+      "instrumentId": "SH600276",
+      "provider": "baostock",
+      "rawVersionId": "cac7c894-ae50-41e9-a096-6c911310d5dc",
+      "latestPublishedTradeDate": "2026-10-09",
+      "expectedCompletedTradeDate": "2026-10-09",
+      "effectiveAfterTradeDate": "2026-10-09",
+      "calendarHash": "3597d73a95e188e7defdb05eb15e8f4219fe623950e61a794c748138f0fae0b0",
+      "asOf": "2026-10-10T16:01:38.529079638Z",
+      "definition": "alert-boundary-v1"
+    },
+    {
+      "instrumentId": "SZ000002",
+      "provider": "baostock",
+      "rawVersionId": "a84332b9-92f5-4478-862f-e9c337241b63",
+      "latestPublishedTradeDate": "2026-10-09",
+      "expectedCompletedTradeDate": "2026-10-09",
+      "effectiveAfterTradeDate": "2026-10-09",
+      "calendarHash": "3597d73a95e188e7defdb05eb15e8f4219fe623950e61a794c748138f0fae0b0",
+      "asOf": "2026-10-10T16:01:38.560381681Z",
+      "definition": "alert-boundary-v1"
+    }
+  ],
+  "preserved": {
+    "marketHeads": true,
+    "predictions": true,
+    "models": true,
+    "mail": true,
+    "rules": true,
+    "preferences": true
+  },
+  "notificationMigration": "3",
+  "schedulerMigration": "6",
+  "calendarRefresh": "2026-10-11\t2026-10-11\tNULL",
+  "scanCursors": "EVENT\t11\tNULL\t2026-10-10 16:00:48.917643\tNULL\nRECONCILE\t0\tNULL\t2026-10-10 15:49:58.885544\tNULL",
+  "jobsByState": "",
+  "triggerAndMessageCounts": "0\t0",
+  "rulesBoundarySummary": "0\t2026-10-09\t1",
+  "maasCalls": 0,
+  "mailSentByThisSlice": 0,
+  "verifiedAt": "2026-10-11 Asia/Shanghai",
+  "tests": {
+    "backend": 487,
+    "frontend": 102,
+    "algorithm": 76,
+    "failures": 0,
+    "frontendBuild": "PASS"
+  },
+  "restart": {
+    "beforeCursors": "EVENT\t2\tNULL\t2026-10-10 15:51:59.008615\tNULL\nRECONCILE\t0\tNULL\t2026-10-10 15:49:58.885544\tNULL",
+    "afterCursors": "EVENT\t11\tNULL\t2026-10-10 16:00:48.917643\tNULL\nRECONCILE\t0\tNULL\t2026-10-10 15:49:58.885544\tNULL",
+    "eventCursorMonotonic": true
+  },
+  "browser": {
+    "ownMessagesEmpty": true,
+    "unreadFilter": true,
+    "refreshAndReload": true,
+    "ownRuleHistoryEmpty": true,
+    "homeSummaryEntry": true,
+    "desktopWidth": 1280,
+    "narrowWidth": 390,
+    "horizontalOverflow": false,
+    "restoredViewport": true
+  },
+  "realTrigger": "NOT_OBSERVED: only saved rule disabled, effective after 2026-10-09; no fabricated rule/message",
+  "limits": [
+    "Long-running stability and real ex-right samples pending",
+    "Gateway duplicate header handling deferred",
+    "Empty rule page availability hint deferred",
+    "Alert email C not implemented"
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "date": "2026-10-18",
+  "baseCommit": "d44f5c2",
+  "implementationHead": "16e3c67",
+  "stage": "SDD008A",
+  "status": "DEPLOYED_USER_SAVE_REFRESH_CONFIRMED",
+  "frontend": {
+    "tests": 170,
+    "files": 41,
+    "buildPassed": true
+  },
+  "backendFull": {
+    "tests": 690,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "independentReview": {
+    "passed": true,
+    "critical": 0,
+    "important": 0,
+    "unresolvedMinor": 0,
+    "coverageFindingsFixed": 2,
+    "postReviewTargetedTests": 5
+  },
+  "backupIsolatedRestorePassed": true,
+  "deployed": true,
+  "authenticatedBrowserAcceptance": {
+    "role": "ADMIN",
+    "emptyRead": true,
+    "stockSelection": true,
+    "basicKeyboard": true,
+    "currentNarrowViewport": true,
+    "realWrite": {
+      "status": "user confirmed saved and persisted after refresh",
+      "evidence": "user reply 已保存，刷新后仍在",
+      "savedValuesReadByAgent": false,
+      "roleReconfirmed": false
+    },
+    "ordinaryUserBrowser": "pending"
+  },
+  "realSupplierCalls": 0,
+  "maasCalls": 0,
+  "mailSent": 0,
+  "productionPositionsWritten": 0,
+  "valuationImplemented": false,
+  "mybatisPlus": "3.5.6 Boot3 starter",
+  "remoteCIExecuted": false,
+  "deployment": {
+    "services": [
+      {
+        "port": 18080,
+        "status": 200,
+        "state": "UP"
+      },
+      {
+        "port": 18081,
+        "status": 200,
+        "state": "UP"
+      },
+      {
+        "port": 18082,
+        "status": 200,
+        "state": "UP"
+      },
+      {
+        "port": 18083,
+        "status": 200,
+        "state": "UP"
+      },
+      {
+        "port": 18084,
+        "status": 200,
+        "state": "UP"
+      },
+      {
+        "port": 18085,
+        "status": 200,
+        "state": "UP"
+      },
+      {
+        "port": 18090,
+        "status": 200,
+        "state": "UP"
+      }
+    ],
+    "assets": [
+      {
+        "name": "PortfolioPage-da-UZeFw.js",
+        "sha256": "6a39508712ecade5426872045bda886245fdbb0fd87fc9ae2ba3f04eb572ff01",
+        "matchesBuild": true
+      }
+    ],
+    "anonymousPositionsStatus": 401,
+    "userSchemaVersion": "3",
+    "adminBrowserEmptyListReadPassed": true,
+    "adminBrowserStockSelectionPassed": true,
+    "keyboardTabToSavePassed": true,
+    "narrowScreenFormInspected": true,
+    "realWriteAcceptance": "user confirmed save and refresh",
+    "productionWritesByAgent": 0,
+    "otherServicesRecreated": false
+  },
+  "commits": [
+    "37f9ca2",
+    "c8afa50",
+    "2527cf3",
+    "16e3c67",
+    "0b7334b"
+  ]
+}

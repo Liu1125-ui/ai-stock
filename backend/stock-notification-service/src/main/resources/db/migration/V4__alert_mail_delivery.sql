@@ -1,0 +1,20 @@
+CREATE TABLE alert_mail_delivery (
+ delivery_id CHAR(36) CHARACTER SET ascii COLLATE ascii_bin PRIMARY KEY,
+ trigger_id CHAR(36) CHARACTER SET ascii COLLATE ascii_bin NOT NULL UNIQUE,
+ owner_id CHAR(36) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
+ rule_id CHAR(36) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
+ rule_revision BIGINT NOT NULL, preference_revision BIGINT NOT NULL, account_revision BIGINT NOT NULL,
+ state VARCHAR(24) NOT NULL, reason_code VARCHAR(64) NULL,
+ attempts INT NOT NULL DEFAULT 0, check_failures INT NOT NULL DEFAULT 0,
+ created_at TIMESTAMP(6) NOT NULL, expires_at TIMESTAMP(6) NOT NULL, updated_at TIMESTAMP(6) NOT NULL,
+ next_attempt_at TIMESTAMP(6) NOT NULL, lease_token CHAR(36) NULL, lease_until TIMESTAMP(6) NULL, sent_at TIMESTAMP(6) NULL,
+ payload_ciphertext BLOB NULL, payload_nonce VARBINARY(12) NULL, payload_key_id VARCHAR(32) NULL, recipient_digest CHAR(64) NULL,
+ CONSTRAINT fk_alert_mail_trigger FOREIGN KEY(trigger_id) REFERENCES alert_trigger(trigger_id),
+ KEY ix_alert_mail_due(state,next_attempt_at,created_at,delivery_id), KEY ix_alert_mail_lease(state,lease_until), KEY ix_alert_mail_owner(owner_id,delivery_id),
+ CHECK(rule_revision>=0 AND preference_revision>=0 AND account_revision>=0),
+ CHECK(attempts>=0 AND check_failures>=0), CHECK(expires_at>created_at),
+ CHECK(state IN('NOT_REQUESTED','PENDING','CHECKING','SENDING','RETRY_WAIT','SENT','FAILED','CANCELLED','EXPIRED','UNKNOWN')),
+ CHECK((state IN('CHECKING','SENDING') AND lease_token IS NOT NULL AND lease_until IS NOT NULL) OR (state NOT IN('CHECKING','SENDING') AND lease_token IS NULL AND lease_until IS NULL)),
+ CHECK((state='SENT' AND sent_at IS NOT NULL) OR (state<>'SENT' AND sent_at IS NULL)),
+ CHECK((payload_ciphertext IS NULL AND payload_nonce IS NULL AND payload_key_id IS NULL AND recipient_digest IS NULL) OR (payload_ciphertext IS NOT NULL AND payload_nonce IS NOT NULL AND payload_key_id IS NOT NULL AND recipient_digest IS NOT NULL))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

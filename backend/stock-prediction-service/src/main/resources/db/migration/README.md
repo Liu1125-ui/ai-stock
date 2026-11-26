@@ -1,0 +1,22 @@
+作用：模型库迁移目录。方法：Flyway只在stock_prediction执行不可变版本与发布审计DDL，测试仅临时stock_prediction_test。
+
+V3：本人同步预测请求与guard锁，唯一(user_id,operation_id)，可扩展horizon数值，状态终态与snapshot约束。只在stock_prediction创建；用户、行情输入引用为REF，无跨服务外键。成功不可被普通操作重写，隐藏仅列表标记。
+
+V4：独立forecast_verification版本、回执与当前指针。预测/真实证据/规则唯一键去重，LONGTEXT+JSON_VALID保留快照；不更新forecast_request.snapshot_json，不创建跨库外键。
+
+V10仅新增预测服务本库的持仓分析操作和不可变结果；不会修改用户持仓或行情表。固定30秒处理期限及45秒租约，重放不重新取数。保留已存预测与对比；回退代码时保留新表与记录。
+
+V11：持仓问答操作与结果，仅预测库owner复合外键；不修改旧估值，不新增跨库关系。
+
+V12：分析操作增加execution_generation/fencing_revision/context_ready；旧记录默认1/1/true并保留已有上下文。新准备操作显式false，终态保持不可逆；未修改旧V6迁移、旧结果或跨服务表。当前仅隔离测试迁移，不能回退删除列来代替业务恢复。
+
+V13：新增本库stock_analysis_market_use，绑定不可变原operation/代次、requestId、RAW、bundle回执及完成确认。FK仅指向本库分析操作；完成通知未知或回执坏损不删行、不猜测释放。旧V12迁移保全测试固定原目标12，测试夹具按子表→操作顺序清理，业务库未迁移。
+
+V14：预测/实际验证补执行代次和fencing；预测新增finished_at，新提交才记录实际终态时间，不虚构旧记录的完成时刻。新增prediction_market_use用于两种业务的原请求和固定头回执；原快照JSON与原验证版本不更新。当前仅测试库，生产迁移仍留统一验收。
+
+V15：比较父操作增加单调fencing_revision；comparison_market_use每轮保留原请求、选择与不可逆终态，FK仅连本库父操作。复合状态约束显式处理SQL NULL，禁止半终态。开发期间仅重建带专用标签容器里的stock_prediction_test以应用未提交约束修正，不接触业务库。
+
+V16 portfolio_market_use：仅股票选择和市场回执；父持仓操作增加fencing_revision。迁移不修改历史估值、持仓和预测。
+
+V17 增加本人训练请求和原子任务身份。批次内配置指纹与数据指纹随首次接单固定。
+V18 为已保存训练任务增加交接尝试、领取租约和确认状态。恢复时只查询原编号。

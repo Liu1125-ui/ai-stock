@@ -1,0 +1,10 @@
+import type {QuestionInput} from '../api/questions'
+const prefix='aistock:question-pending:'
+const uuid=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
+export function normalizeQuestion(value:string){for(let i=0;i<value.length;i++){const c=value.charCodeAt(i);if(c<=31||c>=127&&c<=159)throw new Error('问题不能含换行或控制字符');if(c>=0xd800&&c<=0xdbff){const low=value.charCodeAt(++i);if(!(low>=0xdc00&&low<=0xdfff))throw new Error('问题含无效字符')}else if(c>=0xdc00&&c<=0xdfff)throw new Error('问题含无效字符')}
+ const text=value.normalize('NFC').replace(/^[ \u00a0\u1680\u2000-\u200a\u2028\u2029\u202f\u205f\u3000]+|[ \u00a0\u1680\u2000-\u200a\u2028\u2029\u202f\u205f\u3000]+$/g,'');if([...text].length<1||[...text].length>300)throw new Error('请输入一至三百字的问题');return text}
+function key(user:string,id:string){return prefix+encodeURIComponent(user)+':'+id}
+export function savePending(user:string,input:QuestionInput){if(!uuid.test(input.operationId)||!uuid.test(input.analysisId))throw new Error('请求编号无效');try{sessionStorage.setItem(key(user,input.analysisId),JSON.stringify({...input,question:normalizeQuestion(input.question)}))}catch{throw new Error('无法保存原请求，请检查浏览器存储后再发送')}}
+export function readPending(user:string,id:string):QuestionInput|null{try{const text=sessionStorage.getItem(key(user,id));if(!text)return null;const n=JSON.parse(text);if(typeof n.question!=='string'||!uuid.test(n.operationId)||n.analysisId!==id||Object.keys(n).sort().join(',')!=='analysisId,operationId,question'||normalizeQuestion(n.question)!==n.question)throw new Error();return n}catch{removePending(user,id);throw new Error('原请求恢复记录损坏，未自动发送问题')}}
+export function removePending(user:string,id:string){try{sessionStorage.removeItem(key(user,id))}catch{/* Never turn cleanup into a new request. */}}
+export function clearQuestionRecovery(user:string){try{for(let i=sessionStorage.length-1;i>=0;i--){const k=sessionStorage.key(i);if(k?.startsWith(prefix+encodeURIComponent(user)+':'))sessionStorage.removeItem(k)}}catch{/* Server remains the authority. */}}

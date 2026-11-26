@@ -1,0 +1,131 @@
+{
+  "date": "2026-10-17",
+  "status": "DEPLOYED_REAL_ACCEPTANCE_PASSED_NORMAL_CYCLES_ENABLED",
+  "codeRange": "4442217..c410d18",
+  "backend": {
+    "tests": 660,
+    "suites": 180,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "buildPassed": true,
+    "asOf": "2026-10-16_after_review_fixes",
+    "log": ".superpowers/sdd/2026-10-13-sdd007d-comparison-refresh/final-review-backend-full.log"
+  },
+  "frontend": {
+    "tests": 148,
+    "buildPassed": true,
+    "asOf": "2026-10-16_after_review_fixes"
+  },
+  "python": {
+    "tests": 18,
+    "warnings": 2,
+    "realSupplierCalls": false
+  },
+  "savedBaselineMetricAudit": {
+    "checks": 36,
+    "passed": true,
+    "newUpdateAcceptance": false,
+    "path": "runtime/sdd007d/audit-saved-baseline"
+  },
+  "legacyProbe": {
+    "actualOldRepository": true,
+    "actualOldWorker": true,
+    "matchingOldPredictionInterface": true,
+    "passed": true,
+    "rolledBack": true,
+    "fullOldImageFlywayBoot": false
+  },
+  "databaseMigrations": {
+    "isolated": {
+      "market": 13,
+      "scheduler": 7
+    },
+    "production": {
+      "market": 13,
+      "scheduler": 7
+    },
+    "deploymentTarget": {
+      "market": 13,
+      "scheduler": 7
+    }
+  },
+  "runtimeDeployed": true,
+  "independentReview": {
+    "completed": true,
+    "date": "2026-10-16",
+    "important": 3,
+    "critical": 0,
+    "minor": 0,
+    "fixPasses": 1,
+    "secondReview": false
+  },
+  "realSdkQueries": 9,
+  "maasCalls": 0,
+  "mailSent": 0,
+  "pending": [
+    "long_run_observation",
+    "full_old_image_flyway_boot",
+    "full_visual_and_performance_validation"
+  ],
+  "reviewFixTargeted": {
+    "receiptTests": 8,
+    "taskTests": 9,
+    "selectionAndReceiptTests": 25,
+    "failures": 0
+  },
+  "reviewFixCommits": [
+    "1781cc8",
+    "4f4679e",
+    "c410d18"
+  ],
+  "realSdkQueryCounting": "successful SDK query method paths: raw/backward/calendar per stock; excludes login/logout, underlying network packets and existing RAW pipeline",
+  "realUpdateAcceptance": {
+    "date": "2026-10-16",
+    "passed": true,
+    "attemptsPerStock": 1,
+    "fixedAttemptLimit": 1,
+    "sourceRange": [
+      "2025-10-16",
+      "2026-10-16"
+    ],
+    "independentMetricChecks": 36,
+    "exportPath": "runtime/sdd007d/live/acceptance-20261016",
+    "auditPath": "runtime/sdd007d/audit-20261016",
+    "taskIds": [
+      "d1a2b354-e846-443a-8a4f-38d89ef05b4c",
+      "950c868d-4506-4793-a477-cd61e1867596",
+      "95b50a1f-2564-4a56-a2a9-00ca7a2098f2"
+    ]
+  },
+  "pageAcceptance": {
+    "normalAuthenticatedSession": true,
+    "newComparisonId": "8807800a-c643-4205-81ca-02e8f4b58d6b",
+    "through": "2026-10-16",
+    "refreshPreserved": true,
+    "modelCalls": 0
+  },
+  "normalCycles": {
+    "enabled": true,
+    "instruments": [
+      "SH600030",
+      "SH600276",
+      "SZ000002"
+    ],
+    "newCycleAttemptLimit": 3,
+    "oldAcceptanceAttemptLimit": 1,
+    "requiresRunningServices": true,
+    "longRunProven": false
+  },
+  "resumeCheck": {
+    "date": "2026-10-17",
+    "javaServicesUp": 6,
+    "algorithmHealth": "UP",
+    "frontendHttpStatus": 200,
+    "originalComparisonAndAiHashesUnchanged": true,
+    "comparisonCount": 2,
+    "newAcceptanceComparisonCount": 1,
+    "normalCycleSettingsPreserved": true,
+    "preservationFile": "runtime/sdd007d-resume-20261017-preservation.txt"
+  }
+}

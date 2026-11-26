@@ -1,0 +1,118 @@
+{
+  "date": "2026-10-30",
+  "scope": "核心链路可靠性修复与真实验收，不代表13项业务全部完成",
+  "tests": {
+    "backend": {
+      "common": 54,
+      "user": 99,
+      "market": 258,
+      "prediction": 255,
+      "scheduler": 276,
+      "notification": 113,
+      "totalDistinct": 1055
+    },
+    "frontend": 343,
+    "frontendFiles": 73,
+    "typecheck": true,
+    "build": true,
+    "note": "用户服务99项来自10月30日首轮成功模块；测试库补建后其余模块完整成功，不把环境失败计作通过。"
+  },
+  "marketUpdates": [
+    {
+      "instrument": "SH600030",
+      "taskId": "4c49bead-912a-4b66-94f0-b4fccd396750",
+      "version": "ebaacd08-f124-4144-8f8e-ee623586392a"
+    },
+    {
+      "instrument": "SH600276",
+      "taskId": "fc537b5a-23ff-4394-94fb-3e2a1a34bf46",
+      "version": "c6954dee-8f00-4a58-8911-5224133e0246"
+    },
+    {
+      "instrument": "SZ000002",
+      "taskId": "cf09fcf5-bda8-4028-afd8-588d97885e16",
+      "version": "5c2f9829-d7eb-4247-8080-d781335acdf3"
+    }
+  ],
+  "eachUpdate": {
+    "state": "SUCCEEDED",
+    "attemptCount": 1,
+    "coverageStart": "2025-01-02",
+    "coverageEnd": "2026-10-29"
+  },
+  "prediction": {
+    "id": "69c60fe0-fbb5-4c2e-a65f-e83f4d23bb92",
+    "state": "SUCCEEDED",
+    "originDate": "2026-10-29",
+    "rawVersion": "ebaacd08-f124-4144-8f8e-ee623586392a",
+    "inputVersion": "e8818d5e-1950-4f5f-a8e1-db89b1bc968b",
+    "points": 5,
+    "targetDates": [
+      "2026-10-30",
+      "2026-11-02",
+      "2026-11-03",
+      "2026-11-04",
+      "2026-11-05"
+    ],
+    "snapshotSha256": "0b4bf19171111a5803de057f2ba9fa88c3b37325aff32db9137be5d6bff30f20",
+    "unchangedAfterRefresh": true
+  },
+  "historicalValidation": {
+    "predictionId": "19ddcb7c-3fba-4df3-ba4f-f8eebfeb3f14",
+    "verificationVersion": "4419b286-a867-44e2-a873-ec3b8aac001f",
+    "realizationVersion": "21f9531d-5044-4519-b763-0ff266e67f27",
+    "rawVersion": "ebaacd08-f124-4144-8f8e-ee623586392a",
+    "verifiedCount": 5,
+    "triggeredByRevisionTask": true
+  },
+  "unexpectedMaas": {
+    "recordedOperations": 1,
+    "disclosedToUser": true,
+    "cause": "ExplanationPanel.load(true) 自动生成",
+    "fix": "只允许主动点击生成",
+    "operationsAfterRefreshStill": 1,
+    "additionalAfterFix": 0,
+    "billingAmountNotMeasured": true
+  },
+  "checks": {
+    "watchlistUsesNewDate": true,
+    "existingPositionAndValuationRetained": true,
+    "alertInstrumentPrefill": true,
+    "existingDisabledRuleRetained": true,
+    "ordinaryAccountReLoginThisRound": false,
+    "roleIsolationRegressionPassed": true,
+    "emailsSentByAcceptance": 0,
+    "manualRefreshGateRestoredFalse": true,
+    "originalEightSchedulerFlagsRestored": true,
+    "oldRawVersionAvailable": true,
+    "sevenAppsHealthy": true,
+    "runningArtifactsMatchBuild": true
+  },
+  "limits": [
+    "新预测目标需按日期到期后验证，不预填未来实际值",
+    "源曾间歇性超时，恢复后成功；没有证明外部服务永久稳定",
+    "误差区间尚未校准",
+    "没有对全部模型或全股票池做真实性能评测"
+  ],
+  "review": {
+    "initialCritical": 0,
+    "initialImportant": 0,
+    "initialMinor": 2,
+    "additionalExplanationCritical": 0,
+    "additionalExplanationImportant": 0,
+    "additionalExplanationMinor": 1,
+    "minorSuggestionsAddressed": true
+  },
+  "runtimeEvidenceSha256": {
+    "backend-20261030.log": "704bef8740ce30f5e1c29379275a60dd15a6b3266aad127257ce3301fffab1b8",
+    "backend-remaining-20261030.log": "ca62ef99ea893761cceaa7872ddba21da5ae95777e0bc07c6185a0adce12c080",
+    "frontend-final-20261030.log": "ae255747f24a18c4347f148a5eafa9a385e67f2895d0349e9ef4936c56da80de",
+    "frontend-final-build-20261030.log": "55ff4c49cbc0a20ae664f27d7f6efedbf79b4bde8d92a2f612d52e018c080d99",
+    "final-acceptance.tsv": "e25f9b4698db53955a712bba356139963b158e1257edd98587ab7f6464c148c0",
+    "prediction-proof-before.tsv": "7b0550152508bce2de5c2b1cf878ffdab9847e563bbb9e7a0eb122a652528eb8",
+    "prediction-proof-after.tsv": "7b0550152508bce2de5c2b1cf878ffdab9847e563bbb9e7a0eb122a652528eb8",
+    "verification-proof.tsv": "919e91f8076727738eb9c90ca384a6ff09268916bd6633d02ee40e4c4b394c2b",
+    "provider-probe-20261030.json": "28f7c2015c03b6ce854e84933f4913663164a92d7a294bc2ad0df40e3e77aed5",
+    "provider-recovery-20261030.json": "0fb374e1a54095e9c22a09c8531168a9cec652d9ece03b9896d3dfcdb716c6bf"
+  }
+}

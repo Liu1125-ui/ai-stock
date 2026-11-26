@@ -1,0 +1,74 @@
+{
+  "checkedAt": "2026-10-05T17:15:59.450664+08:00",
+  "predictionId": "19ddcb7c-3fba-4df3-ba4f-f8eebfeb3f14",
+  "checks": {
+    "succeeded": true,
+    "stock": true,
+    "model": true,
+    "formal": true,
+    "fiveDates": true,
+    "versions": true,
+    "modelHashes": true,
+    "origin": true,
+    "prices": true,
+    "repeatInferenceMatches": true
+  },
+  "originDate": "2026-09-30",
+  "originRawClose": "25.86",
+  "points": [
+    {
+      "step": 1,
+      "ratio": "0.997892558575",
+      "targetDate": "2026-10-08",
+      "referencePrice": "25.805502",
+      "displayReferencePrice": "25.81"
+    },
+    {
+      "step": 2,
+      "ratio": "0.998139500618",
+      "targetDate": "2026-10-09",
+      "referencePrice": "25.811887",
+      "displayReferencePrice": "25.81"
+    },
+    {
+      "step": 3,
+      "ratio": "0.999020099640",
+      "targetDate": "2026-10-12",
+      "referencePrice": "25.834660",
+      "displayReferencePrice": "25.83"
+    },
+    {
+      "step": 4,
+      "ratio": "0.999949753284",
+      "targetDate": "2026-10-13",
+      "referencePrice": "25.858701",
+      "displayReferencePrice": "25.86"
+    },
+    {
+      "step": 5,
+      "ratio": "1.000574946404",
+      "targetDate": "2026-10-14",
+      "referencePrice": "25.874868",
+      "displayReferencePrice": "25.87"
+    }
+  ],
+  "recentHttpRequests": [
+    {
+      "path": "GET /api/v1/predictions HTTP/1.1",
+      "http": 401
+    },
+    {
+      "path": "POST /api/v1/predictions HTTP/1.1",
+      "http": 403
+    },
+    {
+      "path": "POST /api/v1/predictions HTTP/1.1",
+      "http": 200
+    },
+    {
+      "path": "GET /api/v1/predictions?page=1 HTTP/1.1",
+      "http": 200
+    }
+  ],
+  "scope": "Persisted actual user prediction and reverse proxy HTTP statuses; not a visual browser inspection or accuracy evaluation."
+}

@@ -1,0 +1,7 @@
+package com.aistock.common.marketrefs;
+import com.fasterxml.jackson.databind.ObjectMapper;import org.junit.jupiter.api.*;import org.springframework.mock.web.*;import static org.junit.jupiter.api.Assertions.*;
+class ReferenceTokenFilterTest {
+ final String path="/internal/v1/market-version-references/11111111-1111-1111-1111-111111111111";
+ @Test void rejectsAnonymousDuplicateHeadersMethodsAndBodyWithoutCallingOwner()throws Exception{for(int mode=0;mode<4;mode++){var r=new MockHttpServletRequest(mode==2?"POST":"GET",path);if(mode!=0)r.addHeader("X-Service-Token","test");if(mode==1)r.addHeader("X-Service-Token","test");if(mode==3)r.setContent("{}".getBytes());var s=new MockHttpServletResponse();boolean[] called={false};new ReferenceTokenFilter("test",new ObjectMapper()).doFilter(r,s,(a,b)->called[0]=true);assertFalse(called[0]);assertEquals(mode<2?401:mode==2?404:400,s.getStatus());assertEquals("no-store",s.getHeader("Cache-Control"));}}
+ @Test void validGetPassesButParametersDoNot()throws Exception{var r=new MockHttpServletRequest("GET",path);r.addHeader("X-Service-Token","test");var s=new MockHttpServletResponse();boolean[] called={false};var f=new ReferenceTokenFilter("test",new ObjectMapper());f.doFilter(r,s,(a,b)->called[0]=true);assertTrue(called[0]);called[0]=false;r.addParameter("ignored","x");f.doFilter(r,new MockHttpServletResponse(),(a,b)->called[0]=true);assertFalse(called[0]);}
+}

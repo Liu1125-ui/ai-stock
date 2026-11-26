@@ -1,0 +1,7 @@
+package com.aistock.notification.alert;
+import com.aistock.common.*;import com.aistock.common.marketlifecycle.MarketLifecycleContract;import jakarta.servlet.http.HttpServletRequest;import java.util.*;import org.springframework.util.MultiValueMap;import org.springframework.web.bind.annotation.*;
+@RestController @RequestMapping("/internal/v1/market-version-use-proofs") public final class AlertMarketUseProofController {
+ private final AlertMarketUseOwner uses;public AlertMarketUseProofController(AlertMarketUseOwner uses){this.uses=uses;}
+ @GetMapping("/capabilities") public ApiResponse<?> capabilities(HttpServletRequest r){if(!r.getParameterMap().isEmpty())throw MarketLifecycleContract.invalid();return ApiResponse.success(Map.of("protocolVersion",MarketLifecycleContract.PROTOCOL,"supportedPurposes",List.of("ALERT_EVALUATION"),"enabledPurposes",uses.enabled()?List.of("ALERT_EVALUATION"):List.of(),"consumerIntegration","PARTIAL","actionsEnabled",false),TraceIds.normalize(r.getHeader("X-Trace-Id")));}
+ @GetMapping("/{purpose}/{operation}") public ApiResponse<?> proof(@PathVariable String purpose,@PathVariable UUID operation,@RequestParam MultiValueMap<String,String> query,HttpServletRequest r){if(!"ALERT_EVALUATION".equals(purpose)||!query.keySet().equals(Set.of("generation"))||query.get("generation").size()!=1)throw MarketLifecycleContract.invalid();return ApiResponse.success(uses.proof(operation,query.getFirst("generation")),TraceIds.normalize(r.getHeader("X-Trace-Id")));}
+}

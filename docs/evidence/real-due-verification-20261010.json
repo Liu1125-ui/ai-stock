@@ -1,0 +1,59 @@
+{
+  "checkedAt": "2026-10-10T00:13:12.133207+08:00",
+  "predictionId": "19ddcb7c-3fba-4df3-ba4f-f8eebfeb3f14",
+  "verificationVersionId": "f3cbcc81-d3ff-4051-a4f1-ed4c63bf2fec",
+  "evidenceVersionId": "458afdd7-7b8b-4083-8f96-b6df7521bf89",
+  "rawVersionId": "2d8890da-4c38-4970-baa2-cef4e4c3df6b",
+  "originDate": "2026-09-30",
+  "originPrice": "25.86",
+  "evidenceThrough": "2026-10-09",
+  "state": "PARTIAL",
+  "verifiedPoints": [
+    {
+      "date": "2026-10-08",
+      "predicted": "25.805502",
+      "actual": "25.400000",
+      "signedError": "0.405502",
+      "directionHit": true
+    },
+    {
+      "date": "2026-10-09",
+      "predicted": "25.811887",
+      "actual": "25.910000",
+      "signedError": "-0.098113",
+      "directionHit": false
+    }
+  ],
+  "waitingDates": [
+    "2026-10-12",
+    "2026-10-13",
+    "2026-10-14"
+  ],
+  "independentMetrics": {
+    "priceMae": "0.2518075",
+    "priceRmse": "0.29500680735620322291939396500406265186808048423025",
+    "ratioMae": "0.0097373356535189481825212683681361175560711523588554",
+    "ratioRmse": "0.011407842511840805217300617362879452895130722514704",
+    "directionAccuracy": "0.5",
+    "baselineRatioMae": "0.0098607888631090487238979118329466357308584686774942",
+    "baselineRatioRmse": "0.012652164075006099423486763991572816822773906646257",
+    "relativeMaeImprovement": "0.012519607843137254901960784313725490196078431372549"
+  },
+  "rawEvidenceMatchesMarket": true,
+  "originalPredictionAndModelsMatchOct5Baseline": true,
+  "automaticDailyAndRevisionTasks": [
+    "697402c3-37e2-47e5-a756-fa066d5f319c\traw-0b1d67189a5bb99d89950fbd114475280f58db60c4b8b26fec24d43e80f7c34d\tSUCCEEDED\t1\tf3cbcc81-d3ff-4051-a4f1-ed4c63bf2fec",
+    "75d1ebda-cb60-45d3-a682-3dd5c90c0083\tverify-19ddcb7c-3fba-4df3-ba4f-f8eebfeb3f14-2026-10-09-origin-share-close-v1\tSUCCEEDED\t1\tf3cbcc81-d3ff-4051-a4f1-ed4c63bf2fec"
+  ],
+  "deduplicatedVersionCount": 1,
+  "health": {
+    "18080": "UP",
+    "18081": "UP",
+    "18082": "UP",
+    "18083": "UP",
+    "18084": "UP",
+    "18085": "UP"
+  },
+  "cloudModelCallsThisRun": 0,
+  "scope": "one existing stock forecast, two due points; no general accuracy conclusion"
+}
